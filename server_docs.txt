@@ -1,0 +1,51 @@
+npm init
+       npm init is a command-line tool used in Node.js projects to initialize a new package and create a package.json file.
+       The package.json file is an essential part of any Node.js project as it contains 
+       metadata about the project and its dependencies.
+       It includes information such as the 
+              project's name, 
+              version, 
+              description, entry point file, dependencies, and other configuration settings.
+
+
+npm i nodemon
+       `nodemon` is a command-line utility for Node.js development.
+        It automatically restarts your Node.js application when file changes are detected. 
+        This saves you from manually stopping and 
+        restarting the server during development.
+
+
+npm i express
+      Express is a minimal and flexible web application framework for Node.js. 
+      It provides a robust set of features for building web applications and APIs. 
+      With its simplicity and extensive middleware support, Express is widely used 
+      for creating scalable and modular server-side applications in Node.js.
+
+-----------------------------------------------
+const express = require("express");
+const app = express();
+
+app.listen(5000, () => {
+    console.log("server running on port 5000");
+});
+-----------------------------------------------
+
+npm install body-parser
+       body-parser is a middleware for Express.js that allows you to extract the body of incoming HTTP requests. 
+       It parses the request body,
+       which is often sent as JSON or URL-encoded data, and 
+       makes it available in your Express application.
+
+npm install cors
+       cors is a middleware for Express.js that allows you to handle Cross-Origin Resource Sharing (CORS) in your application. 
+       CORS is a mechanism that restricts cross-origin requests in web browsers for security reasons. 
+       The cors package helps you enable CORS in your Express application 
+       and define the access rules for cross-origin requests.
+
+------------------------------------------------------
+app.get('/', (req, res) => {
+    res.send('Welcome');
+});
+
+node server.js
+------------------------------------------------------

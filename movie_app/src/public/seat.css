@@ -1,0 +1,47 @@
+.seat-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .myrow {
+    display: flex;
+    gap: 10px;
+    padding: 1px;
+  }
+  
+  .seat {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+   
+  }
+  
+  .seat.selected {
+    background-color: #60E01C;
+    /* Add other styling properties for selected seats */
+  }
+  
+  .seat.unavailable {
+    background-color:#f2f7ff;
+    /*cursor: not-allowed;
+    /* Add other styling properties for unavailable seats */
+  }
+  
+  
+  
+  
+  /*
+  .myrow:nth-child(5n) {
+    margin-bottom: 20px;   
+  }
+  
+  
+  .myrow .seat:nth-child(4n) {
+    margin-right: 20px; 
+  }
+  
+  */

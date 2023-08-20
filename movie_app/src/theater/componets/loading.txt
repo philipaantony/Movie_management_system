@@ -1,0 +1,25 @@
+{isloading ? (<div style={{
+                display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',
+            }}>
+                <div
+                    className="spinner-border"
+                    role="status"
+                    style={{ width: '6rem', height: '6rem' }}
+                >
+                </div>
+            </div>) : (<>
+
+
+            <Router>
+      
+      <Switch>
+        <Route path="/regsiter"><Register /></Route>
+        <Route path="/t"><TheaterHomePage /></Route>
+        <Route path="/user"><UserHomePage /></Route>
+        <Route path="/addnewscreen"><AddScreen /></Route>
+        <Route path="/addscreen"><AddNewScreen /></Route>
+        <Route path="/seat"><CreateSeatOrientation /></Route>
+        <Route exact path="/"><Login /></Route>
+        <Redirect to="/error"></Redirect>
+      </Switch>
+    </Router>

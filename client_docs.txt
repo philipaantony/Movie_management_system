@@ -1,0 +1,10 @@
+
+----creating app:---
+npx create-react-app movie_app
+
+npm audit fix --force
+npm i bootstrap@5.3.0
+npm i react-router-dom@5.2.0
+
+
+
