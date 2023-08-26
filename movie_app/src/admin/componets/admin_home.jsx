@@ -1,0 +1,149 @@
+import React from 'react';
+import { Link } from "react-router-dom";
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import AddIcon from '@mui/icons-material/Add';
+
+function AdminHome() {
+  return (
+    <div style={{ backgroundColor: "#f2f7ff" }}>
+            <div id="main">
+                <header className="mb-3">
+                    <p className="burger-btn d-block d-xl-none">
+                        <i className="bi bi-justify fs-3"></i>
+                    </p>
+                </header>
+                <div className="page-heading">
+                    <div>
+                        <h3>Welcome, Manage Your Theater Sapce</h3>
+                    </div>
+                </div>
+                <div className="page-content">
+                    <section className="row">
+                        <div className="">
+                            <div className="row">
+                                {/* -------------------row------------------ */}
+                                <div className="col-6 col-lg-3 col-md-6">
+                                    <div className="card">
+                                        <div className="card-body px-3 py-4-5">
+                                            <div className="row">
+                                                <div className="col-md-4">
+                                                    <div className="stats-icon purple">
+                                                        <i className="iconly-boldShow"></i>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <h6 className="text-muted font-semibold">
+                                                        View Rating
+                                                    </h6>
+                                                    <h6 className="font-extrabold mb-0">21</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-6 col-lg-3 col-md-6">
+                                    <div className="card">
+                                        <div className="card-body px-3 py-4-5">
+                                            <div className="row">
+                                                <div className="col-md-4">
+                                                    <div className="stats-icon blue">
+                                                        <i className="iconly-boldProfile"></i>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <h6 className="text-muted font-semibold">
+                                                        View Feedback
+                                                    </h6>
+                                                    <h6 className="font-extrabold mb-0">2678</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-6 col-lg-3 col-md-6">
+                                    <div className="card">
+                                        <div className="card-body px-3 py-4-5">
+                                            <div className="row">
+                                                <div className="col-md-4">
+                                                    <div className="stats-icon green">
+                                                        <i className="iconly-boldAdd-User"></i>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <h6 className="text-muted font-semibold">
+                                                        Following
+                                                    </h6>
+                                                    <h6 className="font-extrabold mb-0">80.000</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-6 col-lg-3 col-md-6">
+                                    <div className="card">
+                                        <div className="card-body px-3 py-4-5">
+                                            <div className="row">
+                                                <div className="col-md-4">
+                                                    <div className="stats-icon red">
+                                                        <i className="iconly-boldBookmark"></i>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <h6 className="text-muted font-semibold">
+                                                        Saved Post
+                                                    </h6>
+                                                    <h6 className="font-extrabold mb-0">112</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Add Movie </h5>
+                                                    <p class="card-text">Add New One <LocalMoviesIcon  style={{fontSize:"40"}}/></p>
+                                                    <Link to="/addmovie">
+                                                        <button class="btn btn-primary">Add Movie <AddIcon/> </button>
+                                                    </Link>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Add Theater</h5>
+                                                    <p class="card-text">Click to add new Theater</p>
+                                                    <Link to="/">
+                                                        <button class="btn btn-primary">Add Theater</button>
+                                                    </Link>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Update Screen</h5>
+                                                    <p class="card-text">Click to update a screen.</p>
+                                                    <a href="#" class="btn btn-primary">Update</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+  )
+}
+
+export default AdminHome

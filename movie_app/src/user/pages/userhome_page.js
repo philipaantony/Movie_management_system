@@ -1,8 +1,23 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import MovieCardFlip from '../componets/movie_card_flip'
-import React from 'react';
+
 import UserNavBar from '../usernavbar/usernavbar';
 
 function UserHomePages() {
+
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/getmovies')
+            .then(response => {
+                setMovies(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching movies:', error);
+            });
+    }, []);
+
     return (
 
         <div id="app">
@@ -101,25 +116,19 @@ function UserHomePages() {
                                     <br></br>
                                     <br></br>
 
-                                    <div class="row ">
-                                        <MovieCardFlip imageurl="img/trending/trend-1.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-2.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-3.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-4.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-5.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-6.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-5.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-3.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-1.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-1.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-2.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-3.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-4.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-5.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-6.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-5.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-3.jpg" moviename="Karithi" />
-                                        <MovieCardFlip imageurl="img/trending/trend-1.jpg" moviename="Karithi" />
+                                    <div class="row " style={{ margin: "20px" }}>
+                                        {movies.map(movie => (
+                                            <MovieCardFlip
+                                                key={movie._id}
+                                                imageurl={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+                                                moviename={movie.title}
+                                                genre={movie.genre}
+                                                language={movie.language}
+                                                dis={movie.description}
+                                            />
+                                        ))}
+
+
                                     </div>
                                 </div>
                                 <div className="col-12 col-lg-3">

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { BACKGROUND_COLOR, FORGROUND_COLOR, TEXTCOLOR, TEXTCOLOR_DIM } from '../../const/const_color'
 import MovieCardFlip from './movie_card_flip';
 
@@ -6,6 +7,20 @@ import MovieCardFlip from './movie_card_flip';
 function UserHome() {
     const heightofimage = 270;
     const widthofimage = 180;
+
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/getmovies')
+            .then(response => {
+                setMovies(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching movies:', error);
+            });
+    }, []);
+
+
     return (
         <div style={{ backgroundColor: BACKGROUND_COLOR }}>
             <div id="main">
@@ -110,15 +125,9 @@ function UserHome() {
                                     <div className="card-content pb-4">
                                         <div className="recent-message d-flex px-4 py-3">
                                             <div class="row">
-                                                <MovieCardFlip imageurl="img/trending/trend-1.jpg" moviename="Karithi" />
-                                                <MovieCardFlip imageurl="img/trending/trend-2.jpg" moviename="Karithi" />
-                                                <MovieCardFlip imageurl="img/trending/trend-3.jpg" moviename="Karithi" />
-                                                <MovieCardFlip imageurl="img/trending/trend-4.jpg" moviename="Karithi" />
-                                                <MovieCardFlip imageurl="img/trending/trend-5.jpg" moviename="Karithi" />
-                                                <MovieCardFlip imageurl="img/trending/trend-6.jpg" moviename="Karithi" />
-                                                <MovieCardFlip imageurl="img/trending/trend-5.jpg" moviename="Karithi" />
-                                                <MovieCardFlip imageurl="img/trending/trend-3.jpg" moviename="Karithi" />
-                                                <MovieCardFlip imageurl="img/trending/trend-1.jpg" moviename="Karithi" />
+                                                {movies.map(movie => (
+                                                    <MovieCardFlip imageurl="img/trending/trend-1.jpg" moviename="Karithi" />
+                                                ))}
 
 
                                                 <div class="col-lg-2 col-md-4 col-sm-6">

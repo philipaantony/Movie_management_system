@@ -1,5 +1,5 @@
 import React from 'react'
-import { BACKGROUND_COLOR, FORGROUND_COLOR, TEXTCOLOR, TEXTCOLOR_DIM } from '../../const/const_color'
+import { FORGROUND_COLOR, TEXTCOLOR, } from '../../const/const_color'
 import "../../public/moviecardflip.css";
 
 function Moviecards() {
@@ -19,7 +19,7 @@ function Moviecards() {
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg">
                                         <div class="ep">18 / 18</div>
-                                        <img src="img/trending/trend-1.jpg" style={{ height: heightofimage, width: widthofimage }}></img>
+                                        <img src="img/trending/trend-1.jpg" style={{ height: heightofimage, width: widthofimage }} alt=""></img>
                                         <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     </div>
@@ -37,7 +37,7 @@ function Moviecards() {
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg">
                                         <div class="ep">18 / 18</div>
-                                        <img src="img/trending/trend-3.jpg" style={{ height: heightofimage, width: widthofimage }}></img>
+                                        <img src="img/trending/trend-3.jpg" style={{ height: heightofimage, width: widthofimage }} alt=""></img>
                                         <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     </div>
@@ -54,7 +54,7 @@ function Moviecards() {
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="">
                                         <div class="ep">18 / 18</div>
-                                        <img src="img/trending/trend-4.jpg" style={{ height: heightofimage, width: widthofimage }}></img>
+                                        <img src="img/trending/trend-4.jpg" style={{ height: heightofimage, width: widthofimage }} alt=""></img>
                                         <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     </div>
@@ -71,7 +71,7 @@ function Moviecards() {
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="">
                                         <div class="ep">18 / 18</div>
-                                        <img src="img/trending/trend-5.jpg" style={{ height: heightofimage, width: widthofimage }}></img>
+                                        <img src="img/trending/trend-5.jpg" style={{ height: heightofimage, width: widthofimage }} alt=""></img>
                                         <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     </div>
@@ -88,7 +88,7 @@ function Moviecards() {
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg">
                                         <div class="ep">18 / 18</div>
-                                        <img src="img/trending/trend-6.jpg" style={{ height: heightofimage, width: widthofimage }}></img>
+                                        <img src="img/trending/trend-6.jpg" style={{ height: heightofimage, width: widthofimage }} alt=""></img>
                                         <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     </div>
@@ -105,7 +105,7 @@ function Moviecards() {
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg">
                                         <div class="ep">18 / 18</div>
-                                        <img src="img/trending/trend-6.jpg" style={{ height: heightofimage, width: widthofimage }}></img>
+                                        <img src="img/trending/trend-6.jpg" style={{ height: heightofimage, width: widthofimage }} alt=""></img>
                                         <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     </div>
