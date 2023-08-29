@@ -27,10 +27,7 @@ function MovieCardFlip(props) {
                     </div>
                 </div>
                 <div class="product__item__text" style={{ padding: "0px", backgroundColor: "" }} >
-                    <ul>
-                        <li style={{ color: TEXTCOLOR }}>{props.genre}</li>
-                        <li style={{ color: TEXTCOLOR }}>{props.language}</li>
-                    </ul>
+
                     <h6 style={{ color: TEXTCOLOR }}>{props.moviename}</h6>
                 </div>
             </div>

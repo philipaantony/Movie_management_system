@@ -1,5 +1,6 @@
 import React from 'react'
 import UserNavBar from '../usernavbar/usernavbar'
+import Footer from '../../footer/footer'
 
 function UserAboutPage() {
   return (
@@ -29,6 +30,7 @@ function UserAboutPage() {
     </div>
 </div>
 </div>
+<Footer/>
 </div>
   )
 }

@@ -86,10 +86,6 @@ function AdminAddMovie() {
 
 
 
-
-
-
-
   return (
     <div style={{ backgroundColor: "#f2f7ff" }}>
       <div id="main">

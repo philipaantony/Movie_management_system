@@ -6,70 +6,69 @@ import axios from 'axios';
 function Register() {
 
 
-    const {register,handleSubmit,formState:{ errors },} = useForm();
-    const onSubmit = (data) =>
-     {
-       console.log(data);
-       axios.post("http://localhost:5000/api/register", data)
+    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const onSubmit = (data) => {
+        console.log(data);
+        axios.post("http://localhost:5000/api/register", data)
             .then((response) => {
                 console.log("Success:", response);
                 alert(response.data.message);
-        })
-        .catch((error) => {
-           ;console.error(error.response.data);
-            alert(error.response.data);
-        });
-        
-
-     }
+            })
+            .catch((error) => {
+                ; console.error(error.response.data);
+                alert(error.response.data);
+            });
 
 
+    }
 
-     const validationRules = {
+
+
+    const validationRules = {
         username: {
-          required: "**Name is required",
-          minLength: {
-            value: 3,
-            message: "**Name must have at least 3 characters",
-          },
+            required: "**Name is required",
+            minLength: {
+                value: 3,
+                message: "**Name must have at least 3 characters",
+            },
         },
         email: {
             required: 'Email is required',
             pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Invalid email address',
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Invalid email address',
             },
-          },
-          phone: {
+        },
+        phone: {
             required: 'Phone number is required',
             pattern: {
-              value: /^[0-9]{10}$/i,
-              message: 'Invalid phone number',
+                value: /^[0-9]{10}$/i,
+                message: 'Invalid phone number',
             },
-          },
-          dob: {
+        },
+        dob: {
             required: 'Date of birth is required',
-          },
-          password: {
+        },
+        password: {
             required: 'Password is required',
             minLength: {
-              value: 8,
-              message: 'Password must have at least 8 characters',
+                value: 8,
+                message: 'Password must have at least 8 characters',
             },
-          },
-          confirmPassword: {
+        },
+        confirmPassword: {
             required: 'Confirm password is required',
             validate: (value, context) => {
-              return value === context.password || 'Passwords do not match';
+                return value === context.password || 'Passwords do not match';
             },
-          },
-        
+        },
+
     }
-   
+
     return (
         <div>
             <center>
-            <div style={{ width: "70%", paddingTop: "70px" }}>
+                <div style={{ width: "70%", paddingTop: "70px" }}>
                     <div>
                         <div className="col-lg-5 col-12">
                             <div id="auth-left">
@@ -78,7 +77,7 @@ function Register() {
                                     Input your data to register to our website.
                                 </p>
 
-                                <form  onSubmit={handleSubmit(onSubmit)}>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="form-group position-relative has-icon-left mb-4">
                                         <input
                                             name="username"
@@ -91,15 +90,15 @@ function Register() {
                                             <i className="bi bi-person"></i>
                                         </div>
                                         <p className="text-danger">
-                                {" "}
-                                {errors?.username && errors.username.message}
-                              </p>
+                                            {" "}
+                                            {errors?.username && errors.username.message}
+                                        </p>
                                     </div>
 
                                     <div className="form-group position-relative has-icon-left mb-4">
                                         <input
-                                           name="email"
-                                           {...register("email", validationRules.email)}
+                                            name="email"
+                                            {...register("email", validationRules.email)}
                                             type="text"
                                             className="form-control form-control-xl"
                                             placeholder="Email"
@@ -108,15 +107,15 @@ function Register() {
                                             <i className="bi bi-envelope"></i>
                                         </div>
                                         <p className="text-danger">
-                                {" "}
-                                {errors?.email && errors.email.message}
-                              </p>
+                                            {" "}
+                                            {errors?.email && errors.email.message}
+                                        </p>
                                     </div>
 
                                     <div className="form-group position-relative has-icon-left mb-4">
                                         <input
-                                             name="phone"
-                                             {...register("phone", validationRules.phone)}
+                                            name="phone"
+                                            {...register("phone", validationRules.phone)}
                                             type="text"
                                             className="form-control form-control-xl"
                                             placeholder="Phone Number"
@@ -125,9 +124,9 @@ function Register() {
                                             <i className="bi bi-phone"></i>
                                         </div>
                                         <p className="text-danger">
-                                {" "}
-                                {errors?.phone && errors.phone.message}
-                              </p>
+                                            {" "}
+                                            {errors?.phone && errors.phone.message}
+                                        </p>
                                     </div>
 
                                     <div className="form-group position-relative has-icon-left mb-4">
@@ -142,9 +141,9 @@ function Register() {
                                             <i className="bi bi-person"></i>
                                         </div>
                                         <p className="text-danger">
-                                {" "}
-                                {errors?.dob && errors.dob.message}
-                              </p>
+                                            {" "}
+                                            {errors?.dob && errors.dob.message}
+                                        </p>
                                     </div>
 
 
@@ -161,15 +160,15 @@ function Register() {
                                             <i className="bi bi-shield-lock"></i>
                                         </div>
                                         <p className="text-danger">
-                                {" "}
-                                {errors?.password && errors.password.message}
-                              </p>
+                                            {" "}
+                                            {errors?.password && errors.password.message}
+                                        </p>
                                     </div>
 
                                     <div className="form-group position-relative has-icon-left mb-4">
                                         <input
-                                         name="confirmPassword"
-                                         {...register("confirmPassword", validationRules.confirmPassword)}
+                                            name="confirmPassword"
+                                            {...register("confirmPassword", validationRules.confirmPassword)}
                                             type="password"
                                             className="form-control form-control-xl"
                                             placeholder="Confirm Password"
@@ -178,9 +177,9 @@ function Register() {
                                             <i className="bi bi-shield-lock"></i>
                                         </div>
                                         <p className="text-danger">
-                                {" "}
-                                {errors?.confirmPassword && errors.confirmPassword.message}
-                              </p>
+                                            {" "}
+                                            {errors?.confirmPassword && errors.confirmPassword.message}
+                                        </p>
                                     </div>
 
                                     <button className="btn btn-primary btn-block btn-lg shadow-lg mt-5">
@@ -196,15 +195,15 @@ function Register() {
                                                 Log in
                                             </a>
                                         </Link>
-                                        
+
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
             </center>
-           
+
         </div>
     )
 }

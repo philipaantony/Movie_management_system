@@ -1,22 +1,31 @@
 import React, { useState } from "react";
 import { Link,useNavigate} from "react-router-dom";
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { login } from '../../Redux/user/userSlice';
+
 
 
 
 function Login() {
+
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleLogin = async (e) => {
         e.preventDefault();   
+      
         axios.post('http://localhost:5000/api/login', {email,password})
             .then((response) => {
                 console.log("Success:", response);
                 if(response.data.message === "userexist")
                 {
+                    
                     alert("Login Successfull");
+                    dispatch(login({ useremail: email }));
                     navigate("/userhome")
                 }
                 else if(response.data.message === "no_user")

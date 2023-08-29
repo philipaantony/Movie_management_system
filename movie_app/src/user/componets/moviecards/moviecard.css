@@ -1,0 +1,114 @@
+/* Common styles for movie cards */
+.movie_card {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 400px; /* Reduced width */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .movie_card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .movie_card .info_section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .movie_card .movie_header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    animation: fadeInDown 0.5s ease both;
+  }
+  
+  .movie_card .movie_header img.locandina {
+    width: 70px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+  
+  .movie_card .movie_header h1 {
+    font-size: 24px;
+    margin: 0;
+    animation: fadeInUp 0.5s ease both;
+  }
+  
+  .movie_card .movie_header h4 {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+    animation: fadeInUp 0.5s ease both;
+  }
+  
+  .movie_card .minutes {
+    font-size: 14px;
+    color: #888;
+    animation: fadeInUp 0.5s ease both;
+  }
+  
+  .movie_card .type {
+    font-size: 14px;
+    color: #888;
+    margin: 5px 0;
+    animation: fadeInUp 0.5s ease both;
+  }
+  
+  .movie_card .movie_desc p.text {
+    font-size: 16px;
+    color: #555;
+    margin: 0;
+    animation: fadeInUp 0.5s ease both;
+  }
+  
+  .movie_card .movie_social ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    margin: 15px 0 0;
+    animation: fadeInUp 0.5s ease both;
+  }
+  
+  .movie_card .movie_social ul li i {
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .movie_card .movie_social ul li i:hover {
+    color: #ff6b6b;
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

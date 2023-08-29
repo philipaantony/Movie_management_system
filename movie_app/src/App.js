@@ -4,9 +4,7 @@ import './public/seat.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateSeatOrientation from "./theater/theater_orientation";
 import TheaterHomePage from "./theater/pages/theater_home_page";
-
 import AddScreen from "./theater/componets/add_screen";
-
 import ViewScreens from "./theater/componets/view_screens_list";
 import Viewscreenorientation from "./theater/componets/viewscreenorientation";
 import AddNewTheaterPage from "./theater/pages/add_new_theater_page";
@@ -18,8 +16,7 @@ import Registrationpage from "./auth/pages/registrationpage";
 import AdminHomePage from "./admin/pages/admin_home_page";
 import AdminAddMoviePage from "./admin/pages/admin_add_movie_page";
 import Adminviewaddedmoviespage from "./admin/pages/admin_view_added_movie_page";
-
-
+import UserViewMovie from "./user/pages/user_view_movie";
 
 
 export default function App() {
@@ -39,7 +36,8 @@ export default function App() {
           <Route path="/viewtheater" element={<Viewtheaterlistpage />} />
           <Route path="/seat" element={<CreateSeatOrientation />} />
 
-          <Route path="/addmovie" element={<AdminAddMoviePage claer />} />
+          <Route path="/addmovie" element={<AdminAddMoviePage />} />
+          <Route path="/viewmovie" element={<UserViewMovie />} />
 
           <Route path="/userhome" element={<UserHomePages />}></Route>
           <Route path="/adminhome" element={<AdminHomePage />}></Route>
@@ -54,5 +52,4 @@ export default function App() {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+

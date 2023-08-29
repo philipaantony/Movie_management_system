@@ -9,6 +9,9 @@ import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import "../../public/navbar.css";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+
+import { useDispatch ,useSelector} from 'react-redux';
+import { logout } from '../../Redux/user/userSlice';
 import {
     CDropdown,
     CDropdownToggle,
@@ -18,8 +21,18 @@ import {
     CAvatar,
 } from "@coreui/react";
 
+
 function UserNavBar(props) {
+
+    const useremail = useSelector((state) => state.user.useremail);
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+      dispatch(logout());
+      navigate('/');
+    };
 
 
     return (
@@ -84,7 +97,7 @@ function UserNavBar(props) {
                                         <div className="user-name text-end me-3">
                                             <h6 className="mb-0 text-gray-600">John Ducky</h6>
                                             <p className="mb-0 text-sm text-gray-600">
-                                                philipantony@gmail.com
+                                            {useremail}
                                             </p>
                                         </div>
                                         <div className="user-img d-flex align-items-center">
@@ -109,7 +122,7 @@ function UserNavBar(props) {
                                     </CDropdownItem>
                                     <CDropdownDivider />
                                     <CDropdownItem href="">
-                                        <LogoutIcon /> Logout
+                                        <div  onClick={handleLogout}><LogoutIcon></LogoutIcon>Logout</div>
                                     </CDropdownItem>
                                 </CDropdownMenu>
                             </CDropdown>

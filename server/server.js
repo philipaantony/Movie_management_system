@@ -11,8 +11,9 @@ const bcrypt = require('bcrypt');
 const threaterScreenModel = require('../server/model/threaterScreenModel');
 const Theater = require('../server/model/theatermodel');
 const Movies = require('../server/model/moviemodel');
-const User = require("./model/usermodel");
 const Login = require("./model/loginmodel");
+const User = require("./model/usermodel");
+
 
 
 
@@ -83,6 +84,8 @@ app.get('/api/getmovies', async (req, res) => {
 
 app.post('/api/register', async (req, res) => {
     try {
+
+
         const { username, email, phone, dob, password } = req.body;
         const user = new User({ username, email, phone, dob });
         const status = await user.save();
@@ -105,8 +108,17 @@ app.post('/api/register', async (req, res) => {
 
     }
     catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error' });
+
+        if (error.code === 11000) {
+            console.log("---------------------------------")
+            console.log("Email Duplication")
+            console.log("---------------------------------")
+            res.json({ message: "User Already Exist" });
+        } else {
+            console.error(error);
+            console.log("Server error")
+            res.status(500).json({ message: 'Server error' });
+        }
     }
 
 })
