@@ -119,6 +119,8 @@ function AdminAddMovie() {
                       >
                         <div className="form-body">
                           <div className="row">
+
+
                             <div className="col-md-4">
                               <label>Title</label>
                             </div>
@@ -131,15 +133,17 @@ function AdminAddMovie() {
                                 placeholder="Movie title"
                               />
                               <p className="text-danger">
-                                {" "} {errors?.title && errors.title.message}
+                               {errors?.title && errors.title.message}
                               </p>
                             </div>
+
+
                             <div className="col-md-4">
                               <label>Genre</label>
                             </div>
                             <div className="col-md-8 form-group">
                               <select
-                                className="form-control"
+                                className="btn  dropdown-toggle dropdown-toggle-split"
                                 name="genre"
                                 defaultValue=""
                                 {...register("genre", validationRules.genre)}

@@ -5,7 +5,7 @@ import Footer from '../../footer/footer'
 function UserAboutPage() {
   return (
     <div id="app">
-    <div style={{ padding: "10px", margin: "20px" }} className="layout-navbar">
+    <div style={{}} className="layout-navbar">
     <UserNavBar activeabout="active"/>
     <div className="container mt-5">
     <div className="row">

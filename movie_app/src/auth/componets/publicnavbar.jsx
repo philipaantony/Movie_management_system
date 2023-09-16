@@ -5,9 +5,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import MovieIcon from "@mui/icons-material/Movie";
 import "../../public/navbar.css";
 import SlideshowSharpIcon from '@mui/icons-material/SlideshowSharp';
+import '../../public/buttoncss.css'
 
 
 function PublicNavBar(props) {
+
+    const btn = props.button;
+
     return (
         <div>
             <header className="mb-3">
@@ -24,10 +28,11 @@ function PublicNavBar(props) {
                             About Us
                         </li>
                         </Link>
-
+                        <Link to="/explore">
                         <li className={`nav-item ${props.activediscover}`}>
                             Explore
                         </li>
+                        </Link>
                         <Link to="/register">
                         <li
                             className={`nav-item ${props.activedjoin}`}>
@@ -59,17 +64,23 @@ function PublicNavBar(props) {
                     </ul>
                     <nav className="navbar navbar-expand navbar-light ">
                         <div className="container-fluid">
-                            <div style={{ padding: "20px" }}>
+                            <div style={{ padding: "20px" }} >
                             <MovieIcon />
                             </div>
                             <div style={{ padding: "20px" }}>
                                 <SlideshowSharpIcon/>
                             </div>
 
+                            {btn ? ( <div className="user-name text-end me-3">  
+                            <Link to="/register"><button type="button" className="attractive-button">Signup?</button>      
+                            </Link>                                                                      
+                            </div>):(
+                                 <div className="user-name text-end me-3">  
+                                 <Link to="/"><button type="button" className="attractive-button">Login?</button>      
+                                 </Link>                                                                      
+                                 </div>
+                            )}
                            
-                            <div className="user-name text-end me-3">  
-                            <Link to="/register"><button type="button" class="btn btn-primary">Signup?</button>      </Link>                                                                      
-                                        </div>
                         </div>
                     </nav>
                 </nav>

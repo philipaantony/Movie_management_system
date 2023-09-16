@@ -105,7 +105,7 @@ function AdminHome() {
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h5 class="card-title">Add Movie </h5>
-                                                    <p class="card-text">Add New One <LocalMoviesIcon  style={{fontSize:"40"}}/></p>
+                                                    <p class="card-text">Add New One <LocalMoviesIcon  style={{fontSize:"20"}}/></p>
                                                     <Link to="/addmovie">
                                                         <button class="btn btn-primary">Add Movie <AddIcon/> </button>
                                                     </Link>
@@ -116,10 +116,10 @@ function AdminHome() {
                                         <div class="col-md-3">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Add Theater</h5>
-                                                    <p class="card-text">Click to add new Theater</p>
-                                                    <Link to="/">
-                                                        <button class="btn btn-primary">Add Theater</button>
+                                                    <h5 class="card-title">View Users</h5>
+                                                    <p class="card-text">Click to View System Users</p>
+                                                    <Link to="/viewusers">
+                                                        <button class="btn btn-primary">View Users</button>
                                                     </Link>
 
                                                 </div>
@@ -128,9 +128,11 @@ function AdminHome() {
                                         <div class="col-md-3">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Update Screen</h5>
-                                                    <p class="card-text">Click to update a screen.</p>
-                                                    <a href="#" class="btn btn-primary">Update</a>
+                                                    <h5 class="card-title">View Theater</h5>
+                                                    <p class="card-text">Aprove new Theaters</p>
+                                                    <Link to="/viewtheaters">
+                                                    <a href="#" class="btn btn-primary">View Theater</a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>

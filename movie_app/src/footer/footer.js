@@ -10,27 +10,27 @@ function Footer() {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">
-                            <h3>About Us</h3>
+                            <h3 style={{ color: "white" }}>About Us</h3>
                             <p>
                                 Welcome to the Movie Management System, your go-to platform for managing and discovering the latest movies.
                             </p>
                         </div>
                         <div className="col-md-4">
-                            <h3>Connect with Us</h3>
-                            <div className="social-icons">
-                                <a href="#" className="social-icon">
+                            <h3 style={{ color: "white" }}>Connect with Us</h3>
+                            <div className="social-icons" >
+                                <a className="social-icon" style={{ paddingLeft: "20px" }}>
                                     <FontAwesomeIcon icon={faFacebook} />
                                 </a>
-                                <a href="#" className="social-icon">
+                                <a className="social-icon" style={{ paddingLeft: "20px" }}>
                                     <FontAwesomeIcon icon={faTwitter} />
                                 </a>
-                                <a href="#" className="social-icon">
+                                <a className="social-icon" style={{ paddingLeft: "20px" }}>
                                     <FontAwesomeIcon icon={faInstagram} />
                                 </a>
                             </div>
                         </div>
                         <div className="col-md-4">
-                            <h3>Contact Information</h3>
+                            <h3 style={{ color: "white" }}>Contact Information</h3>
                             <p>
                                 Email: info@moviemanagement.com<br />
                                 Phone: +123-456-7890

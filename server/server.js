@@ -9,10 +9,10 @@ const bcrypt = require('bcrypt');
 
 
 const threaterScreenModel = require('../server/model/threaterScreenModel');
-const Theater = require('../server/model/theatermodel');
 const Movies = require('../server/model/moviemodel');
 const Login = require("./model/loginmodel");
 const User = require("./model/usermodel");
+const Theater = require("./model/theatermodel");
 
 
 
@@ -97,6 +97,7 @@ app.post('/api/register', async (req, res) => {
                 email,
                 password: hashedPassword,
                 usertype: "user",
+                status: "Authorised"
             });
             const status2 = await newLogin.save();
 
@@ -131,18 +132,23 @@ app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
     try {
         const existingLogin = await Login.findOne({ email });
+
         if (existingLogin) {
             const passwordMatch = await bcrypt.compare(password, existingLogin.password);
             if (passwordMatch) {
                 console.log('Login successful:', existingLogin);
-                res.json({ message: 'userexist' });
+                res.json({ message: 'userexist', existingLogin });
             } else {
                 console.log('Invalid credentials');
                 res.json({ message: 'no_user' });
             }
         } else {
+            const existingLogin = {
+                usertype: 'nouser',
+                status: 'Not-Authorised',
+            };
             console.log('Invalid credentials');
-            res.json({ message: 'Invalid credentials' });
+            res.json({ message: 'Invalid credentials', existingLogin });
         }
     } catch (error) {
         console.error('Error during login:', error);
@@ -154,15 +160,72 @@ app.post('/api/login', async (req, res) => {
 
 //----------------------------------------------------------------------------
 
-app.post('/api/addnewtheater', async (req, res) => {
+app.post('/api/theaterreg', async (req, res) => {
     try {
-        const { name, owner, location } = req.body;
-        const theater = new Theater({ name, owner, location });
-        await theater.save();
-        res.status(201).json({ message: 'Theater added successfully' });
+        const { name, owner, location, email, phone, password, cpassword } = req.body;
+        const status = "Pending";
+        const newTheater = new Theater(
+            {
+                theater_name: name,
+                theater_owner: owner,
+                theater_location: location,
+                theater_email: email,
+                theater_phone: phone,
+                status: "Pending"
+            }
+        )
+        const savedTheater = await newTheater.save();
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const newLogin = new Login({
+            email,
+            password: hashedPassword,
+            usertype: "theater",
+            status: "Pending"
+        });
+        const logdata = await newLogin.save();
+        if (savedTheater && logdata) {
+            res.status(201).json({ message: 'Registration Successful', savedTheater });
+        }
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        if (error.code === 11000) {
+            console.log("---------------------------------")
+            console.log("Email Duplication")
+            console.log("---------------------------------")
+            res.json({ message: "You Already Registered" });
+        }
+        else {
+            console.error(error);
+            console.log("Server error")
+            res.status(500).json({ message: 'Server error' });
+        }
+
+    }
+});
+
+
+app.patch('/api/approvetheaters/:id', async (req, res) => {
+    const { id } = req.params;
+    const { status, email } = req.body;
+    console.log(id);
+    console.log(status);
+    console.log(email);
+    try {
+        // Update the status of the theater in the database
+        const [updatedTheater, updatedLogin] =
+            await Promise.all([
+                Theater.findOneAndUpdate({ theater_email: email }, { status }, { new: true }),
+                Login.findOneAndUpdate({ email }, { status }, { new: true }),
+            ]);
+
+        if (!updatedTheater || !updatedLogin) {
+            return res.status(404).json({ message: 'Failed to Update' });
+        }
+
+        return res.json({ updatedTheater, message: 'Theater Approved..' });
+    } catch (error) {
+        console.error('Error updating theater status:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
@@ -210,6 +273,18 @@ app.get('/api/getscreen', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 })
+
+//========================get user for admin ===============================================================
+
+
+app.get('/api/getalluser', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching users' });
+    }
+});
 
 //=======================================================================================
 

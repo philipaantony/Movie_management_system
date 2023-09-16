@@ -2,11 +2,15 @@ import React from 'react'
 import PublicNavBar from '../componets/publicnavbar'
 import Footer from '../../footer/footer'
 import Register from '../componets/register'
+import Publicnavbarblack from '../componets/publicnavbarblack'
 
 function Registrationpage() {
   return (
     <div>
-        <PublicNavBar activedjoin="active"/>
+{//<PublicNavBar activedjoin="active"/>
+}
+      
+        <Publicnavbarblack activedjoin="active"/>
         <Register/>
         <Footer/>
     </div>

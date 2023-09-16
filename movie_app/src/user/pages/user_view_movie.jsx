@@ -3,7 +3,8 @@ import UserNavBar from "../usernavbar/usernavbar";
 import Maincard from "../componets/moviecards/maincard";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import {useLocation} from 'react-router-dom';
-import Moviecard from "../componets/moviecards/moviecard";
+
+import Footer from "../../footer/footer";
 
 
 function UserViewMovie() {
@@ -13,8 +14,8 @@ function UserViewMovie() {
   const name = location.state.moviename;
 
   return (
-    <div>
-      <UserNavBar />
+    <div >
+      <UserNavBar activehome="active"/>
       <div className="container my-5">
         <div className="row">
           <div className="col-md-4">
@@ -69,7 +70,7 @@ function UserViewMovie() {
           </div>
         </div>
       </div>
-      <Moviecard/>
+      <Footer/>
     </div>
   );
 }

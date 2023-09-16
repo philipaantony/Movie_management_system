@@ -4,6 +4,7 @@ const loginSchema = new mongoose.Schema({
     email: String,
     password: String,
     usertype: String,
+    status: String,
 });
 
 const Login = mongoose.model('Login', loginSchema);

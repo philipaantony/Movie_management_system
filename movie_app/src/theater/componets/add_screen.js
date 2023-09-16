@@ -30,11 +30,14 @@ function AddScreen() {
 
     const handleClick = (seatNumber) => {
         console.log(unavailableseats);
-        if (unavailableseats.includes(seatNumber)) {
+        if (unavailableseats.includes(seatNumber)) 
+        {
             setunavailableseats((prevUnavailableSeats) =>
                 prevUnavailableSeats.filter((seat) => seat !== seatNumber)
             );
-        } else {
+        } 
+        else
+         {
             setunavailableseats((prevUnavailableSeats) => [...prevUnavailableSeats, seatNumber]);
         }
     };
@@ -121,12 +124,16 @@ function AddScreen() {
                         const seatRow = [];
                         for (let i = 1; i <= rows; i++) {
                             const seatCols = [];
-                            for (let j = 1; j <= columns; j++) {
+                            for (let j = 1; j <= columns; j++) 
+                            {
                                 const seatNumber = i + '-' + j;
                                 const seatno = i + '' + j;
+
                                 const isSelected = selectedSeats.includes(seatNumber);
                                 const isUnavailable = unavailableseats.includes(seatno);
+
                                 //If seactno exists in the unavailable array, it means that the seat is marked as unavailable, and isUnavailable will be true.
+                                
                                 const backgroundColor = isSelected ? '#60E01C' : '';
 
                                 seatCols.push(

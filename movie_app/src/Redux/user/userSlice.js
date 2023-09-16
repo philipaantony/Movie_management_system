@@ -13,7 +13,7 @@ const userSlice = createSlice({
             state.isLoggedIn = true;
         },
         logout: (state, action) => {
-            state.useremail = '';
+            state.useremail = action.payload.useremail;
             state.isLoggedIn = false;
         }
     }

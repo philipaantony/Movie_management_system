@@ -1,0 +1,26 @@
+/* AttractiveButton.css */
+
+.attractive-button {
+    background: linear-gradient(to right, #1D267D, #3045ff);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .attractive-button .icon {
+    margin-right: 8px;
+  }
+  
+  .attractive-button:hover {
+    background: linear-gradient(to right, #1D267D, #472183);
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
