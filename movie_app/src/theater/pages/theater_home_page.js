@@ -4,12 +4,14 @@ import TheaterHome from '../componets/Theater_Home'
 
 
 
+
 function Theater_Home_Page() {
     return (
         <div>
 
             <TheaterSidebar classname={"sidebar-item active"} />
             <TheaterHome />
+
 
         </div>
     )

@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import UserNavBar from "../usernavbar/usernavbar";
 import UserCarousel from "../componets/Carousel/user_carousel";
 
 function UserHomePage2() {
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    axios
+        .get("http://localhost:5000/api/getmovies")
+        .then((response) => {
+            setMovies(response.data);
+        })
+        .catch((error) => {
+            console.error("Error fetching movies:", error);
+        });
+}, []);
+
+const titleStyle = {
+  color: 'white',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  animation: 'typeWriter 5s steps(20, end), blink-caret 0.5s step-end infinite',
+};
+
   const trendingMovies = [
     // Replace with your trending movie data
     {
@@ -105,7 +125,7 @@ function UserHomePage2() {
             </div>
           </div>
 
-          {/* Search Bar */}
+          {/* Search Bar ---------------------------------------------*/}
           <div className="row mt-4">
             <div className="col-md-8 mx-auto">
               <div className="input-group">
@@ -140,43 +160,16 @@ function UserHomePage2() {
           </div>
         </div>
       </div>
+{/*------------------------------------------------------------------------------ */}
 
-      <div
+<div
         className="container-fluid"
         style={{ paddingLeft: "60px", paddingRight: "60px" }}
       >
         <section className="mt-5">
           <h2>Trending Movies</h2>
           <div className="row">
-            {trendingMovies.map((movie) => (
-              <div className="col-lg-2 col-md-4 col-6 mb-4" key={movie.id}>
-                <div className="card" style={{ maxHeight: "450px" }}>
-                  <img
-                    src={movie.poster}
-                    className="card-img-top"
-                    alt={movie.title}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{movie.title}</h5>
-                    <p className="card-text">{movie.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    
-      <UserCarousel/>
-
-      <div
-        className="container-fluid"
-        style={{ paddingLeft: "60px", paddingRight: "60px" }}
-      >
-        <section className="mt-5">
-          <h2>Trending Movies</h2>
-          <div className="row">
-            {trendingMovies.map((movie) => (
+            {movies.map((movie) => (
               <div className="col-lg-2 col-md-4 col-6 mb-4" key={movie.id}>
                 <div
                   className="card"
@@ -202,7 +195,7 @@ function UserHomePage2() {
                     }}
                   >
                     <img
-                      src={movie.poster}
+                      src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
                       className="card-img-top movie-poster"
                       alt={movie.title}
                       style={{
@@ -227,6 +220,47 @@ function UserHomePage2() {
           </div>
         </section>
       </div>
+
+
+
+
+
+
+
+
+
+
+      
+ {/*------------------------------------------------------------------------------ */}   
+      <UserCarousel/>
+{/*------------------------------------------------------------------------------ */}
+     
+<div
+        className="container-fluid"
+        style={{ paddingLeft: "60px", paddingRight: "60px" }}
+      >
+        <section className="mt-5">
+          <h2>Trending Movies</h2>
+          <div className="row">
+            {trendingMovies.map((movie) => (
+              <div className="col-lg-2 col-md-4 col-6 mb-4" key={movie.id}>
+                <div className="card" style={{ maxHeight: "450px" }}>
+                  <img
+                    src={movie.poster}
+                    className="card-img-top"
+                    alt={movie.title}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{movie.title}</h5>
+                    <p className="card-text">{movie.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+      {/*------------------------------------------------------------------------------ */}
     </div>
   );
 }

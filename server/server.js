@@ -8,7 +8,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 
 
-const threaterScreenModel = require('../server/model/threaterScreenModel');
+const TheaterScreen = require('../server/model/threaterScreenModel');
 const Movies = require('../server/model/moviemodel');
 const Login = require("./model/loginmodel");
 const User = require("./model/usermodel");
@@ -84,16 +84,15 @@ app.get('/api/getmovies', async (req, res) => {
 
 app.post('/api/register', async (req, res) => {
     try {
-
-
         const { username, email, phone, dob, password } = req.body;
         const user = new User({ username, email, phone, dob });
-        const status = await user.save();
-        if (status) {
+        const usersaved = await user.save();
+        if (usersaved) {
 
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
             const newLogin = new Login({
+                _id: usersaved._id,
                 email,
                 password: hashedPassword,
                 usertype: "user",
@@ -171,13 +170,14 @@ app.post('/api/theaterreg', async (req, res) => {
                 theater_location: location,
                 theater_email: email,
                 theater_phone: phone,
-                status: "Pending"
+
             }
         )
         const savedTheater = await newTheater.save();
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         const newLogin = new Login({
+            _id: savedTheater._id,
             email,
             password: hashedPassword,
             usertype: "theater",
@@ -204,25 +204,16 @@ app.post('/api/theaterreg', async (req, res) => {
 });
 
 
-app.patch('/api/approvetheaters/:id', async (req, res) => {
-    const { id } = req.params;
-    const { status, email } = req.body;
-    console.log(id);
-    console.log(status);
-    console.log(email);
-    try {
-        // Update the status of the theater in the database
-        const [updatedTheater, updatedLogin] =
-            await Promise.all([
-                Theater.findOneAndUpdate({ theater_email: email }, { status }, { new: true }),
-                Login.findOneAndUpdate({ email }, { status }, { new: true }),
-            ]);
+app.patch('/api/approvetheaters', async (req, res) => {
 
-        if (!updatedTheater || !updatedLogin) {
+    const { status, email } = req.body;
+    try {
+        const updatedLogin = await Login.findOneAndUpdate({ email }, { status }, { new: true });
+        if (!updatedLogin) {
             return res.status(404).json({ message: 'Failed to Update' });
         }
 
-        return res.json({ updatedTheater, message: 'Theater Approved..' });
+        return res.json({ message: 'Status Updated', status });
     } catch (error) {
         console.error('Error updating theater status:', error);
         return res.status(500).json({ message: 'Internal Server Error' });
@@ -230,10 +221,27 @@ app.patch('/api/approvetheaters/:id', async (req, res) => {
 });
 
 
+
+
+
+
 //-----------------------------------------------------------------------------
 app.get('/api/theaters', async (req, res) => {
+    const email = req.query.theater_email;
     try {
-        const theaters = await Theater.find();
+        const theaters = await Theater.find({ theater_email: email });
+        console.log(theaters);
+        res.status(200).json(theaters);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+//------------------------------------------------------------------------------
+app.get('/api/theaterlogin', async (req, res) => {
+
+    try {
+        const theaters = await Login.find({ usertype: 'theater' });
         res.status(200).json(theaters);
     } catch (error) {
         console.error(error);
@@ -241,20 +249,31 @@ app.get('/api/theaters', async (req, res) => {
     }
 });
 
+
+
 //----------------adding screen------------------------------------------------
 app.post('/api/addnewscreen', async (req, res) => {
-    const { theaterid, type, screentype, rows, columns, orientation } = req.body;
     try {
-        const NewScreen = threaterScreenModel({ theaterid, type, screentype, rows, columns, orientation });
-        await NewScreen.save().then((data) => {
-            console.log(data)
-            res.json({ Status: "S" });
-        })
+        const { columns, name, orientation, rows, screenType, theatertype, tremail, trid } = req.body;
+
+        // Create a new Theater document based on the request data
+        const newTheater = new TheaterScreen({
+            trid,
+            tremail,
+            name,
+            screentype: screenType, // Assuming you want to map screenType to screentype
+            rows,
+            columns,
+            orientation,
+            theatertype,
+        });
+        const savedTheater = await newTheater.save();
+        res.status(201).json({ message: 'New theater screen added successfully', theater: savedTheater });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-    catch (err) {
-        console.error(err);
-        res.json({ Status: "F" });
-    }
+
 });
 
 
@@ -285,6 +304,34 @@ app.get('/api/getalluser', async (req, res) => {
         res.status(500).json({ error: 'Error fetching users' });
     }
 });
+
+
+app.get('/api/getscreenbyid', async (req, res) => {
+    try {
+        let screenId = req.query.trid
+        console.log("------------");
+        console.log(screenId);
+        console.log("------------");
+        const theaterScreen = await TheaterScreen.find({ trid: screenId });
+        console.log(theaterScreen)
+        if (!theaterScreen) {
+            return res.status(404).json({ message: 'Theater screen not found' });
+        }
+
+
+        res.status(200).json({ theaterScreen });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+
+
+
+
+
 
 //=======================================================================================
 

@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../Redux/user/userSlice";
-
 import { useForm } from "react-hook-form";
+import { baseUrl } from "../../config/config";
 
 function Login() {
   const {register,handleSubmit,formState: { errors },} = useForm();
@@ -14,7 +14,7 @@ function Login() {
 
   const onSubmit = async (data) => {
     axios
-      .post("http://localhost:5000/api/login", data)
+      .post(`${baseUrl}/api/login`, data)
       .then((response) => {
         console.log("Success:", response);
 
@@ -24,7 +24,7 @@ function Login() {
         if (response.data.existingLogin.usertype === "admin") 
         {
           alert("Login Successfull as Admin");
-          dispatch(login({ useremail: data.email }));
+          dispatch(login({userid:"66666" ,useremail: data.email }));
           navigate("/adminhome");
         } 
         else if (response.data.existingLogin.usertype === "user") 
@@ -37,15 +37,19 @@ function Login() {
         {
           if(response.data.existingLogin.status === "Pending")
           {
-            alert("Login Successfull as Theater");
-            dispatch(login({ useremail: data.email }));
+            alert("Login Successfull as Theater");          
             navigate("/requestpending");
+          }
+          else if(response.data.existingLogin.status === "Rejected")
+          {
+            alert("Login Successfull as Theater");
+            navigate("/requestrejected");
           }
           else if(response.data.existingLogin.status === "Approved")
           {
             alert("Login Successfull as Theater");
-            dispatch(login({ useremail: data.email }));
-            navigate("/t");
+            dispatch(login({userid: response.data.existingLogin._id, useremail: data.email }));
+            navigate("/theaterhome");
           }
         }
         else if (response.data.existingLogin.status === "Not-Authorised") 

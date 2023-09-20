@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { baseUrl } from "../../config/config";
 
 function Register() {
 
@@ -10,7 +11,7 @@ function Register() {
     const onSubmit = (data) =>
      {
        console.log(data);
-       axios.post("http://localhost:5000/api/register", data)
+       axios.post(`${baseUrl}/api/register`, data)
             .then((response) => {
                 console.log("Success:", response);
                 alert(response.data.message);

@@ -42,7 +42,7 @@ function TheaterSidebar(props) {
                             <li className="sidebar-title">Menu</li>
 
                             <li className={props.classname}>
-                                <Link to="/t">
+                                <Link to="/theaterhome">
                                     <p className="sidebar-link">
                                         <i className="bi bi-grid-fill"></i>
                                         <span>Dashboard</span>

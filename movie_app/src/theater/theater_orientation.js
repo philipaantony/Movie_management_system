@@ -1,20 +1,78 @@
 import React, { useState, } from 'react';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { baseUrl } from "../config/config";
+import { useSelector } from "react-redux";
 
 
 
 function CreateSeatOrientation() {
 
-    const [rows, setRows] = useState('10');
-    const [columns, setColumns] = useState('20');
-    //const rows = 12;
-    //const columns = 20;
+    const trid = useSelector((state) => state.user.userid);
 
-    //const unavailable = ['41', '42', '43', '44', '31', '32', '33', '34'];
+    const tremail = useSelector((state) => state.user.useremail);
+
+    const { register, handleSubmit, formState: { errors }, } = useForm();
+
+    const validationRules = {
+        name: {
+            required: "**Name is required",
+        },
+        theatertype: {
+            required: "**theatertype is required",
+        },
+        screenType: {
+            required: "**screenType is required",
+        },
+        rows: {
+            required: "Number of Rows is required",
+            max: {
+                value: 20,
+                message: "Number of Rows must not exceed 20",
+            },
+        },
+        columns: {
+            required: "Number of Columns is required",
+            max: {
+                value: 20,
+                message: "Number of Columns must not exceed 20",
+            },
+        },
+    };
+
+
+    const onSubmit = (data) => {
+        const seatString = unavailableseats.join(',');
+        console.log("-----------");
+        console.log(data);
+        console.log(seatString);
+        console.log("-----------");
+        data.orientation = seatString;
+        data.trid = trid;
+        data.tremail = tremail;
+        console.log(data);
+
+        axios.post(`${baseUrl}/api/addnewscreen`, data)
+            .then((response) => {
+                console.log("Success:", response);
+                alert(response.data.message);
+            })
+            .catch((error) => {
+                ; console.error(error.response.data);
+                alert(error.response.data);
+            });
+
+    };
+
+    const [rows, setRows] = useState('10');
+    const [columns, setColumns] = useState('10');
     const [unavailableseats, setunavailableseats] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
 
 
     const handleClick = (seatNumber) => {
+
         console.log(unavailableseats);
         if (unavailableseats.includes(seatNumber)) {
             setunavailableseats((prevUnavailableSeats) =>
@@ -29,80 +87,167 @@ function CreateSeatOrientation() {
 
     return (
         <div>
-            <center>
-                <br></br>
-                <div style={{ paddingLeft: "300px", paddingRight: "300px" }}>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Number of Row:</span>
-                        <input type="number" max="25" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-                            value={rows}
-                            onChange={(event) => setRows(event.target.value)}
-                        />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="container mt-5 card" style={{ margin: "0 auto", maxWidth: "600px" }}>
+                    <h2>My Screens</h2>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="inputAddress">Screen Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                {...register("name", validationRules.name)}
+                                class="form-control"
+                                placeholder="Screen Name"
+                                aria-describedby="inputGroup-sizing-default"
+                            />
+                        </div>
+                        <p className="text-danger">
+                            {errors?.name && <p className="text-danger">{errors.name.message}</p>}
+                        </p>
+
+                        <div class="form-group col-md-6">
+                            <label htmlFor="theaterType">Theater Type</label>
+                            <div className="input-group">
+                                <select
+                                    className="form-control"
+                                    id="theatertype"
+                                    name="theaterType"
+                                    {...register("theatertype", validationRules.theatertype)}
+
+
+                                >
+                                    <option value="">Select Theater Type</option>
+                                    <option value="A/C">A/C</option>
+                                    <option value="Non A/C">Non A/C</option>
+                                </select>
+                                <div className="input-group-append">
+                                    <span className="input-group-text">
+                                        <i className="fas fa-caret-down"><ArrowDropDownIcon /></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <p className="text-danger">
+                                {errors?.theatertype && <p className="text-danger">{errors.theatertype.message}</p>}
+                            </p>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label htmlFor="screenType">Screen Type</label>
+                            <div className="input-group">
+                                <select
+                                    className="form-control"
+                                    id="screenType"
+                                    name="screenType"
+                                    {...register("screenType", validationRules.screenType)}
+
+                                >
+                                    <option value="">Select Screen Type</option>
+                                    <option value="IMAX">IMAX</option>
+                                    <option value="Dolby">Dolby</option>
+                                </select>
+                                <div className="input-group-append">
+                                    <span className="input-group-text">
+                                        <i className="fas fa-caret-down"><ArrowDropDownIcon /></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <p className="text-danger">
+                                {errors?.screenType && <p className="text-danger">{errors.screenType.message}</p>}
+                            </p>
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Number of rows</label>
+                            <input type="number" class="form-control" id="inputEmail4" placeholder="Number of rows"
+                                value={rows}
+                                name="rows"
+                                {...register("rows", validationRules.rows)}
+                                onChange={(event) => setRows(event.target.value)} />
+                            <p className="text-danger">
+                                {errors?.rows && <p className="text-danger">{errors.rows.message}</p>}
+                            </p>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Number of rows</label>
+                            <input type="number" class="form-control" id="inputPassword4" placeholder="Number of cols"
+                                value={columns}
+                                name="columns"
+                                {...register("columns", validationRules.columns)}
+                                onChange={(event) => setColumns(event.target.value)} />
+                            <p className="text-danger">
+                                {errors?.columns && <p className="text-danger">{errors.columns.message}</p>}
+                            </p>
+                        </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Number of Cols:</span>
-                        <input type="number" max="25" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-                            value={columns}
-                            onChange={(event) => setColumns(event.target.value)}
-                        />
-                    </div>
-                    <br />
-                    <br></br>
-                    <br></br>
+
+
+
                 </div>
-            </center>
+                <br></br>
 
 
-            <div class="seat-grid ">
-                {(() => {
-                    const seatRow = [];
-                    for (let i = 1; i <= rows; i++) {
-                        const seatCols = [];
-                        for (let j = 1; j <= columns; j++) {
-                            const seatNumber = i + '-' + j;
-                            const seatno = i + '' + j;
-                            const isSelected = selectedSeats.includes(seatNumber);
-                            const isUnavailable = unavailableseats.includes(seatno);
-                            //If seactno exists in the unavailable array, it means that the seat is marked as unavailable, and isUnavailable will be true.
-                            const backgroundColor = isSelected ? '#60E01C' : '';
 
-                            seatCols.push(
-                                <div className="seat" style={{ padding: '5px' }} key={seatNumber}>
+                <div class="seat-grid ">
+                    {(() => {
+                        const seatRow = [];
+                        for (let i = 1; i <= rows; i++) {
+                            const seatCols = [];
+                            for (let j = 1; j <= columns; j++) {
+                                const seatNumber = i + '-' + j;
+                                const seatno = i + '-' + j;
+                                const isSelected = selectedSeats.includes(seatNumber);
+                                const isUnavailable = unavailableseats.includes(seatno);
+                                //If seactno exists in the unavailable array, it means that the seat is marked as unavailable, and isUnavailable will be true.
+                                const backgroundColor = isSelected ? '#60E01C' : '';
+
+                                seatCols.push(
+                                    <div className="seat" style={{ padding: '5px' }} key={seatNumber}>
 
 
-                                    {isUnavailable ? (
-                                        <button
-                                            className="btn btn btn-light btn-sm"
-                                            style={{ color: "#d4d4d4" }}
-                                            onClick={() => handleClick(seatno)}
-                                        >
-                                            X
-                                        </button>
-                                    ) : (
-                                        <button
-                                            className="btn btn-outline-dark btn-sm"
-                                            style={{ backgroundColor: backgroundColor }}
-                                            onClick={() => handleClick(seatno)}
-                                        >
-                                            {j}
-                                        </button>
-                                    )}
+                                        {isUnavailable ? (
+                                            <button type='button'
+                                                className="btn btn btn-light btn-sm"
+                                                style={{ color: "#d4d4d4" }}
+                                                onClick={() => handleClick(seatno)}
+                                            >
+                                                X
+                                            </button>
+                                        ) : (
+                                            <button type='button'
+                                                className="btn btn-outline-dark btn-sm"
+                                                style={{ backgroundColor: backgroundColor }}
+                                                onClick={() => handleClick(seatno)}
+                                            >
+                                                {j}
+                                            </button>
+                                        )}
+                                    </div>
+                                );
+                            }
+                            seatRow.push(
+                                <div
+                                    className="myrow"
+
+                                    key={i}
+                                >
+                                    {seatCols}
                                 </div>
                             );
                         }
-                        seatRow.push(
-                            <div
-                                className="myrow"
-
-                                key={i}
-                            >
-                                {seatCols}
-                            </div>
-                        );
-                    }
-                    return seatRow;
-                })()}
-            </div>
+                        return seatRow;
+                    })()}
+                </div>
+                <div className="container mt-5 card" style={{ margin: "0 auto", maxWidth: "600px" }}>
+                    <button type="submit" class="btn btn-primary">Add New Screen </button>
+                </div>
+            </form>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     );
 }
