@@ -100,7 +100,7 @@ const titleStyle = {
           backgroundImage: `url('assets/explore/a1.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "80vh",
+          height: "100vh",
           position: "relative",
         }}
       >

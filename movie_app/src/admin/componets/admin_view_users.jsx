@@ -52,8 +52,8 @@ function AdminViewUsers() {
               <tr key={user.id}>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.dob}</td>
+                <td>{user.phone === 'googleauth' ? <img  style={{ width: '70px', height: '42px' }} src="assets/googleauth/verifiedlogo.png" alt="Google Auth Image" /> : user.phone}</td>
+                <td>{user.dob === 'googleauth' ?  <img  style={{ width: '70px', height: '42px' }} src="assets/googleauth/verifiedlogo.png" alt="Google Auth Image" /> : user.dob}</td>
                 <td><button type="button" class="btn btn-primary">View</button></td>
                 <td><button type="button" class="btn btn-danger">Delete</button></td>
               </tr>

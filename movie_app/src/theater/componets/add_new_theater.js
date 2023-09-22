@@ -62,7 +62,7 @@ function AddNewTheater() {
                 </header>
                 <div className="page-heading">
                     <div>
-                        <h3>Add New Theater</h3>
+                        <h3>Add New Theatre</h3>
                     </div>
                 </div>
                 <div className="page-content">

@@ -108,7 +108,7 @@ function AdminViewTheater(prop) {
                       }
                      className="btn btn-danger mr-2"
                    >
-                     UnApprove 
+                     Cancel 
                    </button>
                   )}
                  

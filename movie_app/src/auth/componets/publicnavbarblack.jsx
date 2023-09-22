@@ -45,7 +45,7 @@ function Publicnavbarblack(props) {
                     <Link to="/theaterreg">
                         <li style={{ color: 'white' }}
                             className={`nav-item ${props.activetheater}`}>
-                            Theather Reg
+                            Theatre Reg
                         </li>
                     </Link>
                     <div style={{ width: "40px" }}></div>
@@ -57,7 +57,7 @@ function Publicnavbarblack(props) {
                     </div>
                     <div style={{ width: "3px" }}></div>
                     <div class="form-group has-search">
-                    <button type="button" class="btn btn-outline-light">Serach</button>
+                    <button type="button" class="btn btn-outline-light">Search</button>
                     </div>
                 </ul>
                 <nav className="navbar navbar-expand navbar-light ">

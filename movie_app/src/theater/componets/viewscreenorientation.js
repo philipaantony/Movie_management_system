@@ -32,7 +32,7 @@ function Viewscreenorientation(props) {
                 <>
                     <div>
                         <center>
-                            <h2>Theater Layout</h2>
+                            <h2>Theatre Layout</h2>
                         </center>
                         <div class="seat-grid" style={{ margin: "30px", padding: "50px" }}>
                             {(() => {

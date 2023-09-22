@@ -5,16 +5,14 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
-const bcrypt = require('bcrypt');
+
 
 
 const TheaterScreen = require('../server/model/threaterScreenModel');
 const Movies = require('../server/model/moviemodel');
 const Login = require("./model/loginmodel");
-const User = require("./model/usermodel");
+
 const Theater = require("./model/theatermodel");
-
-
 
 
 app.use(cors());
@@ -31,7 +29,19 @@ mongoose.connect('mongodb://localhost:27017/MovieApp', { useNewUrlParser: true, 
         console.error('Error connecting to MongoDB:', error);
     });
 
+const getalluser = require('./controllers/getallusers');
+const getallmovies = require('./controllers/getallmovies');
+const logincontroller = require('./controllers/login');
+const UserReg = require('./controllers/userregistrartion');
+const TheaterReg = require('./controllers/theaterregistration');
 
+
+
+app.use('/api/getalluser', getalluser);
+app.use('/api/getmovies', getallmovies);
+app.use('/api/login', logincontroller);
+app.use('/api/register', UserReg);
+app.use('/api/theaterreg', TheaterReg)
 
 
 const storage = multer.diskStorage({
@@ -66,142 +76,6 @@ app.post('/api/addmovies', upload.single('poster_url'), async (req, res) => {
 }
 );
 
-
-//------------------------------------------------------------------------------------
-
-
-app.get('/api/getmovies', async (req, res) => {
-    try {
-        const movies = await Movies.find();
-        res.json(movies);
-    } catch (error) {
-        res.status(500).json({ error: 'Error fetching movies' });
-    }
-});
-
-//----------------------------------------------------------------------------------------
-
-
-app.post('/api/register', async (req, res) => {
-    try {
-        const { username, email, phone, dob, password } = req.body;
-        const user = new User({ username, email, phone, dob });
-        const usersaved = await user.save();
-        if (usersaved) {
-
-            const saltRounds = 10;
-            const hashedPassword = await bcrypt.hash(password, saltRounds);
-            const newLogin = new Login({
-                _id: usersaved._id,
-                email,
-                password: hashedPassword,
-                usertype: "user",
-                status: "Authorised"
-            });
-            const status2 = await newLogin.save();
-
-            if (status2) {
-                console.log('User registered:', newLogin);
-                res.status(201).json({ message: 'Registration Successful' });
-            }
-        }
-
-    }
-    catch (error) {
-
-        if (error.code === 11000) {
-            console.log("---------------------------------")
-            console.log("Email Duplication")
-            console.log("---------------------------------")
-            res.json({ message: "User Already Exist" });
-        } else {
-            console.error(error);
-            console.log("Server error")
-            res.status(500).json({ message: 'Server error' });
-        }
-    }
-
-})
-
-//--------------------------------------------------------------------------------
-
-
-
-app.post('/api/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const existingLogin = await Login.findOne({ email });
-
-        if (existingLogin) {
-            const passwordMatch = await bcrypt.compare(password, existingLogin.password);
-            if (passwordMatch) {
-                console.log('Login successful:', existingLogin);
-                res.json({ message: 'userexist', existingLogin });
-            } else {
-                console.log('Invalid credentials');
-                res.json({ message: 'no_user' });
-            }
-        } else {
-            const existingLogin = {
-                usertype: 'nouser',
-                status: 'Not-Authorised',
-            };
-            console.log('Invalid credentials');
-            res.json({ message: 'Invalid credentials', existingLogin });
-        }
-    } catch (error) {
-        console.error('Error during login:', error);
-        res.status(500).json({ error: 'An error occurred during login' });
-    }
-});
-
-
-
-//----------------------------------------------------------------------------
-
-app.post('/api/theaterreg', async (req, res) => {
-    try {
-        const { name, owner, location, email, phone, password, cpassword } = req.body;
-        const status = "Pending";
-        const newTheater = new Theater(
-            {
-                theater_name: name,
-                theater_owner: owner,
-                theater_location: location,
-                theater_email: email,
-                theater_phone: phone,
-
-            }
-        )
-        const savedTheater = await newTheater.save();
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-        const newLogin = new Login({
-            _id: savedTheater._id,
-            email,
-            password: hashedPassword,
-            usertype: "theater",
-            status: "Pending"
-        });
-        const logdata = await newLogin.save();
-        if (savedTheater && logdata) {
-            res.status(201).json({ message: 'Registration Successful', savedTheater });
-        }
-    } catch (error) {
-        if (error.code === 11000) {
-            console.log("---------------------------------")
-            console.log("Email Duplication")
-            console.log("---------------------------------")
-            res.json({ message: "You Already Registered" });
-        }
-        else {
-            console.error(error);
-            console.log("Server error")
-            res.status(500).json({ message: 'Server error' });
-        }
-
-    }
-});
 
 
 app.patch('/api/approvetheaters', async (req, res) => {
@@ -296,14 +170,7 @@ app.get('/api/getscreen', async (req, res) => {
 //========================get user for admin ===============================================================
 
 
-app.get('/api/getalluser', async (req, res) => {
-    try {
-        const users = await User.find();
-        res.json(users);
-    } catch (err) {
-        res.status(500).json({ error: 'Error fetching users' });
-    }
-});
+
 
 
 app.get('/api/getscreenbyid', async (req, res) => {
@@ -325,12 +192,6 @@ app.get('/api/getscreenbyid', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
-
-
-
-
-
-
 
 
 //=======================================================================================
