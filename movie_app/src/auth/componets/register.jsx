@@ -26,49 +26,67 @@ function Register() {
         });     
 
      }
-
-
-
      const validationRules = {
-        username: {
-          required: "**Name is required",
-          minLength: {
-            value: 3,
-            message: "**Name must have at least 3 characters",
-          },
+      username: {
+        required: "**Name is required",
+        minLength: {
+          value: 3,
+          message: "**Name must have at least 3 characters",
         },
-        email: {
-            required: '**Email is required',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Invalid email address',
-            },
-          },
-          phone: {
-            required: '**Phone number is required',
-            pattern: {
-              value: /^[0-9]{10}$/i,
-              message: '**Invalid phone number',
-            },
-          },
-          dob: {
-            required: '**Date of birth is required',
-          },
-          password: {
-            required: '**Password is required',
-            minLength: {
-              value: 4,
-              message: '**Password must have at least 4 characters',
-            },
-          },
-          confirmPassword: {
-            required: '**Confirm password is required',
-            validate: (value, context) => {
-              return value === context.password || '**Passwords do not match';
-            },
-          },
-        
-    }
+        pattern: {
+          value: /^[A-Za-z\s]+$/, // Allow only alphabetic characters and spaces
+          message: '**Name should not contain numbers or special characters',
+        },
+      },
+      email: {
+        required: '**Email is required',
+        pattern: {
+          value: /^[A-Za-z][A-Za-z0-9._%+-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i, // Ensure it doesn't start with a number
+          message: 'Invalid email address',
+        },
+      },
+      phone: {
+        required: '**Phone number is required',
+        pattern: {
+          value: /^[6-9]{1}[0-9]{9}$/, // Allow only valid 10-digit phone numbers starting with digits 6-9
+          message: '**Invalid phone number'
+        },
+      },
+      dob: {
+        required: '**Date of birth is required',
+        validate: (value) => {
+          const birthDate = new Date(value);
+          const currentDate = new Date();
+          const age = currentDate.getFullYear() - birthDate.getFullYear();
+    
+          if (age < 15 ) {
+            return '**You must be at least 15 years old.';
+          }
+          if (age < 15 || age >= 90) {
+            return '**Age is not Valid';
+          }
+    
+          return true;
+        },
+      },
+      password: {
+        required: '**Password is required',
+        minLength: {
+          value: 4,
+          message: '**Password must have at least 4 characters',
+        },
+      },
+      confirmPassword: {
+        required: '**Confirm password is required',
+        validate: (value, context) => {
+          return value === context.password || '**Passwords do not match';
+        },
+      },
+    };
+    
+
+
+     
    
     return (
         <div>
@@ -95,8 +113,6 @@ function Register() {
           <form role="form text-left"  onSubmit={handleSubmit(onSubmit)}>
            
             <GoogleauthUserReg/>
-
-
             <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
               <input type="text" 
                      name="username"
@@ -110,10 +126,6 @@ function Register() {
                                 {" "}
                                 {errors?.username && errors.username.message}
             </p>
-
-
-
-
             <div className="mb-3">
               <input type="email" 
               name="email"
@@ -123,9 +135,6 @@ function Register() {
                 aria-describedby="email-addon" />
             </div>
             <p className="text-danger">{" "}{errors?.email && errors.email.message}</p>
-
-
-
              <div className="mb-3">
               <input type="text" 
               name="phone"

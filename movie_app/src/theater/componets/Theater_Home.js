@@ -44,7 +44,7 @@ function TheaterHome() {
                 </header>
                 <div className="page-heading">
                     <div>
-                        <h3>Welcome, Manage Your Theater Sapce</h3>
+                        <h3>Welcome, Manage Your Theatre Space</h3>
                     </div>
                 </div>
                 <div className="page-content">

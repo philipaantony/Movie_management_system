@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from 'react-router-dom';
+import GoBackButton from "../../public/gobackButton";
 
 
 function AdminViewTheaterLogin() {
@@ -52,6 +53,7 @@ function AdminViewTheaterLogin() {
     <div id="main">
       <div className="container mt-5 card" style={{ padding: "20px" }}>
         <h2>New Request</h2>
+        <GoBackButton/>
         <table className="table">
           <thead>
             <tr>

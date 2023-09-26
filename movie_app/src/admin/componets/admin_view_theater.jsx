@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { toast, Toaster } from 'react-hot-toast';
+import GoBackButton from '../../public/gobackButton';
 
 function AdminViewTheater(prop) {
 
@@ -11,7 +12,6 @@ function AdminViewTheater(prop) {
 
   const temail = prop.temail;
   const [tstatus,setStatus] = useState(prop.tstatus);
-  
 
   useEffect(() => {
    
@@ -49,7 +49,7 @@ function AdminViewTheater(prop) {
   
     setStatusUpdated(true);
     setStatus(response.data.status);
-    alert(response.data.message);
+    toast.success(response.data.message)
     setStatusUpdated(false);
     
     } catch (error) {
@@ -63,9 +63,10 @@ function AdminViewTheater(prop) {
 
   return (
     <div id="main">
+      <div><Toaster/></div>
   <div className="container mt-5 card" style={{ padding: "20px" }}>
     <h2>Theater Request</h2>
-
+<GoBackButton/>
     <div className="row">
       {theaters.map((tr) =>
          (

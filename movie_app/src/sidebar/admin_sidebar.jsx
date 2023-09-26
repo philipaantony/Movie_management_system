@@ -1,7 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../Redux/user/userSlice";
 
 function AdminSidebar(props) {
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+    const useremail = localStorage.getItem("email");
+    const handleLogout = () => 
+    {
+        localStorage.clear();
+        dispatch(logout({userid:"" ,useremail: "" }));
+        navigate("/", { replace: true });
+      };
+
+
   return (
     <div>
         <div id="sidebar" className="active">
@@ -19,9 +33,8 @@ function AdminSidebar(props) {
                                 <div className="ms-3 name">
                                     <h5 className="font-bold">Admin Panel</h5>
                                     <h9 className="text-muted mb-0" style={{ fontSize: "13px" }}>
-                                        MYEMAIL
-                                    </h9>
-                                    <button
+                                    {useremail}                                   </h9>
+                                    <button onClick={() => handleLogout()}
                                         class="btn btn-danger"
                                         style={{
                                             width: "130px",
@@ -59,15 +72,16 @@ function AdminSidebar(props) {
                                     </a>
                                 </li>
                             </Link>
-
-                            <Link to="/user">
-                                <li className="sidebar-item  ">
+                                        
+                            <Link to="/viewpostedmovies">
+                                <li className={props.viewmovie}>
                                     <a href="application-checkout.html" className="sidebar-link">
                                         <i className="bi bi-basket-fill"></i>
-                                        <span>Checkout User Page</span>
+                                        <span>View Posted Movies</span>
                                     </a>
                                 </li>
                             </Link>
+                            
 
                             <li className="sidebar-title">Raise Support</li>
                         </ul>

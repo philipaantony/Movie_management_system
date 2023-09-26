@@ -34,6 +34,7 @@ const getallmovies = require('./controllers/getallmovies');
 const logincontroller = require('./controllers/login');
 const UserReg = require('./controllers/userregistrartion');
 const TheaterReg = require('./controllers/theaterregistration');
+const Userdelbyadmin = require('./controllers/deleteuserbyadmin')
 
 
 
@@ -42,6 +43,7 @@ app.use('/api/getmovies', getallmovies);
 app.use('/api/login', logincontroller);
 app.use('/api/register', UserReg);
 app.use('/api/theaterreg', TheaterReg)
+app.use('/api/delete', Userdelbyadmin);
 
 
 const storage = multer.diskStorage({
