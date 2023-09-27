@@ -76,6 +76,14 @@ function Register() {
           message: '**Password must have at least 4 characters',
         },
       },
+    //   password: {
+    //     required: '**Password is required',
+    //     pattern: {
+    //         value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
+    //         message: '**Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$%^&+=!)',
+    //     },
+    // },
+    
       confirmPassword: {
         required: '**Confirm password is required',
         validate: (value, context) => {

@@ -35,7 +35,7 @@ function Homecards() {
                                                 </div>
                                                 <div className="col-md-8">
                                                     <h6 className="text-muted font-semibold">
-                                                        View Patients
+                                                        View Screens
                                                     </h6>
                                                     <h6 className="font-extrabold mb-0">2678</h6>
                                                 </div>
@@ -82,6 +82,7 @@ function Homecards() {
                                     </div>
                                 </div>
                                 <div class="container">
+                             
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="card">

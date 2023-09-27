@@ -25,12 +25,7 @@ function Publicnavbarblack(props) {
                             Home
                         </li>
                     </Link>
-                    <Link to="/"><li style={{ color: 'white' }}
-                        className={`nav-item ${props.activeabout}`}
-                    >
-                        About Us
-                    </li>
-                    </Link>
+                    
                     <Link to="/explore">
                         <li style={{ color: 'white' }} className={`nav-item ${props.activediscover}`}>
                             Explore

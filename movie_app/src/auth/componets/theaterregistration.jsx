@@ -1,13 +1,13 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function Theaterregistration() {
 
     const {register,handleSubmit,formState:{ errors },} = useForm();
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const onSubmit = (data) =>
      {
        console.log(data);
@@ -15,8 +15,14 @@ function Theaterregistration() {
       .then((response) => {
         console.log('Theater Registered:', response.data);
         alert(response.data.message);
+        if(response.data.navigation===true)
+        {
+          navigate("/requestpending");
+        }
+        
       })
       .catch((error) => {
+        alert("Something Went Wrong");
         console.error('Error while Registering theater:', error);
    
       });
@@ -38,18 +44,18 @@ function Theaterregistration() {
             required: "**Owner Name is required",
             
           },
-        email: {
+          email: {
             required: '**Email is required',
             pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              value: /^[A-Za-z][A-Za-z0-9._%+-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i, // Ensure it doesn't start with a number
               message: 'Invalid email address',
             },
           },
           phone: {
-            required: '**Contact number is required',
+            required: '**Phone number is required',
             pattern: {
-              value: /^[0-9]{10}$/i,
-              message: '**Invalid phone number',
+              value: /^[6-9]{1}[0-9]{9}$/, // Allow only valid 10-digit phone numbers starting with digits 6-9
+              message: '**Invalid phone number'
             },
           },
           
@@ -60,6 +66,15 @@ function Theaterregistration() {
               message: '**Password must have at least 4 characters',
             },
           },
+
+        //   password: {
+        //     required: '**Password is required',
+        //     pattern: {
+        //         value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
+        //         message: '**Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$%^&+=!)',
+        //     },
+        // },
+        
           confirmPassword: {
             required: '**Confirm password is required',
             validate: (value, context) => {

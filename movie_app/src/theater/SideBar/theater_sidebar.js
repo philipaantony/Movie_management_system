@@ -1,7 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../Redux/user/userSlice";
 
 function TheaterSidebar(props) {
+    const navigate = useNavigate();
+    const username = localStorage.getItem("name");
+    //const trid = localStorage.getItem("userId");
+    const useremail = localStorage.getItem("email");
+    const dispatch = useDispatch();
+    //const profilepicture = localStorage.getItem("profilepicture");
+    console.log(username);
+    console.log(useremail);
+
+    const handleLogout = () => {
+        localStorage.clear();
+        dispatch(logout({ userid: "", useremail: "" }));
+        navigate("/", { replace: true });
+    };
 
     return (
         <div>
@@ -18,11 +34,20 @@ function TheaterSidebar(props) {
                                     <img src="assets/images/faces/2.jpg" alt="Face 1" />
                                 </div>
                                 <div className="ms-3 name">
-                                    <h5 className="font-bold">Theater Panel</h5>
+                                    <h7 className="font-bold">Theater Panel</h7><br></br>
+                                    <h9 className="font-bold">{username}</h9><br></br>
                                     <h9 className="text-muted mb-0" style={{ fontSize: "13px" }}>
-                                        MYEMAIL
+                                        {useremail}
                                     </h9>
                                     <button
+                                        onClick={() => {
+                                            const confirmLogout = window.confirm(
+                                                "Are you sure you want to log out?"
+                                            );
+                                            if (confirmLogout) {
+                                                handleLogout();
+                                            }
+                                        }}
                                         class="btn btn-danger"
                                         style={{
                                             width: "130px",
@@ -41,7 +66,7 @@ function TheaterSidebar(props) {
                         <ul className="menu">
                             <li className="sidebar-title">Menu</li>
 
-                            <li className={props.classname}>
+                            <li className={props.dashboard}>
                                 <Link to="/theaterhome">
                                     <p className="sidebar-link">
                                         <i className="bi bi-grid-fill"></i>
@@ -52,20 +77,20 @@ function TheaterSidebar(props) {
 
 
                             <li className="sidebar-title">Pages</li>
-                            <Link to="/addnewtheater">
+                            <Link to="/createnewscreen">
                                 <li className={props.newt}>
                                     <a href="application-email.html" className="sidebar-link">
                                         <i className="bi bi-envelope-fill"></i>
-                                        <span>Add New Theater</span>
+                                        <span>Add New Screen</span>
                                     </a>
                                 </li>
                             </Link>
 
-                            <Link to="/user">
-                                <li className="sidebar-item  ">
+                            <Link to="/viewmyscreens">
+                                <li className={props.viewscreenlist}>
                                     <a href="application-checkout.html" className="sidebar-link">
                                         <i className="bi bi-basket-fill"></i>
-                                        <span>Checkout User Page</span>
+                                        <span>View My Screens</span>
                                     </a>
                                 </li>
                             </Link>

@@ -34,7 +34,7 @@ function GoogleauthLogin({ onChildData }) {
   const onSuccess = (response) => {
     console.log(response.profileObj);
     const { profileObj } = response;
-    const { name, email } = profileObj;
+    const { name, email,imageUrl} = profileObj;
     console.log("User data - Name:", name);
     console.log("User data - Email:", email);
     const data = {
@@ -49,6 +49,7 @@ function GoogleauthLogin({ onChildData }) {
       const decoded = jwt_decode(token);
       console.log("decoded:", decoded);
       const { username, email, userId,usertype,status } = decoded;
+      localStorage.setItem("profilepicture", imageUrl);
       localStorage.setItem("name", username);
       localStorage.setItem("email", email);
       localStorage.setItem("userId", userId);

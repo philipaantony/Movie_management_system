@@ -27,6 +27,7 @@ function Login() {
         const decoded = jwt_decode(token);
         console.log("decoded:", decoded);
         const { username, email, userId,usertype,status } = decoded;
+  
         localStorage.setItem("name", username);
         localStorage.setItem("email", email);
         localStorage.setItem("userId", userId);

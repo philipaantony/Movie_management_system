@@ -1,5 +1,5 @@
 import React from 'react'
-import TheaterSidebar from '../../sidebar/theater_sidebar'
+import TheaterSidebar from '../SideBar/theater_sidebar'
 import TheaterHome from '../componets/Theater_Home'
 
 
@@ -9,7 +9,7 @@ function Theater_Home_Page() {
     return (
         <div>
 
-            <TheaterSidebar classname={"sidebar-item active"} />
+            <TheaterSidebar dashboard={"sidebar-item active"} />
             <TheaterHome />
 
 

@@ -15,6 +15,7 @@ function UserNavBar(props) {
 
   const username = localStorage.getItem("name");
   const useremail = localStorage.getItem("email");
+  const profilepicture = localStorage.getItem("profilepicture");
   console.log(username);
   console.log(useremail);
   //const useremail = useSelector((state) => state.user.useremail);
@@ -24,7 +25,7 @@ function UserNavBar(props) {
 
   const handleLogout = () => {
 
-    localStorage.removeItem("isLoggedIn");
+    localStorage.clear();
     dispatch(logout({userid:"" ,useremail: "" }));
     navigate("/",{ replace: true },{ redirect: true });
   };
@@ -59,14 +60,7 @@ function UserNavBar(props) {
             </li>
           </Link>
 
-          <Link to="">
-            <li
-              style={{ color: "white" }}
-              className={`nav-item ${props.activediscover}`}
-            >
-              Explore
-            </li>
-          </Link>
+          
           <Link to="/userabout">
             <li
               style={{ color: "white" }}
@@ -117,9 +111,8 @@ function UserNavBar(props) {
                       </p>
                     </div>
                     <div className="avatar avatar-md">
-                      <img
-                        src={"assets/images/faces/1.jpg"}
-                        alt="User Avatar"
+                      
+                    <img src={profilepicture || 'assets/images/faces/4.jpg'} alt="Profile Picture"
                         className="rounded-circle"
                       />
                     </div>

@@ -31,14 +31,14 @@ router.post('', async (req, res) => {
         });
         const logdata = await newLogin.save();
         if (savedTheater && logdata) {
-            res.status(201).json({ message: 'Registration Successful', savedTheater });
+            res.status(201).json({ message: 'Registration Successful', savedTheater, navigation: true });
         }
     } catch (error) {
         if (error.code === 11000) {
             console.log("---------------------------------")
             console.log("Email Duplication")
             console.log("---------------------------------")
-            res.json({ message: "You Already Registered" });
+            res.json({ message: "You Already Registered", navigation: false });
         }
         else {
             console.error(error);

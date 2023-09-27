@@ -4,14 +4,16 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { baseUrl } from "../config/config";
 import { useSelector } from "react-redux";
+import GoBackButton from '../public/gobackButton';
 
 
 
 function CreateSeatOrientation() {
 
-    const trid = useSelector((state) => state.user.userid);
-
-    const tremail = useSelector((state) => state.user.useremail);
+    const trid = localStorage.getItem("userId");
+    const tremail = localStorage.getItem("email");
+    //const trid = useSelector((state) => state.user.userid);
+    //const tremail = useSelector((state) => state.user.useremail);
 
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
@@ -35,8 +37,8 @@ function CreateSeatOrientation() {
         columns: {
             required: "Number of Columns is required",
             max: {
-                value: 20,
-                message: "Number of Columns must not exceed 20",
+                value: 25,
+                message: "Number of Columns must not exceed 25",
             },
         },
     };
@@ -69,7 +71,7 @@ function CreateSeatOrientation() {
     const [columns, setColumns] = useState('10');
     const [unavailableseats, setunavailableseats] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
-
+    //const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
     const handleClick = (seatNumber) => {
 
@@ -87,9 +89,10 @@ function CreateSeatOrientation() {
 
     return (
         <div>
+            <GoBackButton />
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="container mt-5 card" style={{ margin: "0 auto", maxWidth: "600px" }}>
-                    <h2>My Screens</h2>
+                <div className="container mt-5 card" style={{ margin: "0 auto", padding: "40px", maxWidth: "700px" }}>
+                    <h2>Generate Screen</h2>
 
                     <div class="row">
                         <div class="form-group">
@@ -172,7 +175,7 @@ function CreateSeatOrientation() {
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="inputPassword4">Number of rows</label>
+                            <label for="inputPassword4">Number of Columns</label>
                             <input type="number" class="form-control" id="inputPassword4" placeholder="Number of cols"
                                 value={columns}
                                 name="columns"
@@ -191,7 +194,17 @@ function CreateSeatOrientation() {
 
 
 
+
+
                 <div class="seat-grid ">
+                    <p>
+                        Design Guidelines for Your Theatre Seating Arrangement:
+                        <br></br>
+                        1. Click on a seat to designate it as unavailable.
+                        <br></br>
+                        2. Click on the same seat again to restore its availability.
+                    </p>
+
                     {(() => {
                         const seatRow = [];
                         for (let i = 1; i <= rows; i++) {
@@ -242,7 +255,10 @@ function CreateSeatOrientation() {
                     })()}
                 </div>
                 <div className="container mt-5 card" style={{ margin: "0 auto", maxWidth: "600px" }}>
-                    <button type="submit" class="btn btn-primary">Add New Screen </button>
+                    <button type="submit" class="btn btn-primary" style={{ margin: "10px" }}>Add New Screen </button>
+                    <button
+                        onClick={() => { setunavailableseats([]); }}
+                        type="button" class="btn btn-danger" style={{ margin: "10px" }}>Restore </button>
                 </div>
             </form>
             <br></br>

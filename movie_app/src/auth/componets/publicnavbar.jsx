@@ -22,12 +22,7 @@ function PublicNavBar(props) {
                                 Home
                             </li>
                         </Link>
-                        <Link to="/"><li
-                            className={`nav-item ${props.activeabout}`}
-                        >
-                            About Us
-                        </li>
-                        </Link>
+                        
                         <Link to="/explore">
                         <li className={`nav-item ${props.activediscover}`}>
                             Explore
