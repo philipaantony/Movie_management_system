@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MovieIcon from "@mui/icons-material/Movie";
@@ -9,10 +9,10 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/user/userSlice";
+import LocationPicker from "../componets/LocationPicker";
 
 
 function UserNavBar(props) {
-
   const username = localStorage.getItem("name");
   const useremail = localStorage.getItem("email");
   const profilepicture = localStorage.getItem("profilepicture");
@@ -24,11 +24,13 @@ function UserNavBar(props) {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-
     localStorage.clear();
-    dispatch(logout({userid:"" ,useremail: "" }));
-    navigate("/",{ replace: true },{ redirect: true });
+    dispatch(logout({ userid: "", useremail: "" }));
+    navigate("/", { replace: true }, { redirect: true });
   };
+
+ 
+
 
   const headerStyle = {
     background: "linear-gradient(to left,#212529 ,#212529 )", // Adjust the colors as needed
@@ -60,7 +62,6 @@ function UserNavBar(props) {
             </li>
           </Link>
 
-          
           <Link to="/userabout">
             <li
               style={{ color: "white" }}
@@ -72,22 +73,9 @@ function UserNavBar(props) {
 
           <div style={{ width: "40px" }}></div>
 
-          <div class="form-group has-search">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search movie, shows...."
-            />
-          </div>
-          <div style={{ width: "3px" }}></div>
-          <div class="form-group has-search">
-            <button type="button" class="btn btn-outline-light">
-              Search
-            </button>
-          </div>
+          <LocationPicker/>
         </ul>
 
-        
         <nav className="navbar navbar-expand navbar-light ">
           <div className="container-fluid">
             <div style={{ padding: "20px" }}>
@@ -104,15 +92,14 @@ function UserNavBar(props) {
                   <div className="user-img d-flex align-items-center">
                     <div className="user-name text-start me-3">
                       <h6 style={{ color: "white", fontSize: "15px" }}>
-                      {username}
+                        {username}
                       </h6>
-                      <p className="mb-0 text-sm text-white-600">
-                        {useremail}
-                      </p>
+                      <p className="mb-0 text-sm text-white-600">{useremail}</p>
                     </div>
                     <div className="avatar avatar-md">
-                      
-                    <img src={profilepicture || 'assets/images/faces/4.jpg'} alt="Profile Picture"
+                      <img
+                        src={profilepicture || "assets/images/faces/4.jpg"}
+                        alt="Profile Picture"
                         className="rounded-circle"
                       />
                     </div>
@@ -127,8 +114,8 @@ function UserNavBar(props) {
                   }}
                 >
                   <Dropdown.Item style={{ color: "blue" }}>
-                  <Link to="/userprofile">
-                    <AccountCircleIcon /> View Profile
+                    <Link to="/userprofile">
+                      <AccountCircleIcon /> View Profile
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Item style={{ color: "green" }}>

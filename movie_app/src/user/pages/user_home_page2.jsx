@@ -148,7 +148,7 @@ const titleStyle = {
                   type="button"
                   id="search-button"
                   style={{
-                    background: "transparent",
+                    background: "blue",
                     border: "none",
                     borderRadius: "0px 25px 25px 0px",
                   }}

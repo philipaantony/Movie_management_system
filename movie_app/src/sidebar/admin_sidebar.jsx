@@ -15,7 +15,7 @@ function AdminSidebar(props) {
   };
 
   return (
-    <div>
+    <>
       <div id="sidebar" className="active">
         <div className="sidebar-wrapper active" style={{ overflow: "hidden" }}>
           <div className="sidebar-header">
@@ -95,7 +95,7 @@ function AdminSidebar(props) {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

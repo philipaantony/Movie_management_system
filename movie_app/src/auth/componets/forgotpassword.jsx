@@ -1,77 +1,100 @@
-
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from 'react'
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function ForgotPassword() {
-  return (
-    <div>
-        <div>
-        <center>
-          <div style={{ width: "70%", paddingTop: "70px" }}>
-            <div class="col-lg-5 col-12">
-              <div id="auth-left">
-                <h1 class="auth-title">Forgot Password?</h1>
-                <p class="auth-subtitle mb-5">
-                  Enter your Registered Email below to reset your password
-                </p>
 
-                <form >
-                  <div 
-                    className="form-group position-relative has-icon-left mb-4 ">
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm();
+
+      const onSubmit = async (data) => {
+        console.log(data);
+      }
+
+      const validationRules = {
+        email: {
+          required: "**Email is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        },
+       
+      };
+  return (
+    <>
+    <br></br>
+      <div className="container" style={{}}>
+        <div className="row mt-lg-n10 mt-md-n11 mt-n10">
+          <div
+            className="col-xl-4 col-lg-5 col-md-7 mx-auto"
+            style={{ width: "420px" }}
+          >
+            <div className="card z-index-0">
+              <div className="card-header text-center pt-4">
+                <h5>Forgot Password</h5>
+                <p className="">
+               Reset your password by typing your email below
+                </p>
+              </div>
+
+           
+              <br></br>
+              <div className="card-body">
+                <form role="form text-left" onSubmit={handleSubmit(onSubmit)}>
+                  <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
                     <input
-                      type="text"
+                      type="email"
                       name="email"
-                      //{...register("email", validationRules.email)}
-                      className={`form-control form-control-xl 
-                       `}
+                      {...register("email", validationRules.email)}
+                      className={`form-control ${
+                        errors.email ? "is-invalid" : ""
+                      }`}
                       placeholder="Email"
+                      aria-label="Email"
+                      aria-describedby="email-addon"
                     />
-                    <div className="form-control-icon">
-                      <i className="bi bi-person"></i>
-                    </div>
-                  </div>   
-                  <div class="form-check form-check-lg d-flex align-items-end">
-                    <input
-                      class="form-check-input me-2"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label
-                      class="form-check-label text-gray-600"
-                      for="flexCheckDefault"
-                    >
-                      Keep me logged in
-                    </label>
-                  </div>                          
-                  <button 
-                    type="submit"
-                    class="btn btn-primary btn-block btn-lg shadow-lg mt-5"
-                  >
-                    Send OTP
-                  </button>
+                  </div>
+
+                  <p className="text-danger">
+                    {" "}
+                    {errors?.email && errors.email.message}
+                  </p>
+
+
+
+
+
+
                  
-                </form>
-                <div class="text-center mt-5 text-lg fs-4">
-                  <p class="text-gray-600">
-                    Do yo want to login?
+
+                 
+                  <div className="text-center">
+                    <button
+                      type="submit"
+                      className="attractive-button btn-block btn-lg shadow-lg mt-5"
+                    >
+                      Send Email
+                    </button>
+                  </div>
+
+                  <p className="text-sm mt-3 mb-0">
+                    Already have an account?
                     <Link to="/">
-                      <a class="font-bold">Login</a>
+                      <a className="font-bold">Login</a>
                     </Link>
                   </p>
-                  <p>
-                    <Link><a class="font-bold">Forgot password?</a>.</Link>
-                  </p>
-                </div>
+                
+                </form>
               </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block">
-              <div id="auth-right"></div>
-            </div>
           </div>
-        </center>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

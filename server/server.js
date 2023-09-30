@@ -34,16 +34,20 @@ const getallmovies = require('./controllers/getallmovies');
 const logincontroller = require('./controllers/login');
 const UserReg = require('./controllers/userregistrartion');
 const TheaterReg = require('./controllers/theaterregistration');
-const Userdelbyadmin = require('./controllers/deleteuserbyadmin')
+const Userdelbyadmin = require('./controllers/deleteuserbyadmin');
+const AddShowTime = require('./controllers/theatreapis/addshowtime');
+const getShowTime = require('./controllers/theatreapis/getshowtimes');
 
 
 
-app.use('/api/getalluser', getalluser);
+app.use('/api/getalluser', getalluser)
 app.use('/api/getmovies', getallmovies);
 app.use('/api/login', logincontroller);
 app.use('/api/register', UserReg);
 app.use('/api/theaterreg', TheaterReg)
 app.use('/api/delete', Userdelbyadmin);
+app.use('/api/postshowtime', AddShowTime);
+app.use('/api/getshowtime', getShowTime);
 
 
 const storage = multer.diskStorage({
@@ -118,6 +122,7 @@ app.get('/api/theaterlogin', async (req, res) => {
 
     try {
         const theaters = await Login.find({ usertype: 'theater' });
+        console.log(theaters);
         res.status(200).json(theaters);
     } catch (error) {
         console.error(error);

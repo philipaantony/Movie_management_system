@@ -5,7 +5,6 @@ import CreateSeatOrientation from "./theater/theater_orientation";
 import TheaterHomePage from "./theater/pages/theater_home_page";
 import AddScreen from "./theater/componets/add_screen";
 import Viewscreenorientation from "./theater/componets/viewscreenorientation";
-
 import UserHomePages from "./user/pages/userhome_page";
 import UserAboutPage from "./user/pages/user_about_page";
 import Loginpage from "./auth/pages/loginpage";
@@ -29,6 +28,8 @@ import { useSelector } from "react-redux";
 import UserProfilePage from "./user/pages/user_profilepage";
 import AdminViewPostedMoviesPage from "./admin/pages/admin_view_posted_movies_page";
 import Viewtheaterlistpage from "./theater/pages/view_screen_list_page";
+import AddScreeningTimePage from "./theater/pages/add_screening_time_page";
+
 
 
 export default function App() {
@@ -66,6 +67,8 @@ export default function App() {
 
 
 
+
+              <Route path="/createnewtime" element={<AddScreeningTimePage />} />
               <Route path="/createnewscreen" element={<CreateSeatOrientation />} />
               <Route path="/vieworientation" element={<Viewscreenorientation />}></Route>
               <Route path="/theaterhome" element={<TheaterHomePage />}></Route>

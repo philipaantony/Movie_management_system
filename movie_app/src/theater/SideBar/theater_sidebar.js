@@ -20,7 +20,7 @@ function TheaterSidebar(props) {
     };
 
     return (
-        <div>
+        <>
             <div id="sidebar" className="active">
                 <div className="sidebar-wrapper active" style={{ overflow: "hidden" }}>
                     <div className="sidebar-header">
@@ -79,7 +79,7 @@ function TheaterSidebar(props) {
                             <li className="sidebar-title">Pages</li>
                             <Link to="/createnewscreen">
                                 <li className={props.newt}>
-                                    <a href="application-email.html" className="sidebar-link">
+                                    <a href="" className="sidebar-link">
                                         <i className="bi bi-envelope-fill"></i>
                                         <span>Add New Screen</span>
                                     </a>
@@ -103,7 +103,7 @@ function TheaterSidebar(props) {
                     </button>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

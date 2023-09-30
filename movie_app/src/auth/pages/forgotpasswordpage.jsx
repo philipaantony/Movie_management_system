@@ -1,12 +1,12 @@
 import React from 'react'
-import PublicNavBar from '../componets/publicnavbar'
 import Footer from '../../footer/footer'
 import ForgotPassword from '../componets/forgotpassword'
+import Publicnavbarblack from '../componets/publicnavbarblack'
 
 function ForgotPasswordPage() {
   return (
     <div>
-        <PublicNavBar activehome="active" button="reg"/>
+        <Publicnavbarblack activehome="active" button="reg"/>
         <ForgotPassword/>
         <Footer/>
     </div>

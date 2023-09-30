@@ -14,10 +14,15 @@ function Theaterregistration() {
        axios.post('http://localhost:5000/api/theaterreg', data)
       .then((response) => {
         console.log('Theater Registered:', response.data);
-        alert(response.data.message);
         if(response.data.navigation===true)
         {
+        alert(response.data.message);
           navigate("/requestpending");
+        }
+        if(response.data.navigation===false)
+        {
+        alert(response.data.message);
+         
         }
         
       })

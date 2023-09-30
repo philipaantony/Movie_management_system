@@ -30,6 +30,7 @@ function AdminViewTheaterLogin() {
         const response = await axios.get(
           "http://localhost:5000/api/theaterlogin"
         );
+        console.log(response.data);
         setTheaters(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -87,7 +88,7 @@ function AdminViewTheaterLogin() {
                   </td>
                   
                 </tr>
-              ) : null // Render nothing if the status is not 'Approved'
+              ) : null// Render nothing if the status is not 'Approved'
             )}
           </tbody>
         </table>
@@ -193,7 +194,7 @@ function AdminViewTheaterLogin() {
                     </button>
                   </td>
                 </tr>
-              ) : null // Render nothing if the status is not 'Approved'
+              ) : null// Render nothing if the status is not 'Approved'
             )}
           </tbody>
         </table>
