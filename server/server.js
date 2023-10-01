@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
+require('dotenv').config();
+
+const port = process.env.PORT
+const mongodbUrl = process.env.MONGODB_URL;
 
 
 
@@ -21,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 
-mongoose.connect('mongodb://localhost:27017/MovieApp', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongodbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB');
     })
@@ -34,10 +38,10 @@ const getallmovies = require('./controllers/getallmovies');
 const logincontroller = require('./controllers/login');
 const UserReg = require('./controllers/userregistrartion');
 const TheaterReg = require('./controllers/theaterregistration');
-const Userdelbyadmin = require('./controllers/deleteuserbyadmin');
+
 const AddShowTime = require('./controllers/theatreapis/addshowtime');
 const getShowTime = require('./controllers/theatreapis/getshowtimes');
-
+const forgotpassword = require('./controllers/forgotpassword');
 
 
 app.use('/api/getalluser', getalluser)
@@ -45,9 +49,11 @@ app.use('/api/getmovies', getallmovies);
 app.use('/api/login', logincontroller);
 app.use('/api/register', UserReg);
 app.use('/api/theaterreg', TheaterReg)
-app.use('/api/delete', Userdelbyadmin);
+
 app.use('/api/postshowtime', AddShowTime);
 app.use('/api/getshowtime', getShowTime);
+
+app.use('/api/forgotpassword', forgotpassword);
 
 
 const storage = multer.diskStorage({
@@ -203,6 +209,6 @@ app.get('/api/getscreenbyid', async (req, res) => {
 
 //=======================================================================================
 
-app.listen(5000, () => {
+app.listen(port, () => {
     console.log("server running on port 5000");
 });

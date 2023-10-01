@@ -20,6 +20,10 @@ function Publicnavbarblack(props) {
         <header className="" style={headerStyle}>
             <nav className="navbar" style={{ paddingLeft: "50px", paddingRight: "50px" }}>
                 <ul className="nav-list">
+                    <li>
+                    
+                    </li>
+               
                     <Link to="/">
                         <li style={{ color: 'white' }} className={`nav-item ${props.activehome}`}>
                             Home

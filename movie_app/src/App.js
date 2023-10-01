@@ -29,6 +29,7 @@ import UserProfilePage from "./user/pages/user_profilepage";
 import AdminViewPostedMoviesPage from "./admin/pages/admin_view_posted_movies_page";
 import Viewtheaterlistpage from "./theater/pages/view_screen_list_page";
 import AddScreeningTimePage from "./theater/pages/add_screening_time_page";
+import Otppage from "./auth/pages/otppage";
 
 
 
@@ -84,6 +85,7 @@ export default function App() {
 
           )}
           <Route path="/" element={<Loginpage />} />
+          <Route path="/verify" element={<Otppage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/theaterreg" element={<TheaterRegistrationPage />} />
           <Route path="/requestpending" element={<RequestPending />} />

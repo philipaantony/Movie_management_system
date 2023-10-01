@@ -51,7 +51,7 @@ function Login() {
             alert("Application Got Rejected");
             navigate("/requestrejected");
           } else if (status === "Approved") {
-            alert("Login Successfull as Theater");
+            alert("Login Successful as Theater");
             dispatch(login({userid:userId ,useremail: email }));
             navigate("/theaterhome");
           }
@@ -63,7 +63,7 @@ function Login() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("Error");
+        alert("Invalid credentials");
       });
   };
 

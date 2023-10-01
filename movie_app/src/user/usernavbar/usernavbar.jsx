@@ -12,7 +12,8 @@ import { logout } from "../../Redux/user/userSlice";
 import LocationPicker from "../componets/LocationPicker";
 
 
-function UserNavBar(props) {
+function UserNavBar(props)
+ {
   const username = localStorage.getItem("name");
   const useremail = localStorage.getItem("email");
   const profilepicture = localStorage.getItem("profilepicture");
