@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
-import './public/seat.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import "./public/seat.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateSeatOrientation from "./theater/theater_orientation";
 import TheaterHomePage from "./theater/pages/theater_home_page";
 import AddScreen from "./theater/componets/add_screen";
@@ -22,7 +22,7 @@ import UserHomePage2 from "./user/pages/user_home_page2";
 import AdminViewTheatersPage from "./admin/pages/admin_view_theaters_page";
 import AdminApproveTheaterPage from "./admin/pages/admin_approve_theater_page";
 import RequestRejected from "./auth/pages/requestrejected";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Error404 from "./errorpage/error404";
 import { useSelector } from "react-redux";
 import UserProfilePage from "./user/pages/user_profilepage";
@@ -31,14 +31,13 @@ import Viewtheaterlistpage from "./theater/pages/view_screen_list_page";
 import AddScreeningTimePage from "./theater/pages/add_screening_time_page";
 import Otppage from "./auth/pages/otppage";
 
-
-
 export default function App() {
-
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-
+  const usertype = localStorage.getItem("usertype");
   const isLoggedInlocal = localStorage.getItem("isLoggedIn");
-  console.log(isLoggedIn)
+  console.log(isLoggedIn);
+  console.log("----------------->>>>>>>>>>>>");
+  console.log(usertype);
 
   return (
     <div>
@@ -46,44 +45,57 @@ export default function App() {
         <ScrollToTop />
 
         <Routes>
-          {isLoggedIn || isLoggedInlocal ? (
+          {(isLoggedIn || isLoggedInlocal) && usertype === "user" ? (
             <>
               {/* User routes */}
+              <Route path="/userhome" element={<UserHomePage2 />} />
               <Route path="/userhome2" element={<UserHomePages />} />
               <Route path="/userabout" element={<UserAboutPage />} />
               <Route path="/viewmovie" element={<UserViewMovie />} />
-              <Route path="/userhome" element={<UserHomePage2 />} />
 
+            </>
+          ) : usertype === "admin" ? (
+            <>
               {/* Admin routes */}
 
-              <Route path="/viewpostedmovies" element={<AdminViewPostedMoviesPage />} />
+              <Route
+                path="/viewpostedmovies"
+                element={<AdminViewPostedMoviesPage />}
+              />
               <Route path="/viewusers" element={<AdminViewVsersPage />} />
               <Route path="/addmovie" element={<AdminAddMoviePage />} />
               <Route path="/adminhome" element={<AdminHomePage />} />
               <Route path="/viewtheaters" element={<AdminViewTheatersPage />} />
-              <Route path="/viewtheaterapplication" element={<AdminApproveTheaterPage />} />
-              <Route path="/userprofile" element={< UserProfilePage />} />
-
+              <Route
+                path="/viewtheaterapplication"
+                element={<AdminApproveTheaterPage />}
+              />
+              <Route path="/userprofile" element={<UserProfilePage />} />
+            </>
+          ) : usertype === "theater" ? (
+            <>
               {/* theatre routes */}
 
-
-
-
               <Route path="/createnewtime" element={<AddScreeningTimePage />} />
-              <Route path="/createnewscreen" element={<CreateSeatOrientation />} />
-              <Route path="/vieworientation" element={<Viewscreenorientation />}></Route>
+              <Route
+                path="/createnewscreen"
+                element={<CreateSeatOrientation />}
+              />
+              <Route
+                path="/vieworientation"
+                element={<Viewscreenorientation />}
+              ></Route>
               <Route path="/theaterhome" element={<TheaterHomePage />}></Route>
               <Route path="/addnewscreen" element={<AddScreen />} />
               <Route path="/viewmyscreens" element={<Viewtheaterlistpage />} />
               <Route path="/seat" element={<CreateSeatOrientation />} />
             </>
           ) : (
-            <>
-              {/* Public routes */}
-
-            </>
-
+            <>{/* Public routes */}</>
           )}
+
+          <Route path="/userhome" element={<UserHomePage2 />} />
+
           <Route path="/" element={<Loginpage />} />
           <Route path="/verify" element={<Otppage />} />
           <Route path="/explore" element={<ExplorePage />} />

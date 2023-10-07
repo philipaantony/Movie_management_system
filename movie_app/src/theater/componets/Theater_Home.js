@@ -16,36 +16,31 @@ function TheaterHome() {
 
 
     return (
-        <div style={{ backgroundColor: "#f2f7ff" }}>
-            <div id="main">
-                <header className="mb-3">
-                    <p className="burger-btn d-block d-xl-none">
-                        <i className="bi bi-justify fs-3"></i>
-                    </p>
-                </header>
-                <div className="page-heading">
-                    <div>
-                        <h3>Welcome {username}</h3>
-                    </div>
-                </div>
-                <div className="page-content">
-                    <section className="row">
-                        <div className="">
-                            <div className="row">
 
-                                <Homecards />
-
-
-
-
-
-
-                            </div>
-                        </div>
-                    </section>
+        <div id="main" style={{ backgroundColor: "#f2f7ff" }}>
+            <header className="mb-3">
+                <p className="burger-btn d-block d-xl-none">
+                    <i className="bi bi-justify fs-3"></i>
+                </p>
+            </header>
+            <div className="page-heading">
+                <div>
+                    <h3>Welcome {username}</h3>
                 </div>
             </div>
+            <div className="page-content">
+                <section className="row">
+                    <div className="">
+                        <div className="row">
+
+                            <Homecards />
+
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
+
     );
 }
 

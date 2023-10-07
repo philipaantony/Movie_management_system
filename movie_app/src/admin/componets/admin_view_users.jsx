@@ -8,7 +8,7 @@ import GoBackButton from '../../public/gobackButton';
 function AdminViewUsers() {
 
 
-  const usersPerPage = 10;
+  const usersPerPage = 15;
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [refresh, setRefresh] = useState(false);

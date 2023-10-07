@@ -49,11 +49,14 @@ function GoogleauthLogin({ onChildData }) {
       const decoded = jwt_decode(token);
       console.log("decoded:", decoded);
       const { username, email, userId,usertype,status } = decoded;
+
+      
       localStorage.setItem("profilepicture", imageUrl);
       localStorage.setItem("name", username);
       localStorage.setItem("email", email);
       localStorage.setItem("userId", userId);
       localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("usertype", usertype);
 
 
         if (usertype === "user") {
@@ -81,7 +84,7 @@ function GoogleauthLogin({ onChildData }) {
       <div className="text-center">
         <GoogleLogin
           style={{
-            border: "2px solid",
+                        // Cursor style
           }}
           className=" btn-block btn-lg "
           clientId={client_id} // Replace with your actual client ID

@@ -19,7 +19,7 @@ function AdminViewTheaterLogin() {
   };
 
 
-  const usersPerPage = 5;
+  const usersPerPage = 10;
   const [theaters, setTheaters] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [statusUpdated, setStatusUpdated] = useState(false);
@@ -167,7 +167,7 @@ function AdminViewTheaterLogin() {
               <th>Theater Email</th>
               <th>Status</th>
               <th>View Application</th>
-              <th>Delete Request</th>
+              {/* <th>Delete Request</th> */}
             </tr>
           </thead>
           <tbody>
@@ -188,11 +188,11 @@ function AdminViewTheaterLogin() {
                         </button>
 
                   </td>
-                  <td>
+                  {/* <td>
                     <button type="button" className="btn btn-danger">
                       Delete
-                    </button>
-                  </td>
+                    </button> 
+                  </td> */}
                 </tr>
               ) : null// Render nothing if the status is not 'Approved'
             )}

@@ -39,12 +39,24 @@ function Register() {
         },
       },
       email: {
-        required: '**Email is required',
+        required: 'Email is required',
         pattern: {
-          value: /^[A-Za-z][A-Za-z0-9._%+-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i, // Ensure it doesn't start with a number
+          value: /^[A-Za-z][A-Za-z0-9._%+-]*@[A-Za-z0-9-]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$/i,
           message: 'Invalid email address',
         },
+        validate: (value) => {
+          if (!value.match(/\.[A-Za-z0-9-]+@/)) {
+            return true; // Valid email
+          }
+          return 'Invalid email address: Dot directly before @ is not allowed.';
+        },
       },
+      
+      
+      
+      
+      
+      
       phone: {
         required: '**Phone number is required',
         pattern: {
@@ -193,15 +205,15 @@ function Register() {
 
 
 
-            <div className="form-check form-check-info text-left">
+            {/* <div className="form-check form-check-info text-left">
               <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault" defaultChecked />
               <label className="form-check-label" htmlFor="flexCheckDefault">
                 I agree the <a href="javascript:;" className="text-dark font-weight-bolder">Terms and Conditions</a>
               </label>
-            </div>
+            </div> */}
 
             <div className="text-center">
-              <button type="submit" className="attractive-button btn-block btn-lg shadow-lg mt-5">Login</button>
+              <button type="submit" className="attractive-button btn-block btn-lg shadow-lg mt-5">Register</button>
             </div>
 
            

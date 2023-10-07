@@ -106,7 +106,7 @@ function ForgotPassword() {
                   <p className="text-sm mt-3 mb-0">
                     Already have an account?
                     <Link to="/">
-                      <a className="font-bold">Login</a>
+                      <a className="font-bold">Reset My Password</a>
                     </Link>
                   </p>
                 </form>

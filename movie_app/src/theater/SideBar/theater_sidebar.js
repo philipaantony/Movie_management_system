@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/user/userSlice";
@@ -19,9 +19,29 @@ function TheaterSidebar(props) {
         navigate("/", { replace: true });
     };
 
+    useEffect(() => {
+        function hideSidebarOnResize() {
+            const w = window.innerWidth;
+            const sidebar = document.getElementById("sidebar");
+            if (w < 1200) {
+                sidebar.classList.remove("active");
+            } else {
+                sidebar.classList.add("active");
+            }
+        }
+        window.addEventListener("resize", hideSidebarOnResize);
+        hideSidebarOnResize();
+        return () => {
+            window.removeEventListener("resize", hideSidebarOnResize);
+        };
+    }, []);
+
+
+
     return (
         <>
-            <div id="sidebar" className="active">
+            <div id="sidebar"
+                className="active">
                 <div className="sidebar-wrapper active" style={{ overflow: "hidden" }}>
                     <div className="sidebar-header">
                         <div className="d-flex justify-content-between"></div>

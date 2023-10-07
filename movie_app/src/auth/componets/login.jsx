@@ -32,6 +32,7 @@ function Login() {
         localStorage.setItem("email", email);
         localStorage.setItem("userId", userId);
         localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("usertype", usertype);
 
         if (usertype === "admin") {
           alert("Login Successfull as Admin");
@@ -139,7 +140,7 @@ function Login() {
                     {errors?.password && errors.password.message}
                   </p>
 
-                  <div className="form-check form-check-info text-left">
+                  {/* <div className="form-check form-check-info text-left">
                     <input
                       className="form-check-input"
                       type="checkbox"
@@ -154,7 +155,7 @@ function Login() {
                       Keep me{" "}
                       <a className="text-dark font-weight-bolder">Logged in</a>
                     </label>
-                  </div>
+                  </div> */}
 
                   <div className="text-center">
                     <button
