@@ -47,6 +47,7 @@ function ForgotPassword() {
   return (
     <>
       <br></br>
+      <br></br>
       <div className="container" style={{}}>
         <div className="row mt-lg-n10 mt-md-n11 mt-n10">
           <div
@@ -106,7 +107,7 @@ function ForgotPassword() {
                   <p className="text-sm mt-3 mb-0">
                     Already have an account?
                     <Link to="/">
-                      <a className="font-bold">Reset My Password</a>
+                      <a className="font-bold">Login</a>
                     </Link>
                   </p>
                 </form>
