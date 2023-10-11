@@ -38,7 +38,6 @@ const getallmovies = require('./controllers/getallmovies');
 const logincontroller = require('./controllers/login');
 const UserReg = require('./controllers/userregistrartion');
 const TheaterReg = require('./controllers/theaterregistration');
-
 const AddShowTime = require('./controllers/theatreapis/addshowtime');
 const getShowTime = require('./controllers/theatreapis/getshowtimes');
 const forgotpassword = require('./controllers/forgotpassword');

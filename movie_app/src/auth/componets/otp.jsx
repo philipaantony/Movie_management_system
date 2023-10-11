@@ -10,7 +10,6 @@ function OTP() {
   const navigate = useNavigate();
   const { email } = location.state;
 
-
   const {
     register,
     handleSubmit,
@@ -139,6 +138,9 @@ function OTP() {
               </div>
             </div>
           </div>
+          <br></br>
+          <br></br>
+          <br></br>
         </div>
       ) : (
         <div>
@@ -202,7 +204,7 @@ function OTP() {
                           type="submit"
                           className="attractive-button btn-block btn-lg shadow-lg mt-5"
                         >
-                          Login
+                          Reset Password
                         </button>
                       </div>
                       <br></br>

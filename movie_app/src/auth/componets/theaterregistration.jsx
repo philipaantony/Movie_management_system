@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function Theaterregistration() {
 
-    const {register,handleSubmit,formState:{ errors },} = useForm();
+    const {register,handleSubmit,formState:{ errors },} = useForm({mode: "onChange"});
 
     const navigate = useNavigate();
     const onSubmit = (data) =>
@@ -34,28 +34,47 @@ function Theaterregistration() {
     }
 
     const validationRules = {
-        name: {
-          required: "**Theater Name is required",
-          minLength: {
-            value: 2,
-            message: "**Theater Name must have at least 2 characters",
-          },
+      name: {
+        required: "**Name is required",
+        minLength: {
+          value: 2,
+          message: "**Name must have at least 2 characters",
         },
-        location: {
-            required: "**Location  is required",
-            
-          },
-        owner: {
-            required: "**Owner Name is required",
-            
+        pattern: {
+          value: /^[A-Za-z\s]+$/, // Allow only alphabetic characters and spaces
+          message: '**Name should not contain numbers or special characters',
+        },
+      },
+      location: {
+        required: "**location is required",
+        minLength: {
+          value: 4,
+          message: "**location must have at least 4 characters",
+        },
+        pattern: {
+          value: /^[A-Za-z\s]+$/, // Allow only alphabetic characters and spaces
+          message: '**location should not contain numbers or special characters',
+        },
+      },
+          owner: {
+            required: "**Onwer Name is required",
+            minLength: {
+              value: 3,
+              message: "** OnwerName must have at least 3 characters",
+            },
+            pattern: {
+              value: /^[A-Za-z\s]+$/, // Allow only alphabetic characters and spaces
+              message: '**Onwer Name should not contain numbers or special characters',
+            },
           },
           email: {
-            required: '**Email is required',
+            required: 'Email is required',
             pattern: {
-              value: /^[A-Za-z][A-Za-z0-9._%+-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i, // Ensure it doesn't start with a number
+              value: /^[A-Za-z][A-Za-z0-9._%+-]*@[A-Za-z0-9-]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$/i,
               message: 'Invalid email address',
             },
           },
+          
           phone: {
             required: '**Phone number is required',
             pattern: {
@@ -64,21 +83,21 @@ function Theaterregistration() {
             },
           },
           
+          // password: {
+          //   required: '**Password is required',
+          //   minLength: {
+          //     value: 4,
+          //     message: '**Password must have at least 4 characters',
+          //   },
+          // },
+
           password: {
             required: '**Password is required',
-            minLength: {
-              value: 4,
-              message: '**Password must have at least 4 characters',
+            pattern: {
+                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
+                message: '**Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$%^&+=!)',
             },
-          },
-
-        //   password: {
-        //     required: '**Password is required',
-        //     pattern: {
-        //         value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
-        //         message: '**Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$%^&+=!)',
-        //     },
-        // },
+        },
         
           confirmPassword: {
             required: '**Confirm password is required',

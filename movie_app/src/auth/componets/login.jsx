@@ -15,7 +15,7 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({mode: "onChange"});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onSubmit = async (data) => {
@@ -70,12 +70,13 @@ function Login() {
 
   const validationRules = {
     email: {
-      required: "**Email is required",
+      required: 'Email is required',
       pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: "Invalid email address",
+        value: /^[A-Za-z][A-Za-z0-9._%+-]*@[A-Za-z0-9-]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$/i,
+        message: 'Invalid email address',
       },
     },
+    
     password: {
       required: "**Password is required",
     },

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../model/usermodel'); // Import your User model
 
+
 router.get('', async (req, res) => {
     try {
         const users = await User.find();

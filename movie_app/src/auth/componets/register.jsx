@@ -9,7 +9,7 @@ import GoogleauthUserReg from '../googleauth/googleauth_userreg';
 function Register() {
 
 
-    const {register,handleSubmit,formState:{ errors },} = useForm();
+    const {register,handleSubmit,formState:{ errors },} = useForm( {mode: "onChange"});
     const onSubmit = (data) =>
      {
      
@@ -44,13 +44,8 @@ function Register() {
           value: /^[A-Za-z][A-Za-z0-9._%+-]*@[A-Za-z0-9-]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$/i,
           message: 'Invalid email address',
         },
-        validate: (value) => {
-          if (!value.match(/\.[A-Za-z0-9-]+@/)) {
-            return true; // Valid email
-          }
-          return 'Invalid email address: Dot directly before @ is not allowed.';
-        },
       },
+      
       
       
       
@@ -81,20 +76,20 @@ function Register() {
           return true;
         },
       },
+      // password: {
+      //   required: '**Password is required',
+      //   minLength: {
+      //     value: 4,
+      //     message: '**Password must have at least 4 characters',
+      //   },
+      // },
       password: {
         required: '**Password is required',
-        minLength: {
-          value: 4,
-          message: '**Password must have at least 4 characters',
+        pattern: {
+            value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
+            message: '**Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$%^&+=!)',
         },
-      },
-    //   password: {
-    //     required: '**Password is required',
-    //     pattern: {
-    //         value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
-    //         message: '**Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$%^&+=!)',
-    //     },
-    // },
+    },
     
       confirmPassword: {
         required: '**Confirm password is required',
