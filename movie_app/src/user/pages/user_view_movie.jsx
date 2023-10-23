@@ -2,41 +2,37 @@ import React from "react";
 import UserNavBar from "../usernavbar/usernavbar";
 import Maincard from "../componets/moviecards/maincard";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
-import {useLocation} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 import Footer from "../../footer/footer";
 
-
 function UserViewMovie() {
-
   const location = useLocation();
-  const url = location.state.imageurl;
-  const name = location.state.moviename;
 
   return (
-    <div >
-      <UserNavBar activehome="active"/>
+    <div>
+      <UserNavBar activehome="active" />
       <div className="container my-5">
         <div className="row">
           <div className="col-md-4">
-            <Maincard url={url} />
+            <Maincard url={location.state.poster_url} />
           </div>
           <div className="col-md-8">
             <br></br>
-            <h1 className="mb-3">{name}</h1>
+            <h1 className="mb-3">{location.state.title}</h1>
             <p>
               <strong>Plot Summary:</strong> {location.state.description}
             </p>
             <div class="row">
               <div class="col">
                 <p>
-                  <strong>Release Date</strong>  {location.state.release_date}
+                  <strong>Release Date</strong> {location.state.release_date}
                 </p>
                 <p>
                   <strong>Director:</strong> {location.state.director}
                 </p>
                 <p>
-                  <strong>Genre:</strong>  {location.state.genre}
+                  <strong>Genre:</strong> {location.state.genre}
                 </p>
                 <p>
                   <strong>language:</strong> {location.state.language}
@@ -44,10 +40,10 @@ function UserViewMovie() {
               </div>
               <div class="col">
                 <p>
-                  <strong>Cast:</strong>  {location.state.cast}
+                  <strong>Cast:</strong> {location.state.cast}
                 </p>
                 <p>
-                  <strong>Duration:</strong>  {location.state.duration}
+                  <strong>Duration:</strong> {location.state.duration}
                 </p>
                 <p>
                   <strong>Quality:</strong> HD
@@ -58,19 +54,25 @@ function UserViewMovie() {
               </div>
             </div>
 
-            <div className="mb-3">
-              <button
-                className="btn btn-primary btn-lg me-3"
-                style={{ paddingRight: "30px" }}
-              >
-                Save <BookmarkAddedIcon />{" "}
-              </button>
-              <button className="btn btn-danger btn-lg">Book Now</button>
-            </div>
+            <div className="mb-3" style={{ display: 'flex', }}>
+  {location.state.StreamingType === "In-Theaters" ? (
+    <button className="btn btn-danger btn-lg me-3" style={{ padding: '10px 20px' }}>
+      Book Now
+    </button>
+  ) : (
+    <button className="btn btn-danger btn-lg me-3" style={{ padding: '10px 20px' }}>
+      Watch Now
+    </button>
+  )}
+  <button className="btn btn-primary btn-lg me-3" style={{ padding: '10px 20px' }}>
+    Save <BookmarkAddedIcon />{" "}
+  </button>
+</div>
+
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

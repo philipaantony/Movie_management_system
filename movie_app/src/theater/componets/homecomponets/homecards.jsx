@@ -97,38 +97,31 @@ function Homecards() {
                                                 </div>
                                             </div>
                                         </div>
+                                       
+                                        
                                         <div class="col-md-3">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">View Theater</h5>
-                                                    <p class="card-text">Click to view a Theater List.</p>
-                                                    <Link to="">
-                                                        <button class="btn btn-primary">
-                                                            View Theater List
-                                                        </button>
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Add Theater</h5>
-                                                    <p class="card-text">Click to add new Theater</p>
-                                                    <Link to="">
-                                                        <button class="btn btn-primary">Add Theater</button>
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Update Screen</h5>
-                                                    <p class="card-text">Click to update a screen.</p>
-                                                    <a href="#" class="btn btn-primary">
-                                                        Update
+                                                    <h5 class="card-title"> View Screens</h5>
+                                                    <p class="card-text">Click to  View Screens.</p>
+                                                    <Link to="/viewmyscreens">
+                                                    <a  class="btn btn-primary">
+                                                        View Screens
                                                     </a>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">View Movies</h5>
+                                                    <p class="card-text">View New Movies for </p>
+                                                    <Link to="/assignmovie">
+                                                        <button class="btn btn-primary">View Movies</button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>

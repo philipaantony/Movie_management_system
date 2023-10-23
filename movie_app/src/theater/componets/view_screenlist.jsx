@@ -82,10 +82,7 @@ function ViewScreenList() {
                         <div className="col">
                           Columns available: {screen.columns}
                         </div>
-                        <div className="col">
-                          {" "}
-                          Theater Type: {screen.theatertype}
-                        </div>
+                        
                         <div className="col">
                         <button class="btn btn-primary" onClick={()=>{
                           navigate('/createnewtime',{state:{screenid:screen._id,trid:screen.trid}})
@@ -101,7 +98,21 @@ function ViewScreenList() {
                           {" "}
                           Layout: {screen.rows}* {screen.columns}
                         </div>
+                        <div className="col">
+                          {" "}
+                          Theater Type: {screen.theatertype}
+                        </div>
+                        <div className="col">
+                        <button style={{marginTop:'10px'}} class="btn btn-primary" onClick={()=>{
+                          navigate('/assignmovietoscreen',{state:{screenid:screen._id,trid:screen.trid}})
+                        }}>
+                            <i class="bi bi-clock-fill"></i> Assign Movie
+                          </button>
+
+                        </div>
+                        
                       </div>
+                      
                       <div className="row">
                         <div className="col"> Capacity: {seatcount}</div>
                       </div>

@@ -41,17 +41,20 @@ const TheaterReg = require('./controllers/theaterregistration');
 const AddShowTime = require('./controllers/theatreapis/addshowtime');
 const getShowTime = require('./controllers/theatreapis/getshowtimes');
 const forgotpassword = require('./controllers/forgotpassword');
-
+const deleteshowtime = require('./controllers/theatreapis/deleteshowtime');
+const assignmovietoscreen = require('./controllers/theatreapis/assign_movie_to_screen');
 
 app.use('/api/getalluser', getalluser)
 app.use('/api/getmovies', getallmovies);
 app.use('/api/login', logincontroller);
 app.use('/api/register', UserReg);
-app.use('/api/theaterreg', TheaterReg)
+app.use('/api/theaterreg', TheaterReg);
+app.use('/api/assignmovie', assignmovietoscreen)
 
+
+app.use('/api/deleteshowtime', deleteshowtime);
 app.use('/api/postshowtime', AddShowTime);
 app.use('/api/getshowtime', getShowTime);
-
 app.use('/api/forgotpassword', forgotpassword);
 
 
@@ -71,12 +74,14 @@ const upload = multer({ storage: storage });
 
 app.post('/api/addmovies', upload.single('poster_url'), async (req, res) => {
     try {
-        const { title, genre, duration, release_date, language, description, director, production, cast, trailer_url, } = req.body;
+        const { title, StreamingType, genre, duration, release_date, language, description, director, production, cast, trailer_url, } = req.body;
         const filename = req.file ? req.file.path : '';
         const poster_url = path.basename(filename);
-        const newMovie = new Movies({ title, genre, duration, release_date, language, description, director, production, cast, poster_url, trailer_url, });
+
+        const newMovie = new Movies({ title, StreamingType, genre, duration, release_date, language, description, director, production, cast, poster_url, trailer_url, });
         const result = await newMovie.save();
         if (result) {
+            console.log("succccccccccccccccccccccccccces");
             res.status(201).json({ message: 'Movie added successfully' });
         }
 

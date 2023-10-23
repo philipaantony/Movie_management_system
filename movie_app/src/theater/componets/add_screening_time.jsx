@@ -5,6 +5,7 @@ import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import GoBackButton from "../../public/gobackButton";
 import axios from "axios";
 import { baseUrl } from "../../config/config";
@@ -55,22 +56,59 @@ function AddScreeningTime(props) {
       });
   };
 
+  const handleDeleteClick = (showtimeId) => {
+    if (window.confirm("Are you sure you want to delete this showtime?")) {
+      axios
+        .delete(`${baseUrl}/api/deleteshowtime/${showtimeId}`)
+        .then((response) => {
+          if (response.data.message) {
+            setRefresh(true);
+          setRefresh(false);
+            alert(response.data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Error deleting showtime");
+        });
+    }
+  };
+  
+
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+     <div style={{ display: 'flex', flexDirection: 'row' }}>
   {showtimes.map((showtime) => (
-    <div key={showtime._id} style={{ 
-      border: '1px solid ', 
-      margin: '20px', padding: '10px', 
-      borderRadius: '10px' ,
-      color: 'white',
-      backgroundColor :'#146C94',
-      
-      }}>
-      {showtime.time}
+    <div key={showtime._id} style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        style={{
+          border: '1px solid ',
+          marginLeft: '40px',
+          padding: '10px',
+          borderRadius: '10px',
+          color: 'white',
+          backgroundColor: '#146C94',
+          display: 'flex', // Make the div a flex container
+          alignItems: 'center', // Center its contents vertically
+        }}
+      >
+        {showtime.time}
+      </div>
+      <button
+      style={{
+        background: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+      }}
+      onClick={() => handleDeleteClick(showtime._id)}
+    >
+      <DeleteForeverIcon />
+    </button>
     </div>
   ))}
 </div>
+
+
 
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>

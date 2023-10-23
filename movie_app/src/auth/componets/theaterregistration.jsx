@@ -6,11 +6,11 @@ import axios from 'axios';
 function Theaterregistration() {
 
     const {register,handleSubmit,formState:{ errors },} = useForm({mode: "onChange"});
-
     const navigate = useNavigate();
     const onSubmit = (data) =>
      {
        console.log(data);
+       
        axios.post('http://localhost:5000/api/theaterreg', data)
       .then((response) => {
         console.log('Theater Registered:', response.data);

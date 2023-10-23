@@ -57,7 +57,7 @@ function UserHomePages() {
                                             <div className="row" >
                                                 {movies.map((movie) => {
                                                     const data = {
-                                                        imageurl: `http://localhost:5000/movie_poster/${movie.poster_url}`,
+                                                        poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
                                                         moviename: movie.title,
                                                         genre: movie.genre,
                                                         duration: movie.duration,

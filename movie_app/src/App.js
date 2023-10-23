@@ -30,6 +30,8 @@ import AdminViewPostedMoviesPage from "./admin/pages/admin_view_posted_movies_pa
 import Viewtheaterlistpage from "./theater/pages/view_screen_list_page";
 import AddScreeningTimePage from "./theater/pages/add_screening_time_page";
 import Otppage from "./auth/pages/otppage";
+import AssignMoviesPage from "./theater/pages/assign_movies_page";
+import AssignMovieToScreenPage from "./theater/pages/assign_movie_to_screen_page";
 
 export default function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -85,6 +87,9 @@ export default function App() {
                 path="/vieworientation"
                 element={<Viewscreenorientation />}
               ></Route>
+              <Route path="/assignmovie" element={<AssignMoviesPage />}></Route>
+
+              <Route path="/assignmovietoscreen" element={<AssignMovieToScreenPage />}></Route>
               <Route path="/theaterhome" element={<TheaterHomePage />}></Route>
               <Route path="/addnewscreen" element={<AddScreen />} />
               <Route path="/viewmyscreens" element={<Viewtheaterlistpage />} />

@@ -6,6 +6,10 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    StreamingType: {
+        type: String,
+        required: true,
+    },
     genre: {
         type: String,
         required: true,

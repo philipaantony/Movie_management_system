@@ -16,7 +16,9 @@ function AdminAddMovie() {
     const formData = new FormData();
 
     formData.append("title", data.title);
+    formData.append("StreamingType", data.StreamingType);
     formData.append("genre", data.genre);
+    
     formData.append("duration", data.duration);
     formData.append("release_date", data.release_date);
     formData.append("language", data.language);
@@ -54,6 +56,9 @@ function AdminAddMovie() {
     },
     genre: {
       required: "**Genre is required",
+    },
+    StreamingType: {
+      required: "**Streaming Type is required",
     },
     duration: {
       required: "**Duration is required",
@@ -134,6 +139,28 @@ function AdminAddMovie() {
                               />
                               <p className="text-danger">
                                {errors?.title && errors.title.message}
+                              </p>
+                            </div>
+
+
+                            <div className="col-md-4">
+                              <label>Streaming Type</label>
+                            </div>
+                            <div className="col-md-8 form-group">
+                              <select
+                                className="btn  dropdown-toggle dropdown-toggle-split"
+                                name="genre"
+                                defaultValue=""
+                                {...register("StreamingType", validationRules.StreamingType)}
+                              >
+                                <option value="">Streaming Type</option>
+                                <option value="In-Theaters">In Theaters Now</option>
+                                <option value="OTT-Release">OTT Release</option>
+                                
+                                {/* Add more genre options here */}
+                              </select>
+                              <p className="text-danger">
+                                {errors?.StreamingType && errors.StreamingType.message}
                               </p>
                             </div>
 

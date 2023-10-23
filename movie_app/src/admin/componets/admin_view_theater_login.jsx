@@ -19,7 +19,7 @@ function AdminViewTheaterLogin() {
   };
 
 
-  const usersPerPage = 10;
+  const usersPerPage = 20;
   const [theaters, setTheaters] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [statusUpdated, setStatusUpdated] = useState(false);

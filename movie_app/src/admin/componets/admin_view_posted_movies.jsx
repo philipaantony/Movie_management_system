@@ -77,6 +77,9 @@ function AdminViewPostedMovies() {
                   <p className="card-text">
                     <strong>Duration:</strong> {movie.duration} Hr
                   </p>
+                  <p className="card-text">
+                    <strong>StreamingType:</strong> {movie.StreamingType}
+                  </p>
                 </div>
                 <div className="col">
                   <p className="card-text">
