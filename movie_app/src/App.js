@@ -32,6 +32,8 @@ import AddScreeningTimePage from "./theater/pages/add_screening_time_page";
 import Otppage from "./auth/pages/otppage";
 import AssignMoviesPage from "./theater/pages/assign_movies_page";
 import AssignMovieToScreenPage from "./theater/pages/assign_movie_to_screen_page";
+import UserViewStreamingTheatrePage from "./user/pages/user_view_streaming_theatre";
+import UserSelectSeat from "./user/pages/user_select_seat";
 
 export default function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -50,6 +52,7 @@ export default function App() {
           {(isLoggedIn || isLoggedInlocal) && usertype === "user" ? (
             <>
               {/* User routes */}
+              <Route path="/selectseat" element={<UserSelectSeat />} />
               <Route path="/userhome" element={<UserHomePage2 />} />
               <Route path="/userhome2" element={<UserHomePages />} />
               <Route path="/userabout" element={<UserAboutPage />} />
@@ -60,10 +63,8 @@ export default function App() {
             <>
               {/* Admin routes */}
 
-              <Route
-                path="/viewpostedmovies"
-                element={<AdminViewPostedMoviesPage />}
-              />
+              <Route path="/viewpostedmovies" element={<AdminViewPostedMoviesPage />} />
+
               <Route path="/viewusers" element={<AdminViewVsersPage />} />
               <Route path="/addmovie" element={<AdminAddMoviePage />} />
               <Route path="/adminhome" element={<AdminHomePage />} />
@@ -100,7 +101,7 @@ export default function App() {
           )}
 
           <Route path="/userhome" element={<UserHomePage2 />} />
-
+          <Route path="/viewstreaming" element={<UserViewStreamingTheatrePage />} />
           <Route path="/" element={<Loginpage />} />
           <Route path="/verify" element={<Otppage />} />
           <Route path="/explore" element={<ExplorePage />} />

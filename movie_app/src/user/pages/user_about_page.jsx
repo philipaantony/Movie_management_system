@@ -14,6 +14,7 @@ function UserAboutPage() {
             <p>
                 Welcome to our online movies management and movie booking website! We are dedicated to providing you with the best movie-watching experience right from the comfort of your home or at the cinema.
             </p>
+            
             <p>
                 Our platform offers a wide selection of movies, including the latest releases, classics, and everything in between. You can easily explore our movie catalog, read descriptions, watch trailers, and make informed decisions about what to watch next.
             </p>

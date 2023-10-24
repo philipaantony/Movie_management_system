@@ -3,15 +3,14 @@ import Homecards from "./homecomponets/homecards";
 import React from "react";
 
 function TheaterHome() {
-    const username = localStorage.getItem("name");
 
+    const username = localStorage.getItem("name");
     //const useremail = localStorage.getItem("email");
     //const profilepicture = localStorage.getItem("profilepicture");
     //console.log(username);
     //console.log(useremail);
 
     //const trid = useSelector((state) => state.user.userid);
-
 
 
 
@@ -32,9 +31,7 @@ function TheaterHome() {
                 <section className="row">
                     <div className="">
                         <div className="row">
-
                             <Homecards />
-
                         </div>
                     </div>
                 </section>

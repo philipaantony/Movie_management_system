@@ -43,14 +43,18 @@ const getShowTime = require('./controllers/theatreapis/getshowtimes');
 const forgotpassword = require('./controllers/forgotpassword');
 const deleteshowtime = require('./controllers/theatreapis/deleteshowtime');
 const assignmovietoscreen = require('./controllers/theatreapis/assign_movie_to_screen');
+const usergetshow = require('./controllers/userapis/usergetshow')
+const gettr = require('./controllers/userapis/usergettheatre');
 
 app.use('/api/getalluser', getalluser)
 app.use('/api/getmovies', getallmovies);
 app.use('/api/login', logincontroller);
 app.use('/api/register', UserReg);
 app.use('/api/theaterreg', TheaterReg);
-app.use('/api/assignmovie', assignmovietoscreen)
+app.use('/api/assignmovie', assignmovietoscreen);
+app.use('/api/getmytheatre-user', gettr)
 
+app.use('/api/getshowtime-user', usergetshow);
 
 app.use('/api/deleteshowtime', deleteshowtime);
 app.use('/api/postshowtime', AddShowTime);

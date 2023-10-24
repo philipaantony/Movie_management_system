@@ -183,6 +183,7 @@ function UserHomePage2() {
               <div className="row">
                 {movies.map((movie) => {
                   const data = {
+                    movie_id:movie._id,
                     poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
                     title: movie.title,
                     genre: movie.genre,
@@ -270,6 +271,7 @@ function UserHomePage2() {
               <div className="row">
                 {movies.map((movie) => {
                   const data = {
+                    movie_id:movie._id,
                     poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
                     title: movie.title,
                     genre: movie.genre,

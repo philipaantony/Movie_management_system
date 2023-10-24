@@ -2,12 +2,14 @@ import React from "react";
 import UserNavBar from "../usernavbar/usernavbar";
 import Maincard from "../componets/moviecards/maincard";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Footer from "../../footer/footer";
 
 function UserViewMovie() {
   const location = useLocation();
+  const movie_id = location.state.movie_id;
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -54,21 +56,36 @@ function UserViewMovie() {
               </div>
             </div>
 
-            <div className="mb-3" style={{ display: 'flex', }}>
-  {location.state.StreamingType === "In-Theaters" ? (
-    <button className="btn btn-danger btn-lg me-3" style={{ padding: '10px 20px' }}>
-      Book Now
-    </button>
-  ) : (
-    <button className="btn btn-danger btn-lg me-3" style={{ padding: '10px 20px' }}>
-      Watch Now
-    </button>
-  )}
-  <button className="btn btn-primary btn-lg me-3" style={{ padding: '10px 20px' }}>
-    Save <BookmarkAddedIcon />{" "}
-  </button>
-</div>
-
+            <div className="mb-3" style={{ display: "flex" }}>
+              {location.state.StreamingType === "In-Theaters" ? (
+                <button
+                  onClick={() => {
+                    navigate("/viewstreaming",{ state: { 
+                      movie_id:movie_id,
+                      movieName:location.state.title,
+                      language:location.state.language
+                    } });
+                  }}
+                  className="btn btn-danger btn-lg me-3"
+                  style={{ padding: "10px 20px" }}
+                >
+                  Book Now
+                </button>
+              ) : (
+                <button
+                  className="btn btn-danger btn-lg me-3"
+                  style={{ padding: "10px 20px" }}
+                >
+                  Watch Now
+                </button>
+              )}
+              <button
+                className="btn btn-primary btn-lg me-3"
+                style={{ padding: "10px 20px" }}
+              >
+                Save <BookmarkAddedIcon />{" "}
+              </button>
+            </div>
           </div>
         </div>
       </div>

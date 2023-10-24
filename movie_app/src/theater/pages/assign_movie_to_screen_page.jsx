@@ -4,7 +4,9 @@ import { useLocation } from "react-router-dom";
 import AssignMovieToScreen from '../componets/assign_movie_to_screen'
 
 function AssignMovieToScreenPage() {
-    const location = useLocation();
+
+  const location = useLocation();
+  
   const screenid = location.state.screenid;
   const trid = location.state.trid;
 
