@@ -43,6 +43,9 @@ function CreateSeatOrientation() {
         },
     };
 
+    const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
+    console.log(alphabet[1]);
+
 
     const onSubmit = (data) => {
         const seatString = unavailableseats.join(',');
@@ -71,7 +74,6 @@ function CreateSeatOrientation() {
     const [columns, setColumns] = useState('10');
     const [unavailableseats, setunavailableseats] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
-    //const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
     const handleClick = (seatNumber) => {
 
@@ -193,9 +195,6 @@ function CreateSeatOrientation() {
                 <br></br>
 
 
-
-
-
                 <div class="seat-grid ">
                     <p>
                         Design Guidelines for Your Theatre Seating Arrangement:
@@ -207,11 +206,11 @@ function CreateSeatOrientation() {
 
                     {(() => {
                         const seatRow = [];
-                        for (let i = 1; i <= rows; i++) {
+                        for (let i = 0; i < rows; i++) {
                             const seatCols = [];
                             for (let j = 1; j <= columns; j++) {
-                                const seatNumber = i + '-' + j;
-                                const seatno = i + '-' + j;
+                                const seatNumber = alphabet[i] + '-' + j;
+                                const seatno = alphabet[i] + '-' + j;
                                 const isSelected = selectedSeats.includes(seatNumber);
                                 const isUnavailable = unavailableseats.includes(seatno);
                                 //If seactno exists in the unavailable array, it means that the seat is marked as unavailable, and isUnavailable will be true.
@@ -232,10 +231,13 @@ function CreateSeatOrientation() {
                                         ) : (
                                             <button type='button'
                                                 className="btn btn-outline-dark btn-sm"
-                                                style={{ backgroundColor: backgroundColor }}
+                                                style={{
+                                                    fontSize: "10px",
+                                                    backgroundColor: backgroundColor, height: "38px", width: '50px'
+                                                }}
                                                 onClick={() => handleClick(seatno)}
                                             >
-                                                {j}
+                                                {alphabet[i] + "" + j}
                                             </button>
                                         )}
                                     </div>

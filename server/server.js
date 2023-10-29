@@ -45,6 +45,8 @@ const deleteshowtime = require('./controllers/theatreapis/deleteshowtime');
 const assignmovietoscreen = require('./controllers/theatreapis/assign_movie_to_screen');
 const usergetshow = require('./controllers/userapis/usergetshow')
 const gettr = require('./controllers/userapis/usergettheatre');
+const userbookmovies = require('./controllers/userapis/userbookmovies');
+const fetchbookedseats = require('./controllers/userapis/fetchbookedseats');
 
 app.use('/api/getalluser', getalluser)
 app.use('/api/getmovies', getallmovies);
@@ -60,6 +62,9 @@ app.use('/api/deleteshowtime', deleteshowtime);
 app.use('/api/postshowtime', AddShowTime);
 app.use('/api/getshowtime', getShowTime);
 app.use('/api/forgotpassword', forgotpassword);
+app.use('/api/moviebookings', userbookmovies);
+
+app.use('/api/fetchbookedseats', fetchbookedseats)
 
 
 const storage = multer.diskStorage({

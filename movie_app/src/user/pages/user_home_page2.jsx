@@ -4,6 +4,9 @@ import UserNavBar from "../usernavbar/usernavbar";
 import { useNavigate } from "react-router-dom";
 import UserCarousel from "../componets/Carousel/user_carousel";
 
+
+
+
 function UserHomePage2() {
   const isLoggedInlocal = localStorage.getItem("isLoggedIn");
 
@@ -15,6 +18,7 @@ function UserHomePage2() {
       .then((response) => {
         console.log(response.data);
         setMovies(response.data);
+       
       })
       .catch((error) => {
         console.error("Error fetching movies:", error);

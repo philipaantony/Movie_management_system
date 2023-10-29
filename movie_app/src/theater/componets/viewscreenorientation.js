@@ -5,11 +5,12 @@ function Viewscreenorientation(props) {
 
     const rows = props.rows;
     const columns = props.cols;
-    //console.log(rows);
-    //console.log(columns);
+    const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
+    console.log(alphabet[1]);
+
 
     const myorientation = props.orientationProp ? props.orientationProp : ",";
-    //console.log(myorientation);
+    console.log(myorientation);
 
     const unavailable = myorientation.split(",");
     //console.log(unavailable)
@@ -37,11 +38,11 @@ function Viewscreenorientation(props) {
                         <div class="seat-grid" style={{ margin: "30px", padding: "50px" }}>
                             {(() => {
                                 const seatRow = [];
-                                for (let i = 1; i <= rows; i++) {
+                                for (let i = 0; i < rows; i++) {
                                     const seatCols = [];
                                     for (let j = 1; j <= columns; j++) {
-                                        const seatNumber = i + "-" + j;
-                                        const seactno = i + "-" + j;
+                                        const seatNumber = alphabet[i] + "-" + j;
+                                        const seactno = alphabet[i] + "-" + j;
                                         const isSelected = selectedSeats.includes(seatNumber);
                                         const isUnavailable = unavailable.includes(seactno);
                                         //If seactno exists in the unavailable array, it means that the seat is marked as unavailable, and isUnavailable will be true.
@@ -50,18 +51,22 @@ function Viewscreenorientation(props) {
                                         seatCols.push(
                                             <div
                                                 className="seat"
-                                                style={{ padding: "5px" }}
+                                                style={{}}
                                                 key={seatNumber}
                                             >
                                                 {isUnavailable ? (
                                                     <div class="seat unavailable"></div>
                                                 ) : (
                                                     <button
+
                                                         className="btn btn-outline-dark btn-sm"
-                                                        style={{ backgroundColor: backgroundColor }}
+                                                        style={{
+                                                            fontSize: "10px",
+                                                            backgroundColor: backgroundColor, height: "38px", width: '38px'
+                                                        }}
                                                         onClick={() => handleClick(seatNumber)}
                                                     >
-                                                        {j}
+                                                        {alphabet[i] + "" + j}
                                                     </button>
                                                 )}
                                             </div>

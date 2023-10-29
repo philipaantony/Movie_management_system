@@ -1,47 +1,51 @@
+/* Lock button height and width, and adjust text alignment */
 .seat-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
   
-  .myrow {
-    display: flex;
-    gap: 10px;
-    padding: 1px;
-  }
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for your seat buttons */
+.seatbutton {
+  width: 30px; /* Set the width to 30px */
+  height: 30px; /* Set the height to 30px to create a perfect square */
+  font-size: 10px; /* Adjust the font size as needed */
+  cursor: pointer;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background-color: #fcfcfc; /* Button background color */
+  border: 1px solid #000000; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+  color: #000; /* Text color */
+  user-select: none; /* Prevent text selection */
+}
+
+.myrow {
+  display: flex;
+  gap: 3px;
+  padding: 1px;
+}
+
+.seat {
   
-  .seat {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-   
-  }
-  
-  .seat.selected {
-    background-color: #60E01C;
-    /* Add other styling properties for selected seats */
-  }
-  
-  .seat.unavailable {
-    background-color:#f2f7ff;
-    /*cursor: not-allowed;
-    /* Add other styling properties for unavailable seats */
-  }
-  
-  
-  
-  
-  /*
-  .myrow:nth-child(5n) {
-    margin-bottom: 20px;   
-  }
-  
-  
-  .myrow .seat:nth-child(4n) {
-    margin-right: 20px; 
-  }
-  
-  */
+  width: 38px; /* Set the width to 30px */
+  height: 38px; /* Set the height to 30px to create a perfect square */
+  cursor: pointer;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.seat.selected {
+  background-color: #60E01C;
+  /* Add other styling properties for selected seats */
+}
+
+.seat.unavailable {
+  background-color: #f2f7ff;
+  cursor: not-allowed;
+  /* Add other styling properties for unavailable seats */
+}

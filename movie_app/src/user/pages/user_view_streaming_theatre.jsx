@@ -8,7 +8,7 @@ function UserViewStreamingTheatrePage() {
   const location = useLocation();
   const movie_id = location.state.movie_id;
   const [showtimes, setShowtimes] = useState([]);
-
+  
  const navigate = useNavigate();
 
 
@@ -27,13 +27,14 @@ function UserViewStreamingTheatrePage() {
     return date.toISOString().split("T")[0];
   });
 
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(today.toISOString().split("T")[0]);
 
   useEffect(() => {
     axios
       .get(`${baseUrl}/api/getshowtime-user/${movie_id}`)
       .then((response) => {
         setShowtimes(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.error(error);
@@ -44,6 +45,7 @@ function UserViewStreamingTheatrePage() {
   const showtimesByTheaterAndScreen = {};
 
   showtimes.forEach((showtime) => {
+
     const theaterName = showtime.theater_name;
     const screen_name = showtime.screen_name;
 
@@ -113,22 +115,26 @@ function UserViewStreamingTheatrePage() {
         ) : (
           <div>
             {Object.keys(showtimesByTheaterAndScreen).map((theaterName) => (
+
+              
               <div key={theaterName}>
+          {
+                              showtimesByTheaterAndScreen[theaterName][
+                                Object.keys(
+                                  showtimesByTheaterAndScreen[theaterName]
+                                )[0]
+                              ][0].theater_id
+                              
+                            }
                 <section className="section">
                   <div className="row" style={{ margin: "30px" }}>
                     <div className="col-12">
                       <div className="card">
                         <div className="card-header">
-                          <h3>{theaterName}</h3>
+                          <h3>{theaterName}{}</h3>
                           <h6 className="">
                             Theater Location:{" "}
-                            {
-                              showtimesByTheaterAndScreen[theaterName][
-                                Object.keys(
-                                  showtimesByTheaterAndScreen[theaterName]
-                                )[0]
-                              ][0].theater_location
-                            }
+                           
                           </h6>
                           <h5 className="card-title">
                             {Object.keys(
@@ -199,6 +205,10 @@ function UserViewStreamingTheatrePage() {
                                       onClick={()=>{
                                         navigate('/selectseat',{
                                           state:{
+                                            screen_id:showtimesByTheaterAndScreen[theaterName][Object.keys(showtimesByTheaterAndScreen[theaterName])[0]][0].screen_id,
+                                            theater_id:showtimesByTheaterAndScreen[theaterName][Object.keys(showtimesByTheaterAndScreen[theaterName])[0]][0].theater_id,
+                                            movie_id:movie_id,
+                                            date:selectedDate,
                                             time_id:showtime.time_id,
                                             time:showtime.time}});
                                       }}

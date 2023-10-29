@@ -3,12 +3,17 @@ import UserNavBar from "../usernavbar/usernavbar";
 import Maincard from "../componets/moviecards/maincard";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setMovie } from '../../Redux/movie/movieSlice';
 
 import Footer from "../../footer/footer";
 
 function UserViewMovie() {
   const location = useLocation();
   const movie_id = location.state.movie_id;
+  const dispatch = useDispatch(); 
+  const movieData = location.state;
+  dispatch(setMovie(movieData));
   const navigate = useNavigate();
 
   return (

@@ -30,10 +30,12 @@ router.get('/:id', async (req, res) => {
 
                         if (showtime) {
                             showtimesWithTheaterNames.push({
+                                theater_id: theater._id,
                                 theater_name: theater.theater_name,
                                 theater_phone: theater.theater_phone,
                                 theater_location: theater.theater_location,
                                 screen_name: theaterScreen.name,
+                                screen_id: theaterScreen._id,
                                 screentype: theaterScreen.screentype,
                                 theatertype: theaterScreen.theatertype,
                                 time: showtime.time,
