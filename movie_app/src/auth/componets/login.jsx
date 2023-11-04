@@ -38,10 +38,19 @@ function Login() {
           alert("Login Successfull as Admin");
           dispatch(login({userid:userId ,useremail: email }));
           navigate("/adminhome");
-        } else if (usertype === "user") {
-          alert("Login Successfull");
-          dispatch(login({userid:userId ,useremail: email }));
-          navigate("/userhome");
+        } else if (usertype === "user") 
+        {
+          if (status === "blocked") 
+          {
+            alert("Account Blocked");
+          }
+          else
+          {
+            alert("Login Successfull");
+            dispatch(login({userid:userId ,useremail: email }));
+            navigate("/userhome");
+          }
+          
         } else if (usertype === "theater") {
           if (status === "Pending") 
           {

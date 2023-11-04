@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import AddIcon from '@mui/icons-material/Add';
+import AdminUpdateMovieStatus from './admin_update_movie_status';
 
 function AdminHome() {
   return (
@@ -142,6 +143,7 @@ function AdminHome() {
                             </div>
                         </div>
                     </section>
+                    <AdminUpdateMovieStatus/>
                 </div>
             </div>
         </div>

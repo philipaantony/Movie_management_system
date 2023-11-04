@@ -47,9 +47,15 @@ const usergetshow = require('./controllers/userapis/usergetshow')
 const gettr = require('./controllers/userapis/usergettheatre');
 const userbookmovies = require('./controllers/userapis/userbookmovies');
 const fetchbookedseats = require('./controllers/userapis/fetchbookedseats');
+const blockuser = require('./controllers/adminapis/blockuser');
+const approvetheaters = require('./controllers/adminapis/approvetheatre');
 
+app.use('/api/block-user', blockuser);
 app.use('/api/getalluser', getalluser)
+//------------------------------------------
 app.use('/api/getmovies', getallmovies);
+app.use('/api/update-movie-streaming-type', getallmovies);
+//------------------------------------------
 app.use('/api/login', logincontroller);
 app.use('/api/register', UserReg);
 app.use('/api/theaterreg', TheaterReg);
@@ -57,7 +63,7 @@ app.use('/api/assignmovie', assignmovietoscreen);
 app.use('/api/getmytheatre-user', gettr)
 
 app.use('/api/getshowtime-user', usergetshow);
-
+app.use('/api/approvetheaters', approvetheaters)
 app.use('/api/deleteshowtime', deleteshowtime);
 app.use('/api/postshowtime', AddShowTime);
 app.use('/api/getshowtime', getShowTime);
@@ -103,21 +109,7 @@ app.post('/api/addmovies', upload.single('poster_url'), async (req, res) => {
 
 
 
-app.patch('/api/approvetheaters', async (req, res) => {
 
-    const { status, email } = req.body;
-    try {
-        const updatedLogin = await Login.findOneAndUpdate({ email }, { status }, { new: true });
-        if (!updatedLogin) {
-            return res.status(404).json({ message: 'Failed to Update' });
-        }
-
-        return res.json({ message: 'Status Updated', status });
-    } catch (error) {
-        console.error('Error updating theater status:', error);
-        return res.status(500).json({ message: 'Internal Server Error' });
-    }
-});
 
 
 

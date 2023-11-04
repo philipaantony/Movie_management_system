@@ -82,26 +82,7 @@ function Viewscreenorientation(props) {
                             })()}
                         </div>
                     </div>
-                    <div
-                        class="card"
-                        style={{
-                            margin: "30px",
-                            paddingLeft: "100px",
-                            paddingRight: "100px",
-                        }}
-                    >
-                        <div class="card-body">
-                            <h5 class="card-title"> Selected Seats: </h5>
-                            <p class="card-text">
-                                {selectedSeats.map((seat, index) => (
-                                    <span className="badge rounded-pill bg-danger" key={index}>
-                                        {seat}{" "}
-                                    </span>
-                                ))}
-                            </p>
-                            <a class="btn btn-danger">Book Now</a>
-                        </div>
-                    </div>
+
                 </>
             ) : null}
         </div>

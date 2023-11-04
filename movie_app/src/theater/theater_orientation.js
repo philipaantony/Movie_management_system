@@ -151,6 +151,10 @@ function CreateSeatOrientation() {
                                     <option value="">Select Screen Type</option>
                                     <option value="IMAX">IMAX</option>
                                     <option value="Dolby">Dolby</option>
+                                    <option value="3D">3D</option>
+                                    <option value="4D">4D</option>
+                                    <option value="ScreenX">ScreenX</option>
+                                    <option value="Standard Screen">Standard Screen</option>
                                 </select>
                                 <div className="input-group-append">
                                     <span className="input-group-text">
@@ -217,7 +221,9 @@ function CreateSeatOrientation() {
                                 const backgroundColor = isSelected ? '#60E01C' : '';
 
                                 seatCols.push(
-                                    <div className="seat" style={{ padding: '5px' }} key={seatNumber}>
+                                    <div className="seat"
+                                        style={{}}
+                                        key={seatNumber}>
 
 
                                         {isUnavailable ? (

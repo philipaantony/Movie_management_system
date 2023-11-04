@@ -83,21 +83,21 @@ function Theaterregistration() {
             },
           },
           
-          // password: {
-          //   required: '**Password is required',
-          //   minLength: {
-          //     value: 4,
-          //     message: '**Password must have at least 4 characters',
-          //   },
-          // },
-
           password: {
             required: '**Password is required',
-            pattern: {
-                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
-                message: '**Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$%^&+=!)',
+            minLength: {
+              value: 4,
+              message: '**Password must have at least 4 characters',
             },
-        },
+          },
+
+        //   password: {
+        //     required: '**Password is required',
+        //     pattern: {
+        //         value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
+        //         message: '**Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$%^&+=!)',
+        //     },
+        // },
         
           confirmPassword: {
             required: '**Confirm password is required',

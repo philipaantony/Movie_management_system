@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import { baseUrl } from "../../config/config";
-
+import { toast, Toaster } from 'react-hot-toast';
 import GoBackButton from '../../public/gobackButton';
 
 function AdminViewUsers() {
@@ -28,8 +28,23 @@ function AdminViewUsers() {
     fetchUsers();
   }, [refresh]);
 
-
+  const blockUser = async (userId,email,status) => {
+    console.log(userId);
+    console.log(status);
+    console.log(email);
+    try {
+      const response = await axios.post(`${baseUrl}/api/block-user/${userId}`,{email,status});
+      setRefresh(true);
+      toast.success(response.data.message)
+    } catch (error) {
+      console.error('Error blocking user:', error);
   
+      // Show an error toast when there's an error
+      toast.error('Error blocking user', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
   
 
   const offset = currentPage * usersPerPage;
@@ -43,6 +58,7 @@ function AdminViewUsers() {
 
   return (
     <div id="main">
+         <div><Toaster/></div>
       <div className="container mt-5 card" style={{padding:"20px"}}>
         <h2>User List</h2>
         <GoBackButton/>
@@ -53,6 +69,8 @@ function AdminViewUsers() {
               <th>Email</th>
               <th>Phone</th>
               <th>Dob</th>
+              <th>Action</th>
+             
               
              
             </tr>
@@ -64,10 +82,18 @@ function AdminViewUsers() {
                 <td>{user.email}</td>
                 <td>{user.phone === 'googleauth' ? <img  style={{ width: '70px', height: '42px' }} src="assets/googleauth/verifiedlogo.png" alt="Google Auth Image" /> : user.phone}</td>
                 <td>{user.dob === 'googleauth' ?  <img  style={{ width: '70px', height: '42px' }} src="assets/googleauth/verifiedlogo.png" alt="Google Auth Image" /> : user.dob}</td>
-              
+       
                 <td>
-                  
-                </td>
+      {user.status === 'blocked' ? (
+        <button type="button" className="btn btn-success"  onClick={() => blockUser(user._id,user.email,'Authorised')}>
+          Unblock
+        </button>
+      ) : (
+        <button type="button" className="btn btn-danger" onClick={() => blockUser(user._id,user.email,'blocked')}>
+          Block
+        </button>
+      )}
+    </td>
               </tr>
             ))}
           </tbody>

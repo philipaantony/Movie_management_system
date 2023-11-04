@@ -93,13 +93,27 @@ function UserHomePage2() {
 
     // Add more movies as needed
   ];
-  const containerStyle = {
-    backgroundImage: 'url("assets/explore/a1.jpg")',
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
-    // You can adjust other background properties as needed
-  };
+  
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = [
+    'assets/explore/a1.jpg',
+    'assets/explore/a2.jpg', // Add more image URLs as needed
+    'assets/explore/a3.jpg',
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const nextImageIndex = (currentImageIndex + 1) % images.length;
+      setCurrentImageIndex(nextImageIndex);
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval); // Clear the interval when the component unmounts
+  }, [currentImageIndex, images]);
+
+  const backgroundImage = `url('${images[currentImageIndex]}')`;
+
+
 
   return (
     <div>
@@ -109,11 +123,12 @@ function UserHomePage2() {
           <div
             className="movie-home"
             style={{
-              backgroundImage: `url('assets/explore/a1.jpg')`,
+              backgroundImage,
               backgroundSize: "cover",
               backgroundPosition: "center",
               height: "100vh",
               position: "relative",
+              transition: "background-image 1s ease-in-out",
             }}
           >
             {/* Background Overlay */}

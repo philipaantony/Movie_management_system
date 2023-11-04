@@ -2,17 +2,18 @@ import { baseUrl } from "../../config/config";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Viewscreenorientation from "./viewscreenorientation";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 function ViewScreenList() {
-
   const navigate = useNavigate();
   const trid = localStorage.getItem("userId");
   const [theaterScreen, setTheaterScreen] = useState(null);
   const [selectedScreenIndex, setSelectedScreenIndex] = useState(null);
+
   const handleViewScreen = (index) => {
     setSelectedScreenIndex(index);
   };
+
   const hidefun = () => {
     setSelectedScreenIndex(null);
   };
@@ -26,7 +27,6 @@ function ViewScreenList() {
       })
       .then((response) => {
         setTheaterScreen(response.data.theaterScreen);
-        console.log(response.data.theaterScreen);
       })
       .catch((error) => {
         console.error("Error fetching theater screen:", error);
@@ -37,94 +37,70 @@ function ViewScreenList() {
     <div style={{ backgroundColor: "#f2f7ff" }}>
       <div id="main">
         <div
-          className="container mt-5 card"
-          style={{ padding: "20px", background: "#f2f7ff" }}
+          className="container mt-5"
+          style={{ background: "#f2f7ff" }}
         >
-          <h2>My Screens</h2>
+          <h2 className="text-center">My Screens</h2>
           {theaterScreen !== null ? (
             theaterScreen.map((screen, index) => {
               const rows = parseInt(screen.rows);
               const cols = parseInt(screen.columns);
               const total = rows * cols;
-              // console.log(total)
               const orientationItems = screen.orientation.split(",");
               const missing = orientationItems.length;
-              console.log(missing);
               const seatcount = total - missing;
 
               return (
                 <div
-                  className="card"
-                  style={{
-                    padding: "20px",
-                    border: "2px",
-                    borderRadius: "10px",
-                  }}
+                  className="card mb-4"
+                  style={{ borderRadius: "10px" }}
                   key={index}
                 >
-                  <h5
-                    className="card-header"
-                    style={{
-                      backgroundColor: "",
-                      color: "",
-                      padding: "10px",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    Screen Name: {screen.name}
-                  </h5>
-                  <br></br>
+                  <div className="card-header">
+                    <h5 className="card-title">Screen Name: {screen.name}</h5>
+                  </div>
                   <div className="card-body">
                     <h5 className="card-title">{screen.screentype}</h5>
-                    <h6 className="card-text">
-                      <div className="row">
-                        <div className="col">Rows available: {screen.rows}</div>
-                        <div className="col">
-                          Columns available: {screen.columns}
-                        </div>
-                        
-                        <div className="col">
-                        <button class="btn btn-primary" onClick={()=>{
-                          navigate('/createnewtime',{state:{screenid:screen._id,trid:screen.trid}})
-                        }}>
-                            <i class="bi bi-clock-fill"></i> Manage Show Time
-                          </button>
-                        </div>
-                        
-                        
+                    <div className="row">
+                      <div className="col">Rows available: {screen.rows}</div>
+                      <div className="col">Columns available: {screen.columns}</div>
+                      <div className="col">
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => {
+                            navigate('/createnewtime', {
+                              state: { screenid: screen._id, trid: screen.trid },
+                            });
+                          }}
+                        >
+                          <i className="bi bi-clock-fill"></i> Manage Show Time
+                        </button>
                       </div>
-                      <div className="row">
-                        <div className="col">
-                          {" "}
-                          Layout: {screen.rows}* {screen.columns}
-                        </div>
-                        <div className="col">
-                          {" "}
-                          Theater Type: {screen.theatertype}
-                        </div>
-                        <div className="col">
-                        <button style={{marginTop:'10px'}} class="btn btn-primary" onClick={()=>{
-                          navigate('/assignmovietoscreen',{state:{screenid:screen._id,trid:screen.trid}})
-                        }}>
-                            <i class="bi bi-clock-fill"></i> Assign Movie
-                          </button>
-
-                        </div>
-                        
+                    </div>
+                    <div className="row">
+                      <div className="col">Layout: {screen.rows} * {screen.columns}</div>
+                      <div className="col">Theater Type: {screen.theatertype}</div>
+                      <div className="col">
+                        <button
+                          style={{ marginTop: '10px' }}
+                          className="btn btn-primary"
+                          onClick={() => {
+                            navigate('/assignmovietoscreen', {
+                              state: { screenid: screen._id, trid: screen.trid },
+                            });
+                          }}
+                        >
+                          <i className="bi bi-clock-fill"></i> Assign Movie
+                        </button>
                       </div>
-                      
-                      <div className="row">
-                        <div className="col"> Capacity: {seatcount}</div>
-                      </div>
-                      <br />
-                      seats Created Under: {screen.tremail}
-                      <br />
-                    </h6>
+                    </div>
+                    <div className="row">
+                      <div className="col">Capacity: {seatcount}</div>
+                    </div>
+                    <br />
+                    <p>Seats Created Under: {screen.tremail}</p>
                     {selectedScreenIndex === index ? (
-                      <button
-                        className="btn btn-success"
-                        onClick={() => hidefun()}
-                      >
+                      <button className="btn btn-success" onClick={() => hidefun()}>
                         Hide Layout
                       </button>
                     ) : (
@@ -135,7 +111,6 @@ function ViewScreenList() {
                         View Theater Layout
                       </button>
                     )}
-
                     {selectedScreenIndex === index && (
                       <Viewscreenorientation
                         rows={screen.rows}

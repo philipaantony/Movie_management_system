@@ -192,7 +192,7 @@ function AdminAddMovie() {
                             </div>
                             <div className="col-md-8 form-group">
                               <input
-                                type="number"
+                                type="text"
                                 className="form-control"
                                 name="duration"
                                 placeholder="Movie duration"

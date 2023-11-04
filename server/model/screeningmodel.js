@@ -24,6 +24,6 @@ const screeningSchema = new mongoose.Schema({
     },
 });
 
-const Screening = mongoose.model('movie_screening1', screeningSchema);
+const Screening = mongoose.model('movie_screening', screeningSchema);
 
 module.exports = Screening;
