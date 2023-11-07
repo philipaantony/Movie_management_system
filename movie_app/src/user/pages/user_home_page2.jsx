@@ -106,7 +106,7 @@ function UserHomePage2() {
     const interval = setInterval(() => {
       const nextImageIndex = (currentImageIndex + 1) % images.length;
       setCurrentImageIndex(nextImageIndex);
-    }, 3000); // Change image every 3 seconds
+    }, 5000); // Change image every 3 seconds
 
     return () => clearInterval(interval); // Clear the interval when the component unmounts
   }, [currentImageIndex, images]);

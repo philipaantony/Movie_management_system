@@ -117,6 +117,17 @@ function AdminHome() {
                                         <div class="col-md-3">
                                             <div class="card">
                                                 <div class="card-body">
+                                                    <h5 class="card-title">View Movies</h5>
+                                                    <p class="card-text">View Posted Movies</p>
+                                                    <Link to="/viewpostedmovies">
+                                                    <a  class="btn btn-primary">View Movie</a>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-body">
                                                     <h5 class="card-title">View Users</h5>
                                                     <p class="card-text">Click to View System Users</p>
                                                     <Link to="/viewusers">
@@ -132,7 +143,7 @@ function AdminHome() {
                                                     <h5 class="card-title">View Theater</h5>
                                                     <p class="card-text">Aprove new Theaters</p>
                                                     <Link to="/viewtheaters">
-                                                    <a href="#" class="btn btn-primary">View Theater</a>
+                                                    <a  class="btn btn-primary">View Theater</a>
                                                     </Link>
                                                 </div>
                                             </div>

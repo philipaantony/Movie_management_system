@@ -1,24 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 
-function AdminAddMovie() {
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+
+function UpdateMovie() {
+  const location = useLocation();
+  const movieid = location.state.movie_id;
+  console.log(location.state.movie_id);
   const [file, setFile] = useState(null);
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
-  const onSubmit = (data) =>
-  {
+  useEffect(() => {
+    // Fetch movie details by movieId and populate the form fields
+    axios
+      .get(`http://localhost:5000/api/movies/${movieid}`)
+      .then((response) => {
+        console.log(response.data);
+        const movieData = response.data[0];
+        setValue("title", movieData.title);
+        setValue("StreamingType", movieData.StreamingType);
+        setValue("genre", movieData.genre);
+        setValue("duration", movieData.duration);
+
+        const isoDate = new Date(movieData.release_date);
+        const formattedDate = isoDate.toISOString().split("T")[0]; // Format it as "yyyy-MM-dd"
+        setValue("release_date", formattedDate);
+
+        setValue("language", movieData.language);
+        setValue("description", movieData.description);
+        setValue("director", movieData.director);
+        setValue("production", movieData.production);
+        setValue("cast", movieData.cast);
+        setValue("trailer_url", movieData.trailer_url);
+      });
+  }, [movieid, setValue]);
+
+  const onSubmit = (data) => {
     const formData = new FormData();
 
     formData.append("title", data.title);
     formData.append("StreamingType", data.StreamingType);
     formData.append("genre", data.genre);
-    
     formData.append("duration", data.duration);
     formData.append("release_date", data.release_date);
     formData.append("language", data.language);
@@ -33,7 +62,7 @@ function AdminAddMovie() {
     }
 
     axios
-      .post("http://localhost:5000/api/addmovies", formData)
+      .patch(`http://localhost:5000/api/update/${movieid}`, formData)
       .then((response) => {
         console.log("Success:", response);
         alert(response.data.message);
@@ -43,8 +72,6 @@ function AdminAddMovie() {
         alert("Error");
       });
   };
-
-  console.log(errors);
 
   const validationRules = {
     title: {
@@ -89,8 +116,6 @@ function AdminAddMovie() {
     },
   };
 
-
-
   return (
     <div style={{ backgroundColor: "#f2f7ff" }}>
       <div id="main">
@@ -101,7 +126,7 @@ function AdminAddMovie() {
         </header>
         <div className="page-heading">
           <div>
-            <h3>Add New Movie</h3>
+            <h3>Update Movie</h3>
           </div>
         </div>
         <div className="page-content">
@@ -114,18 +139,12 @@ function AdminAddMovie() {
                   </div>
                   <div className="card-content">
                     <div className="card-body">
-
-
-
-                      
                       <form
                         className="form form-horizontal"
                         onSubmit={handleSubmit(onSubmit)}
                       >
                         <div className="form-body">
                           <div className="row">
-
-
                             <div className="col-md-4">
                               <label>Title</label>
                             </div>
@@ -138,10 +157,9 @@ function AdminAddMovie() {
                                 placeholder="Movie title"
                               />
                               <p className="text-danger">
-                               {errors?.title && errors.title.message}
+                                {errors?.title && errors.title.message}
                               </p>
                             </div>
-
 
                             <div className="col-md-4">
                               <label>Streaming Type</label>
@@ -151,19 +169,24 @@ function AdminAddMovie() {
                                 className="btn  dropdown-toggle dropdown-toggle-split"
                                 name="genre"
                                 defaultValue=""
-                                {...register("StreamingType", validationRules.StreamingType)}
+                                {...register(
+                                  "StreamingType",
+                                  validationRules.StreamingType
+                                )}
                               >
                                 <option value="">Streaming Type</option>
-                                <option value="In-Theaters">In Theaters Now</option>
+                                <option value="In-Theaters">
+                                  In Theaters Now
+                                </option>
                                 <option value="OTT-Release">OTT Release</option>
-                                
+
                                 {/* Add more genre options here */}
                               </select>
                               <p className="text-danger">
-                                {errors?.StreamingType && errors.StreamingType.message}
+                                {errors?.StreamingType &&
+                                  errors.StreamingType.message}
                               </p>
                             </div>
-
 
                             <div className="col-md-4">
                               <label>Genre</label>
@@ -357,7 +380,7 @@ function AdminAddMovie() {
                                 type="submit"
                                 className="btn btn-primary me-1 mb-1"
                               >
-                                Submit
+                                Update Movie
                               </button>
                               <button
                                 type="reset"
@@ -381,4 +404,4 @@ function AdminAddMovie() {
   );
 }
 
-export default AdminAddMovie;
+export default UpdateMovie;

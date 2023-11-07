@@ -108,8 +108,81 @@ app.post('/api/addmovies', upload.single('poster_url'), async (req, res) => {
 );
 
 
+app.patch('/api/update/:movieId', upload.single('poster_url'), async (req, res) => {
+    try {
+        const { title, StreamingType, genre, duration, release_date, language, description, director, production, cast, trailer_url } = req.body;
+        const filename = req.file ? req.file.path : '';
+        const poster_url = path.basename(filename);
+
+        // Get the movie ID from the route parameter
+        const { movieId } = req.params;
+
+        // Create an object to store the non-null fields
+        const updatedFields = {
+            ...(title && { title }),
+            ...(StreamingType && { StreamingType }),
+            ...(genre && { genre }),
+            ...(duration && { duration }),
+            ...(release_date && { release_date }),
+            ...(language && { language }),
+            ...(description && { description }),
+            ...(director && { director }),
+            ...(production && { production }),
+            ...(cast && { cast }),
+            ...(poster_url && { poster_url }),
+            ...(trailer_url && { trailer_url }),
+        };
+
+        // Find the movie by ID and update its details with the non-null fields
+        const movie = await Movies.findByIdAndUpdate(movieId, updatedFields);
+
+        if (!movie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+
+        res.status(200).json({ message: 'Movie updated successfully' });
+    } catch (error) {
+        console.error('Error updating movie:', error);
+        res.status(500).json({ message: 'Operation Failed' });
+    }
+});
+
+app.delete('/api/movies/:movieId', async (req, res) => {
+    try {
+        const { movieId } = req.params;
+        console.log(movieId);
+        const movie = await Movies.findByIdAndRemove(movieId);
+        if (!movie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+        else {
+            console.log("deleted....")
+            res.status(200).json({ message: 'Movie deleted successfully' });
+        }
 
 
+    } catch (error) {
+        console.error('Error deleting movie:', error);
+        res.status(500).json({ message: 'Operation Failed' });
+    }
+});
+
+
+
+
+app.get("/api/movies/:movieId", async (req, res) => {
+    const { movieId } = req.params;
+    console.log(movieId);
+
+    try {
+        const currentmovie = await Movies.find({ _id: movieId });
+        // console.log(currentmovie)
+        res.json(currentmovie);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 
 

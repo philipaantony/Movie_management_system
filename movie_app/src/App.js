@@ -34,6 +34,7 @@ import AssignMoviesPage from "./theater/pages/assign_movies_page";
 import AssignMovieToScreenPage from "./theater/pages/assign_movie_to_screen_page";
 import UserViewStreamingTheatrePage from "./user/pages/user_view_streaming_theatre";
 import UserSelectSeat from "./user/pages/user_select_seat";
+import AdminUpadateMoviePage from "./admin/pages/admin_update_movie_page";
 
 export default function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -64,7 +65,7 @@ export default function App() {
               {/* Admin routes */}
 
               <Route path="/viewpostedmovies" element={<AdminViewPostedMoviesPage />} />
-
+              <Route path="/updatemovie" element={<AdminUpadateMoviePage />} />
               <Route path="/viewusers" element={<AdminViewVsersPage />} />
               <Route path="/addmovie" element={<AdminAddMoviePage />} />
               <Route path="/adminhome" element={<AdminHomePage />} />
