@@ -1,24 +1,48 @@
 import React from "react";
+import axios from "axios";
 import UserNavBar from "../usernavbar/usernavbar";
 import Maincard from "../componets/moviecards/maincard";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { setMovie } from '../../Redux/movie/movieSlice';
-
+import { useDispatch } from "react-redux";
+import { setMovie } from "../../Redux/movie/movieSlice";
+import { baseUrl } from "../../config/config";
 import Footer from "../../footer/footer";
+import { toast, Toaster } from 'react-hot-toast';
 
 function UserViewMovie() {
   const location = useLocation();
   const movie_id = location.state.movie_id;
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const movieData = location.state;
   dispatch(setMovie(movieData));
   const navigate = useNavigate();
 
+  const saveMovie = async () => {
+    const userId = localStorage.getItem("userId");
+    console.log(userId);
+    console.log(movie_id);
+
+    try {
+      const response = await axios.post(`${baseUrl}/api//save-movie`, {
+        user_id: userId, // Replace with the actual user_id
+        movie_id: movie_id,
+      });
+      console.log(response.data.message)
+      if (response.status === 200) {
+        toast.success(response.data.message);
+      } else {
+        alert("Failed to save movie");
+      }
+    } catch (error) {
+      alert("Error saving movie:", error);
+    }
+  };
+
   return (
     <div>
       <UserNavBar activehome="active" />
+      <div><Toaster/></div>
       <div className="container my-5">
         <div className="row">
           <div className="col-md-4">
@@ -65,11 +89,13 @@ function UserViewMovie() {
               {location.state.StreamingType === "In-Theaters" ? (
                 <button
                   onClick={() => {
-                    navigate("/viewstreaming",{ state: { 
-                      movie_id:movie_id,
-                      movieName:location.state.title,
-                      language:location.state.language
-                    } });
+                    navigate("/viewstreaming", {
+                      state: {
+                        movie_id: movie_id,
+                        movieName: location.state.title,
+                        language: location.state.language,
+                      },
+                    });
                   }}
                   className="btn btn-danger btn-lg me-3"
                   style={{ padding: "10px 20px" }}
@@ -85,6 +111,7 @@ function UserViewMovie() {
                 </button>
               )}
               <button
+                onClick={saveMovie}
                 className="btn btn-primary btn-lg me-3"
                 style={{ padding: "10px 20px" }}
               >

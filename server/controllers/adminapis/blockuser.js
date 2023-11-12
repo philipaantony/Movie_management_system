@@ -55,7 +55,7 @@ router.post('/:id', async (req, res) => {
         }
         else {
             if (status === 'blocked') {
-                //const emailsend = await sendBlockEmail(email);
+                const emailsend = await sendBlockEmail(email);
             }
             return res.status(200).json({ message: 'Status Updated' });
         }

@@ -51,7 +51,7 @@ router.patch('', async (req, res) => {
         }
         else {
             if (status === 'Rejected') {
-                //const emailsend = await sendOtpEmail(email);
+                const emailsend = await sendOtpEmail(email);
             }
             return res.json({ message: 'Status Updated', status });
         }

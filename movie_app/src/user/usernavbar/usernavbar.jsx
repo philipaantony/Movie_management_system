@@ -119,11 +119,22 @@ function UserNavBar(props)
                       <AccountCircleIcon /> View Profile
                     </Link>
                   </Dropdown.Item>
+
+
                   <Dropdown.Item style={{ color: "green" }}>
+              
+                  <Link to="/mybookings">
                     <MovieIcon /> View My Booking
+                    </Link>
                   </Dropdown.Item>
+
+
                   <Dropdown.Item style={{ color: "red" }}>
+                  <Link to='/favmovies'>
                     <CollectionsBookmarkIcon /> Saved Collection
+                   </Link>
+
+
                   </Dropdown.Item>
                   <Dropdown.Item onClick={() => handleLogout()}>
                     Logout

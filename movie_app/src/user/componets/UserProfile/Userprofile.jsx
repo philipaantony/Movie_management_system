@@ -1,121 +1,75 @@
-import React from 'react';
 import './userprofile.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import { baseUrl } from "../../../config/config";
 
 function UserProfile() {
-  const user = {
-    username: 'john_doe',
-    name: 'John Doe',
-    avatarUrl: 'assets/images/faces/1.jpg',
-    email: 'john@example.com',
-    dob: 'January 1, 1990',
-    bio: 'Software Developer',
-    followers: 100,
-    following: 50,
-  };
+  const userId = localStorage.getItem('userId');
+  const [user, setUser] = useState();
+  const profilepicture = localStorage.getItem("profilepicture");
 
-  const handleWishlistClick = () => {
-    // Implement your wishlist functionality here
-  };
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}/api/user/${userId}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching user details:', error);
+      });
+  }, [userId]);
 
-  const handleBookingHistoryClick = () => {
-    // Implement your booking history functionality here
-  };
-
-  const handleResendActivationClick = () => {
-    // Implement your resend activation functionality here
-  };
+  
 
   return (
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-6">
-          <div className="card">
+          <div className="card user-profile-card">
             <div className="card-body">
               <div className="user-avatar text-center">
                 <img
-                  src={user.avatarUrl}
-                  alt={user.username}
-                  className="img-fluid rounded-circle"
+                  src={profilepicture || "assets/images/faces/4.jpg"}
+                  alt="Profile Picture"
+                  className="img-fluid rounded-circle profile-picture"
                 />
               </div>
               <div className="user-info mt-3">
-                <h2>{user.name}</h2>
-                <p>@{user.username}</p>
-                <p className="font-weight-bold">Email: {user.email}</p>
-                <p className="font-weight-bold">Date of Birth: {user.dob}</p>
+                <h2>{user?.username  || 'No Name'}</h2>
+                <p className="font-weight-bold">Email: {user?.email || 'No Email'}</p>
+                <p className="font-weight-bold">Date of Birth: {user?.dob || 'Verified by google'}</p>
+                <p className="font-weight-bold">Phone: {user?.phone || 'Verified by google'}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="col-md-6">
-          <div className="card">
+          <div className="card user-actions-card">
             <div className="card-body">
-              <p className="bio">{user.bio}</p>
+              <p className="bio">{user?.bio || 'Bio not Updated'}</p>
               <ul className="list-group">
-                <li className="list-group-item">
-                  
-                  Wishlist
+              <li className="list-group-item">
+                 <Link to='/usereditprofile'><i className="bi bi-person-fill"></i> Edit Profile</Link> 
                 </li>
                 <li className="list-group-item">
-                  
-                  Booking History
+                 <Link to='/favmovies'><i className="bi bi-heart-fill"></i> My Saved Collections</Link> 
                 </li>
                 <li className="list-group-item">
-                 
-                  Resend Activation
+                 <Link to='/mybookings'><i className="bi bi-bookmark-check-fill"></i> My Booking</Link> 
+                </li>
+                <li className="list-group-item">
+                <Link to='/userhome'>  <i className="bi bi-book-fill"></i> Explore</Link> 
+                </li>
+                <li className="list-group-item">
+                  <i className="bi bi-geo-fill"></i> Pick Location
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div className="modal-success me-1 mb-1 d-inline-block">
-      {/* Button trigger for Success theme modal */}
-      <button type="button" className="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#success">
-        Success
-      </button>
-      {/* Success theme Modal */}
-      <div className="modal fade text-left" id="success" tabIndex={-1} role="dialog" aria-labelledby="myModalLabel110" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-success">
-              <h5 className="modal-title white" id="myModalLabel110">
-                Success Modal
-              </h5>
-              <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
-                <i data-feather="x" />
-              </button>
-            </div>
-            <div className="modal-body">
-              Tart lemon drops macaroon oat cake chocolate toffee
-              chocolate
-              bar icing. Pudding jelly beans
-              carrot cake pastry gummies cheesecake lollipop. I
-              love cookie
-              lollipop cake I love sweet
-              gummi
-              bears cupcake dessert.
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-light-secondary" data-bs-dismiss="modal">
-                <i className="bx bx-x d-block d-sm-none" />
-                <span className="d-none d-sm-block">Close</span>
-              </button>
-              <button type="button" className="btn btn-success ml-1" data-bs-dismiss="modal">
-                <i className="bx bx-check d-block d-sm-none" />
-                <span className="d-none d-sm-block">Accept</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      
-    </div>
-
+     <br></br>
     </div>
   );
 }

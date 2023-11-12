@@ -38,6 +38,14 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    paymentId: {
+        type: String,
+        required: true,
+    },
+    razorpayOrderID: { // Add this field to store Razorpay order ID
+        type: String,
+        required: true,
+    },
 });
 
 const Booking = mongoose.model('Booking', bookingSchema);

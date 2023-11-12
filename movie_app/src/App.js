@@ -35,6 +35,9 @@ import AssignMovieToScreenPage from "./theater/pages/assign_movie_to_screen_page
 import UserViewStreamingTheatrePage from "./user/pages/user_view_streaming_theatre";
 import UserSelectSeat from "./user/pages/user_select_seat";
 import AdminUpadateMoviePage from "./admin/pages/admin_update_movie_page";
+import UserViewFavMovies from "./user/pages/user_view_fav_movies";
+import UserViewMyTickets from "./user/pages/user_view_mytickets";
+import Myticket from "./user/pages/myticket";
 
 export default function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -53,12 +56,16 @@ export default function App() {
           {(isLoggedIn || isLoggedInlocal) && usertype === "user" ? (
             <>
               {/* User routes */}
+              <Route path="/myticket" element={<Myticket />} />
+              <Route path="/mybookings" element={<UserViewMyTickets />} />
+              <Route path="/favmovies" element={<UserViewFavMovies />} />
+              <Route path="/userhome" element={<UserHomePage2 />} />
               <Route path="/selectseat" element={<UserSelectSeat />} />
               <Route path="/userhome" element={<UserHomePage2 />} />
               <Route path="/userhome2" element={<UserHomePages />} />
               <Route path="/userabout" element={<UserAboutPage />} />
               <Route path="/viewmovie" element={<UserViewMovie />} />
-
+              <Route path="/userprofile" element={<UserProfilePage />} />
             </>
           ) : usertype === "admin" ? (
             <>
@@ -74,7 +81,7 @@ export default function App() {
                 path="/viewtheaterapplication"
                 element={<AdminApproveTheaterPage />}
               />
-              <Route path="/userprofile" element={<UserProfilePage />} />
+
             </>
           ) : usertype === "theater" ? (
             <>
@@ -101,7 +108,7 @@ export default function App() {
             <>{/* Public routes */}</>
           )}
 
-          <Route path="/userhome" element={<UserHomePage2 />} />
+
           <Route path="/viewstreaming" element={<UserViewStreamingTheatrePage />} />
           <Route path="/" element={<Loginpage />} />
           <Route path="/verify" element={<Otppage />} />

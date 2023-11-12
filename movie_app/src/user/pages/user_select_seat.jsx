@@ -4,6 +4,7 @@ import { baseUrl } from "../../config/config";
 import { useSelector } from "react-redux";
 
 import axios from "axios";
+import UserNavBar from "../usernavbar/usernavbar";
 
 function UserSelectSeat() {
   const movieData = useSelector((state) => state.movie);
@@ -63,7 +64,8 @@ function UserSelectSeat() {
       });
   }, [selectedSeats]);
 
-  const bookmyshow = () => {
+  const bookmyshow = (orderId,paymentId) => {
+    
     console.log("-----------------");
     console.log("user_id :", userId);
     console.log("movie_id:", movie_id);
@@ -72,6 +74,8 @@ function UserSelectSeat() {
     console.log("show_time_id:", time_id);
     console.log("selectedSeats:", selectedSeats);
     console.log("Date:", date);
+    console.log("Order id :",orderId);
+    console.log("payment id :",paymentId);
     const data = {
       user_id: userId,
       movie_id: movie_id,
@@ -80,6 +84,8 @@ function UserSelectSeat() {
       show_time_id: time_id,
       selectedSeats: selectedSeats,
       date: date,
+      orderId:orderId,
+      paymentId:paymentId
     };
     axios
       .post(`${baseUrl}/api/moviebookings`, data)
@@ -88,7 +94,11 @@ function UserSelectSeat() {
 
         console.log("useState:", response.data.BookedSeats);
         if (response.data.status === true) {
+          alert("Booking successful! Your seats have been reserved.");
           setSelectedSeats([]);
+        }
+        else{
+          alert("Booking failed. Contact Admin.");
         }
         console.log(bookedseats);
       })
@@ -96,6 +106,104 @@ function UserSelectSeat() {
         console.error("Booking failed:", error);
       });
   };
+
+
+
+
+  function loadScript(src) {
+    return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => {
+            resolve(true);
+        };
+        script.onerror = () => {
+            resolve(false);
+        };
+        document.body.appendChild(script);
+    });
+  }
+  
+  async function displayRazorpay(totalPrice) {
+    const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+    );
+  
+    if (!res) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        return;
+    }
+  
+    // creating a new order
+    const result = await axios.post("http://localhost:5000/payment/orders",{totalPrice});
+  
+    if (!result) {
+        alert("Server error. Are you online?");
+        return;
+    }
+  
+    // Getting the order details back
+    const { amount, id: order_id, currency } = result.data;
+  
+    const options = {
+        key: "rzp_test_vwFYRANZsk49Qu", // Enter the Key ID generated from the Dashboard
+        amount: amount.toString(),
+        currency: currency,
+        name: "Movie Verse.",
+        description: "Test Transaction",
+        image: {  },
+        order_id: order_id,
+        handler: async function (response) {
+            const data = {
+                orderCreationId: order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpaySignature: response.razorpay_signature,
+            };
+  
+            const result = await axios.post("http://localhost:5000/payment/success", data);
+            if (result.data.msg === 'success') {
+              alert("Payment done successfully!. Your booking is processing");
+          }          
+            const orderId = result.data.orderId;
+            const paymentId = result.data.paymentId;
+            if(result.data.msg === 'success')
+            {
+              bookmyshow(orderId,paymentId);
+            }
+        },
+        prefill: {
+            name: "Movie Verse",
+            email: "movieverse@example.com",
+            contact: "9999999999",
+        },
+        notes: {
+            address: "Movie verse Corporate Office",
+        },
+        theme: {
+            color: "#61dafb",
+        },
+    };
+  
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const alphabet = Array.from({ length: 26 }, (_, i) =>
     String.fromCharCode(65 + i)
@@ -118,6 +226,7 @@ function UserSelectSeat() {
 
   return (
     <div>
+      <UserNavBar/>
         <br></br>
       <div class="card" style={{ marginLeft: "200px", marginRight: "200px" }}>
         <div className="row g-0">
@@ -278,6 +387,16 @@ function UserSelectSeat() {
                   <button className="btn btn-danger" onClick={bookmyshow}>
                     Book Now
                   </button>
+
+                 
+              
+                <p>Buy React now!</p>
+                <button className="btn btn-danger" onClick={() => displayRazorpay(totalPrice)}>
+                    Pay ₹{totalPrice}
+                </button>
+         
+
+
                   <button
                     style={{ marginLeft: "20px" }}
                     className="btn btn-primary"
@@ -296,5 +415,7 @@ function UserSelectSeat() {
     </div>
   );
 }
+
+
 
 export default UserSelectSeat;

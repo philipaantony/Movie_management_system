@@ -49,7 +49,16 @@ const userbookmovies = require('./controllers/userapis/userbookmovies');
 const fetchbookedseats = require('./controllers/userapis/fetchbookedseats');
 const blockuser = require('./controllers/adminapis/blockuser');
 const approvetheaters = require('./controllers/adminapis/approvetheatre');
+const savemovies = require('./controllers/userapis/savemovies');
+const favmovieslist = require('./controllers/userapis/getfavmovies');
+const fetchmyprofile = require('./controllers/userapis/fetchuserdetails');
+const getmytickets = require('./controllers/userapis/getuserbookings');
+const payment = require('./controllers/userapis/payment');
 
+
+app.use("/api/getTicketDetails", getmytickets);
+app.use("/payment", payment);
+app.use('/api/payment', payment);
 app.use('/api/block-user', blockuser);
 app.use('/api/getalluser', getalluser)
 //------------------------------------------
@@ -69,8 +78,11 @@ app.use('/api/postshowtime', AddShowTime);
 app.use('/api/getshowtime', getShowTime);
 app.use('/api/forgotpassword', forgotpassword);
 app.use('/api/moviebookings', userbookmovies);
-
-app.use('/api/fetchbookedseats', fetchbookedseats)
+app.use('/api//save-movie', savemovies);
+app.use('/api/fetchbookedseats', fetchbookedseats);
+app.use('/api/getfavmovies', favmovieslist);
+app.use('/api/getfavmovies', favmovieslist);
+app.use('/api/user', fetchmyprofile);
 
 
 const storage = multer.diskStorage({
