@@ -384,9 +384,9 @@ function UserSelectSeat() {
                 </div>
                 <div className="billing-info">
                   <p>Total Price: ₹{totalPrice}</p>
-                  <button className="btn btn-danger" onClick={bookmyshow}>
+                  {/* <button className="btn btn-danger" onClick={bookmyshow}>
                     Book Now
-                  </button>
+                  </button> */}
 
                  
               

@@ -5,7 +5,7 @@ import CreateSeatOrientation from "./theater/theater_orientation";
 import TheaterHomePage from "./theater/pages/theater_home_page";
 import AddScreen from "./theater/componets/add_screen";
 import Viewscreenorientation from "./theater/componets/viewscreenorientation";
-import UserHomePages from "./user/pages/userhome_page";
+
 import UserAboutPage from "./user/pages/user_about_page";
 import Loginpage from "./auth/pages/loginpage";
 import Registrationpage from "./auth/pages/registrationpage";
@@ -38,6 +38,9 @@ import AdminUpadateMoviePage from "./admin/pages/admin_update_movie_page";
 import UserViewFavMovies from "./user/pages/user_view_fav_movies";
 import UserViewMyTickets from "./user/pages/user_view_mytickets";
 import Myticket from "./user/pages/myticket";
+import UserEditProfile from "./user/pages/user_edit_profile";
+import UserChangePassword from "./user/pages/user_change_password";
+import UserChangePassOTP from "./user/pages/user_change_pass_opt";
 
 export default function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -56,13 +59,16 @@ export default function App() {
           {(isLoggedIn || isLoggedInlocal) && usertype === "user" ? (
             <>
               {/* User routes */}
+              <Route path="/useropt" element={<UserChangePassOTP />} />
+              <Route path="/changepassword" element={<UserChangePassword />} />
+              <Route path="/editmyprofile" element={<UserEditProfile />} />
               <Route path="/myticket" element={<Myticket />} />
               <Route path="/mybookings" element={<UserViewMyTickets />} />
               <Route path="/favmovies" element={<UserViewFavMovies />} />
               <Route path="/userhome" element={<UserHomePage2 />} />
               <Route path="/selectseat" element={<UserSelectSeat />} />
               <Route path="/userhome" element={<UserHomePage2 />} />
-              <Route path="/userhome2" element={<UserHomePages />} />
+
               <Route path="/userabout" element={<UserAboutPage />} />
               <Route path="/viewmovie" element={<UserViewMovie />} />
               <Route path="/userprofile" element={<UserProfilePage />} />

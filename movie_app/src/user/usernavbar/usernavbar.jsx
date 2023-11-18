@@ -54,14 +54,6 @@ function UserNavBar(props)
             </li>
           </Link>
 
-          <Link to="/userhome2">
-            <li
-              style={{ color: "white" }}
-              className={`nav-item ${props.activehome2}`}
-            >
-              Explore
-            </li>
-          </Link>
 
           <Link to="/userabout">
             <li
@@ -69,6 +61,15 @@ function UserNavBar(props)
               className={`nav-item ${props.activeabout}`}
             >
               About Us
+            </li>
+          </Link>
+
+          <Link to="/userprofile">
+            <li
+              style={{ color: "white" }}
+              className={`nav-item ${props.activep}`}
+            >
+              My Profile
             </li>
           </Link>
 

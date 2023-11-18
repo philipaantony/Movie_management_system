@@ -141,6 +141,8 @@ function Register() {
                                 {" "}
                                 {errors?.username && errors.username.message}
             </p>
+
+
             <div className="mb-3">
               <input type="email" 
               name="email"
@@ -149,6 +151,8 @@ function Register() {
                 placeholder="User Email" aria-label="email" 
                 aria-describedby="email-addon" />
             </div>
+
+            
             <p className="text-danger">{" "}{errors?.email && errors.email.message}</p>
              <div className="mb-3">
               <input type="text" 

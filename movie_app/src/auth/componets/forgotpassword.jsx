@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { baseUrl } from "../../config/config";
 import axios from "axios";
 
-function ForgotPassword() {
+function ForgotPassword(props) {
+
+  console.log(props.useremail);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {
     register,
-    handleSubmit,
+    handleSubmit,setValue,
     formState: { errors },
   } = useForm({mode: "onChange"});
+
+  useEffect(() => {
+
+    setValue('email',props.useremail  || ''); 
+  }, []);
+
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -21,11 +29,23 @@ function ForgotPassword() {
       console.log("Success:", response.data.message);
       alert(response.data.message);
       if (response.data.status === true) {
-        navigate("/verify", {
-          state: {
-            email: data.email,
-          },
-        });
+
+        if(props.title)
+        {
+          navigate("/useropt", {
+            state: {
+              email: data.email,
+            },
+          });
+        }
+        else{
+          navigate("/verify", {
+            state: {
+              email: data.email,
+            },
+          });
+        }
+        
       }
     } catch (error) {
       console.error(error.response);
@@ -57,7 +77,7 @@ function ForgotPassword() {
           >
             <div className="card z-index-0">
               <div className="card-header text-center pt-4">
-                <h5>Forgot Password</h5>
+                <h5>{props.title ? props.title :'Forgot Password'}</h5>
                 <p className="">
                   Reset your password by typing your email below
                 </p>
@@ -66,7 +86,29 @@ function ForgotPassword() {
               <br></br>
               <div className="card-body">
                 <form role="form text-left" onSubmit={handleSubmit(onSubmit)}>
+
+
+
+                  {props.useremail ? 
                   <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
+                  <input
+                    
+                    type="email"
+                   
+                    name="email"
+                    {...register("email", validationRules.email)}
+                    className={`form-control ${
+                      errors.email ? "is-invalid" : ""
+                    }`}
+                    placeholder="Email"
+                    aria-label="Email"
+                    aria-describedby="email-addon"
+                    disabled={true}
+
+                  />
+                </div>
+                  
+                  :<div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
                     <input
                       type="email"
                       name="email"
@@ -78,7 +120,8 @@ function ForgotPassword() {
                       aria-label="Email"
                       aria-describedby="email-addon"
                     />
-                  </div>
+                  </div>}
+                  
 
                   <p className="text-danger">
                     {" "}
@@ -104,13 +147,17 @@ function ForgotPassword() {
                       </button>
                     )}
                   </div>
-
+                  {props.title ? '' :
+                  
                   <p className="text-sm mt-3 mb-0">
-                    Already have an account?
-                    <Link to="/">
-                      <a className="font-bold">Login</a>
-                    </Link>
-                  </p>
+                  Already have an account?
+                  <Link to="/">
+                    <a className="font-bold">Login</a>
+                  </Link>
+                </p>
+                  
+                  }
+                
                 </form>
               </div>
             </div>

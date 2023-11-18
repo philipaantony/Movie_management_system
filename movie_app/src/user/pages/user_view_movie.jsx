@@ -14,6 +14,9 @@ function UserViewMovie() {
   const location = useLocation();
   const movie_id = location.state.movie_id;
   const dispatch = useDispatch();
+  const releaseDate = new Date(location.state.release_date).toLocaleDateString();
+
+  
   const movieData = location.state;
   dispatch(setMovie(movieData));
   const navigate = useNavigate();
@@ -46,7 +49,11 @@ function UserViewMovie() {
       <div className="container my-5">
         <div className="row">
           <div className="col-md-4">
-            <Maincard url={location.state.poster_url} />
+            <Maincard 
+            
+            duration={location.state.duration}
+            title={location.state.title} 
+            url={location.state.poster_url} />
           </div>
           <div className="col-md-8">
             <br></br>
@@ -57,7 +64,7 @@ function UserViewMovie() {
             <div class="row">
               <div class="col">
                 <p>
-                  <strong>Release Date</strong> {location.state.release_date}
+                  <strong>Release Date</strong> {releaseDate}
                 </p>
                 <p>
                   <strong>Director:</strong> {location.state.director}

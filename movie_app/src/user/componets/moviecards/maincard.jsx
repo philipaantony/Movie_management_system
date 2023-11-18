@@ -29,27 +29,27 @@ function  Maincard(props) {
     <div className="movie-content">
       <div className="movie-content-header">
         <a href="#">
-          <h3 className="movie-title">The Dark Tower</h3>
+          <h3 className="movie-title">{props.title}</h3>
         </a>
         <div className="imax-logo" />
       </div>
       <div className="movie-info">
         <div className="info-section">
-          <label>Date &amp; Time</label>
-          <span>Wed 16 Aug - 07:00PM</span>
+          <label>Duration:</label>
+          <span>{props.duration}</span>
         </div>{/*date,time*/}
         <div className="info-section">
           <label>Screen</label>
           <span>06</span>
-        </div>{/*screen*/}
+        </div>
         <div className="info-section">
           <label>Row</label>
           <span>C</span>
-        </div>{/*row*/}
+        </div>
         <div className="info-section">
           <label>Seat</label>
           <span>18</span>
-        </div>{/*seat*/}
+        </div>
       </div>
     </div>{/*movie-content*/}
   </div>{/*movie-card*/}

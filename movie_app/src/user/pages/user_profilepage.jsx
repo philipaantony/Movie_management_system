@@ -6,7 +6,8 @@ import Footer from '../../footer/footer'
 function UserProfilePage() {
   return (
     <>
-    <UserNavBar/>
+   
+    <UserNavBar activep="active" />
     <UserProfile/>
     <Footer/>
     </>

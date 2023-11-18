@@ -54,8 +54,10 @@ const favmovieslist = require('./controllers/userapis/getfavmovies');
 const fetchmyprofile = require('./controllers/userapis/fetchuserdetails');
 const getmytickets = require('./controllers/userapis/getuserbookings');
 const payment = require('./controllers/userapis/payment');
+const updateuserprofile = require('./controllers/userapis/user_update_profile');
 
 
+app.use("/api/userprofile", updateuserprofile);
 app.use("/api/getTicketDetails", getmytickets);
 app.use("/payment", payment);
 app.use('/api/payment', payment);

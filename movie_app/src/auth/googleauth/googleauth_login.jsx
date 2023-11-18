@@ -57,6 +57,7 @@ function GoogleauthLogin({ onChildData }) {
       localStorage.setItem("userId", userId);
       localStorage.setItem("isLoggedIn", true);
       localStorage.setItem("usertype", usertype);
+      localStorage.setItem("logintype", "googleauth");
 
 
         if (usertype === "user") {

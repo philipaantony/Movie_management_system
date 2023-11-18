@@ -4,33 +4,36 @@ import UserNavBar from "../usernavbar/usernavbar";
 import { useNavigate } from "react-router-dom";
 import UserCarousel from "../componets/Carousel/user_carousel";
 
-
-
-
 function UserHomePage2() {
   const isLoggedInlocal = localStorage.getItem("isLoggedIn");
 
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/getmovies")
       .then((response) => {
         console.log(response.data);
         setMovies(response.data);
-       
       })
       .catch((error) => {
         console.error("Error fetching movies:", error);
       });
   }, []);
 
-  const titleStyle = {
-    color: "white",
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-    animation:
-      "typeWriter 5s steps(20, end), blink-caret 0.5s step-end infinite",
+  const handleSearch = (event) => {
+    const searchTerm = event.target.value;
+    setSearchTerm(searchTerm);
+
+    // Filter movies based on the search term
+    const filteredMovies = movies.filter((movie) =>
+      movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setFilteredMovies(filteredMovies);
   };
 
   const trendingMovies = [
@@ -93,13 +96,12 @@ function UserHomePage2() {
 
     // Add more movies as needed
   ];
-  
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [
-    'assets/explore/a1.jpg',
-    'assets/explore/a2.jpg', // Add more image URLs as needed
-    'assets/explore/a3.jpg',
+    "assets/explore/a1.jpg",
+    "assets/explore/a2.jpg", // Add more image URLs as needed
+    "assets/explore/a3.jpg",
   ];
 
   useEffect(() => {
@@ -112,8 +114,6 @@ function UserHomePage2() {
   }, [currentImageIndex, images]);
 
   const backgroundImage = `url('${images[currentImageIndex]}')`;
-
-
 
   return (
     <div>
@@ -173,6 +173,8 @@ function UserHomePage2() {
                         border: "none",
                         borderRadius: "25px 0px 0px 25px",
                       }}
+                      value={searchTerm}
+                      onChange={handleSearch}
                     />
                     <button
                       className="btn btn-primary"
@@ -197,12 +199,108 @@ function UserHomePage2() {
             className="container-fluid"
             style={{ paddingLeft: "60px", paddingRight: "60px" }}
           >
+            {searchTerm.length > 0 && filteredMovies.length === 0 && (
+              <div>No search results found.</div>
+            )}
+
+            {searchTerm.length > 0 && filteredMovies.length > 0 && (
+              <div
+                className="container-fluid"
+                style={{ paddingLeft: "60px", paddingRight: "60px" }}
+              >
+                <section className="mt-5">
+                  <div className="row">
+                    {filteredMovies.map((movie) => {
+                      const data = {
+                        movie_id: movie._id,
+                        poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
+                        title: movie.title,
+                        genre: movie.genre,
+                        duration: movie.duration,
+                        release_date: movie.release_date,
+                        director: movie.director,
+                        language: movie.language,
+                        description: movie.description,
+                        production: movie.production,
+                        cast: movie.cast,
+                        trailer_url: movie.trailer_url,
+                        StreamingType: movie.StreamingType,
+                      };
+
+                      return (
+                        <div
+                          className="col-lg-2 col-md-4 col-6 mb-4"
+                          onClick={() => {
+                            navigate("/viewmovie", {
+                              state: data,
+                            });
+                          }}
+                          key={movie.id}
+                        >
+                          <div
+                            className="card"
+                            style={{
+                              transition: "transform 0.2s",
+                              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                              overflow: "hidden",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.transform = "scale(1.05)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.transform = "scale(1)";
+                            }}
+                          >
+                            <div
+                              className="card-img-container"
+                              style={{
+                                position: "relative",
+                                width: "100%",
+                                height: "0",
+                                paddingTop: "150%",
+                              }}
+                            >
+                              <img
+                                src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+                                className="card-img-top movie-poster"
+                                alt={movie.title}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  position: "absolute",
+                                  top: "0",
+                                  left: "0",
+                                  transition: "transform 0.2s",
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.transform =
+                                    "scale(1.1)";
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.transform = "scale(1)";
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
+              </div>
+            )}
+          </div>
+
+          <div
+            className="container-fluid"
+            style={{ paddingLeft: "60px", paddingRight: "60px" }}
+          >
             <section className="mt-5">
-              <h2>Now on Theatres</h2>
+              <h2>Now In Theaters</h2>
               <div className="row">
                 {movies.map((movie) => {
                   const data = {
-                    movie_id:movie._id,
+                    movie_id: movie._id,
                     poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
                     title: movie.title,
                     genre: movie.genre,
@@ -214,72 +312,70 @@ function UserHomePage2() {
                     production: movie.production,
                     cast: movie.cast,
                     trailer_url: movie.trailer_url,
-                    StreamingType:movie.StreamingType
+                    StreamingType: movie.StreamingType,
                   };
                   if (movie.StreamingType === "In-Theaters") {
-                  return (
-                    <div
-                      className="col-lg-2 col-md-4 col-6 mb-4"
-                      onClick={() => {
-                        navigate("/viewmovie", {
-                          state: data,
-                        });
-                      }}
-                      key={movie.id}
-                    >
+                    return (
                       <div
-                        className="card"
-                        style={{
-                          transition: "transform 0.2s",
-                          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                          overflow: "hidden",
+                        className="col-lg-2 col-md-4 col-6 mb-4"
+                        onClick={() => {
+                          navigate("/viewmovie", {
+                            state: data,
+                          });
                         }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = "scale(1.05)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = "scale(1)";
-                        }}
+                        key={movie.id}
                       >
                         <div
-                          className="card-img-container"
+                          className="card"
                           style={{
-                            position: "relative",
-                            width: "100%",
-                            height: "0",
-                            paddingTop: "150%",
+                            transition: "transform 0.2s",
+                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                            overflow: "hidden",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "scale(1.05)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "scale(1)";
                           }}
                         >
-                          <img
-                            src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
-                            className="card-img-top movie-poster"
-                            alt={movie.title}
+                          <div
+                            className="card-img-container"
                             style={{
+                              position: "relative",
                               width: "100%",
-                              height: "100%",
-                              position: "absolute",
-                              top: "0",
-                              left: "0",
-                              transition: "transform 0.2s",
+                              height: "0",
+                              paddingTop: "150%",
                             }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.transform = "scale(1.1)";
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.transform = "scale(1)";
-                            }}
-                          />
+                          >
+                            <img
+                              src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+                              className="card-img-top movie-poster"
+                              alt={movie.title}
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                position: "absolute",
+                                top: "0",
+                                left: "0",
+                                transition: "transform 0.2s",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "scale(1.1)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "scale(1)";
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                }
-              })}
+                    );
+                  }
+                })}
               </div>
             </section>
           </div>
-
-
 
           <div
             className="container-fluid"
@@ -290,7 +386,7 @@ function UserHomePage2() {
               <div className="row">
                 {movies.map((movie) => {
                   const data = {
-                    movie_id:movie._id,
+                    movie_id: movie._id,
                     poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
                     title: movie.title,
                     genre: movie.genre,
@@ -302,74 +398,70 @@ function UserHomePage2() {
                     production: movie.production,
                     cast: movie.cast,
                     trailer_url: movie.trailer_url,
-                    StreamingType:movie.StreamingType
+                    StreamingType: movie.StreamingType,
                   };
                   if (movie.StreamingType === "OTT-Release") {
-                  return (
-                    <div
-                      className="col-lg-2 col-md-4 col-6 mb-4"
-                      onClick={() => {
-                        navigate("/viewmovie", {
-                          state: data,
-                        });
-                      }}
-                      key={movie.id}
-                    >
+                    return (
                       <div
-                        className="card"
-                        style={{
-                          transition: "transform 0.2s",
-                          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                          overflow: "hidden",
+                        className="col-lg-2 col-md-4 col-6 mb-4"
+                        onClick={() => {
+                          navigate("/viewmovie", {
+                            state: data,
+                          });
                         }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = "scale(1.05)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = "scale(1)";
-                        }}
+                        key={movie.id}
                       >
                         <div
-                          className="card-img-container"
+                          className="card"
                           style={{
-                            position: "relative",
-                            width: "100%",
-                            height: "0",
-                            paddingTop: "150%",
+                            transition: "transform 0.2s",
+                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                            overflow: "hidden",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "scale(1.05)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "scale(1)";
                           }}
                         >
-                          <img
-                            src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
-                            className="card-img-top movie-poster"
-                            alt={movie.title}
+                          <div
+                            className="card-img-container"
                             style={{
+                              position: "relative",
                               width: "100%",
-                              height: "100%",
-                              position: "absolute",
-                              top: "0",
-                              left: "0",
-                              transition: "transform 0.2s",
+                              height: "0",
+                              paddingTop: "150%",
                             }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.transform = "scale(1.1)";
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.transform = "scale(1)";
-                            }}
-                          />
+                          >
+                            <img
+                              src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+                              className="card-img-top movie-poster"
+                              alt={movie.title}
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                position: "absolute",
+                                top: "0",
+                                left: "0",
+                                transition: "transform 0.2s",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "scale(1.1)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "scale(1)";
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                          }
+                    );
+                  }
                 })}
               </div>
             </section>
           </div>
-
-
-
-
 
           {/*------------------------------------------------------------------------------ */}
           <UserCarousel />
