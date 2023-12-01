@@ -21,13 +21,17 @@ function UserViewStreamingTheatrePage() {
   };
 
   const today = new Date();
-  const next5Days = Array.from({ length: 5 }, (_, i) => {
-    const date = new Date(today);
-    date.setDate(today.getDate() + i);
-    return date.toISOString().split("T")[0];
-  });
 
-  const [selectedDate, setSelectedDate] = useState(today.toISOString().split("T")[0]);
+const next5Days = Array.from({ length: 5 }, (_, i) => {
+  const date = new Date(today);
+  date.setDate(today.getDate() + i + 1); // Add 1 to exclude today
+  return date.toISOString().split("T")[0];
+});
+
+const [selectedDate, setSelectedDate] = useState(next5Days[0]);
+
+// You can also use setSelectedDate(next5Days[0].toISOString().split("T")[0]); if needed
+
 
   useEffect(() => {
     axios

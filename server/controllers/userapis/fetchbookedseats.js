@@ -5,10 +5,11 @@ const Booking = require('../../model/moviebookingmodel'); // Import your Mongoos
 // Define a route for fetching booked seats
 router.get('', async (req, res) => {
     try {
-        const { theater_id, screen_id, show_time_id, date } = req.query;
+        const { theater_id, screen_id, show_time_id, date, movie_id } = req.query;
 
         // Use Mongoose to find bookings matching the provided parameters
         const bookings = await Booking.find({
+            movie_id,
             theater_id,
             screen_id,
             show_time_id,

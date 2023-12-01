@@ -8,6 +8,7 @@ function AssignMovieToScreenPage() {
   const location = useLocation();
   
   const screenid = location.state.screenid;
+  const seatcount = location.state.seatcount;
   const trid = location.state.trid;
 
 
@@ -15,7 +16,7 @@ function AssignMovieToScreenPage() {
     
     <div>
         <TheaterSidebar/>
-        <AssignMovieToScreen screenid={screenid} trid={trid}/>
+        <AssignMovieToScreen seatcount={seatcount} screenid={screenid} trid={trid}/>
     </div>
   )
 }

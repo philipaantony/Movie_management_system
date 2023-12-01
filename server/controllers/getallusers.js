@@ -4,6 +4,7 @@ const User = require('../model/usermodel'); // Import your User model
 const Login = require('../model/loginmodel'); // Import your Login model
 
 router.get('', async (req, res) => {
+    console.log("hai")
     try {
         const users = await User.find();
         const usersWithStatus = await Promise.all(users.map(async (user) => {

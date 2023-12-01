@@ -41,6 +41,8 @@ import Myticket from "./user/pages/myticket";
 import UserEditProfile from "./user/pages/user_edit_profile";
 import UserChangePassword from "./user/pages/user_change_password";
 import UserChangePassOTP from "./user/pages/user_change_pass_opt";
+import ViewStatisticsPage from "./theater/pages/view_statistics_page";
+import TSBooked from "./theater/pages/view_theatre_seats_booked";
 
 export default function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -93,6 +95,9 @@ export default function App() {
             <>
               {/* theatre routes */}
 
+
+              <Route path="/viewstatisticsbooking" element={<TSBooked />} />
+              <Route path="/viewstatistics" element={<ViewStatisticsPage />} />
               <Route path="/createnewtime" element={<AddScreeningTimePage />} />
               <Route
                 path="/createnewscreen"

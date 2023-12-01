@@ -5,7 +5,7 @@ const Booking = require('../../model/moviebookingmodel'); // Import your Mongoos
 // Define a route for booking a movie
 router.post('', async (req, res) => {
     try {
-        const { user_id, movie_id, theater_id, screen_id, show_time_id, selectedSeats, date, orderId, paymentId } = req.body;
+        const { user_id, movie_id, theater_id, screen_id, show_time_id, selectedSeats, date, orderId, paymentId, amount } = req.body;
 
         const bookingPromises = selectedSeats.map(async (seat) => {
             const newBooking = new Booking({
@@ -17,6 +17,7 @@ router.post('', async (req, res) => {
                 selectedSeats: seat, // Create an array with a single seat
                 bookingdate: date,
                 bookingstatus: 'success',
+                amount: amount,
                 paymentId: paymentId,
                 razorpayOrderID: orderId
             });

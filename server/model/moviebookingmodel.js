@@ -38,6 +38,10 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    amount: {
+        type: Number,
+        required: true,
+    },
     paymentId: {
         type: String,
         required: true,

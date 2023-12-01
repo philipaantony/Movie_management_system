@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-dropdown": "^1.11.0",
     "react-geosuggest": "^2.14.1",
+    "react-google-charts": "^4.0.1",
     "react-google-login": "^5.2.2",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.45.4",

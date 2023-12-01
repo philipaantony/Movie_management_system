@@ -86,12 +86,16 @@ function ViewScreenList() {
                           className="btn btn-primary"
                           onClick={() => {
                             navigate('/assignmovietoscreen', {
-                              state: { screenid: screen._id, trid: screen.trid },
+                              state: { 
+                                seatcount:seatcount,
+                                screenid: screen._id, 
+                                trid: screen.trid },
                             });
                           }}
                         >
                           <i className="bi bi-clock-fill"></i> Assign Movie
                         </button>
+                       
                       </div>
                     </div>
                     <div className="row">
@@ -110,6 +114,8 @@ function ViewScreenList() {
                       >
                         View Theater Layout
                       </button>
+
+                      
                     )}
                     {selectedScreenIndex === index && (
                       <Viewscreenorientation
@@ -118,6 +124,17 @@ function ViewScreenList() {
                         orientationProp={screen.orientation}
                       />
                     )}
+                   <button 
+                    onClick={() => {
+                      navigate('/viewstatistics', {
+                        state: { 
+                          
+                          seatcount:seatcount,
+                          screenid: screen._id, trid: screen.trid
+                         },
+                      });
+                    }}
+                    className="btn btn-primary">view Statities</button>
                   </div>
                 </div>
               );

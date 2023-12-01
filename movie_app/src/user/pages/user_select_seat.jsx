@@ -16,6 +16,7 @@ function UserSelectSeat() {
   const date = location.state.date;
   const navigate = useNavigate();
   const trid = location.state.theater_id;
+
   const [theatre, settheatre] = useState([]);
   const [rows, setrows] = useState(6);
   const [columns, setcolumns] = useState(6);
@@ -48,6 +49,7 @@ function UserSelectSeat() {
       screen_id: screen_id,
       show_time_id: time_id,
       date: date,
+      movie_id:movie_id
     };
     axios
       .get(`${baseUrl}/api/fetchbookedseats`, {
@@ -64,7 +66,7 @@ function UserSelectSeat() {
       });
   }, [selectedSeats]);
 
-  const bookmyshow = (orderId,paymentId) => {
+  const bookmyshow = (orderId,paymentId,amount) => {
     
     console.log("-----------------");
     console.log("user_id :", userId);
@@ -76,6 +78,9 @@ function UserSelectSeat() {
     console.log("Date:", date);
     console.log("Order id :",orderId);
     console.log("payment id :",paymentId);
+
+    console.log("amount :",amount);
+
     const data = {
       user_id: userId,
       movie_id: movie_id,
@@ -85,7 +90,8 @@ function UserSelectSeat() {
       selectedSeats: selectedSeats,
       date: date,
       orderId:orderId,
-      paymentId:paymentId
+      paymentId:paymentId,
+      amount:totalPrice
     };
     axios
       .post(`${baseUrl}/api/moviebookings`, data)
@@ -169,7 +175,7 @@ function UserSelectSeat() {
             const paymentId = result.data.paymentId;
             if(result.data.msg === 'success')
             {
-              bookmyshow(orderId,paymentId);
+              bookmyshow(orderId,paymentId,amount.toString());
             }
         },
         prefill: {

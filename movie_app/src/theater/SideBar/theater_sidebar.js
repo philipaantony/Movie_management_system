@@ -10,8 +10,8 @@ function TheaterSidebar(props) {
     const useremail = localStorage.getItem("email");
     const dispatch = useDispatch();
     //const profilepicture = localStorage.getItem("profilepicture");
-    console.log(username);
-    console.log(useremail);
+    //console.log(username);
+    //console.log(useremail);
 
     const handleLogout = () => {
         localStorage.clear();

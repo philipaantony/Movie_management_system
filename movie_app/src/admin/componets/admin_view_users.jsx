@@ -7,6 +7,7 @@ import GoBackButton from '../../public/gobackButton';
 
 function AdminViewUsers() {
 
+  const [blockReason, setBlockReason] = useState('');
 
   const usersPerPage = 15;
   const [users, setUsers] = useState([]);
@@ -28,12 +29,11 @@ function AdminViewUsers() {
     fetchUsers();
   }, [refresh]);
 
-  const blockUser = async (userId,email,status) => {
-    console.log(userId);
-    console.log(status);
-    console.log(email);
+  const blockUser = async (userId,email,status,reason) => {
+    console.log(reason);
+    
     try {
-      const response = await axios.post(`${baseUrl}/api/block-user/${userId}`,{email,status});
+      const response = await axios.post(`${baseUrl}/api/block-user/${userId}`,{email,status,reason});
       setRefresh(true);
       toast.success(response.data.message)
     } catch (error) {
@@ -89,9 +89,58 @@ function AdminViewUsers() {
           Unblock
         </button>
       ) : (
-        <button type="button" className="btn btn-danger" onClick={() => blockUser(user._id,user.email,'blocked')}>
-          Block
-        </button>
+        // <button type="button" className="btn btn-danger" onClick={() => blockUser(user._id,user.email,'blocked')}>
+        //   Block
+        // </button>
+<>
+        <button type="button" className="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+        Block
+      </button>
+
+
+
+
+      <div className="modal fade" id="exampleModalCenter" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalCenterTitle">
+                Block User 
+                </h5>
+                <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                  <i data-feather="x" />
+                </button>
+              </div>
+              <div className="modal-body">
+              <textarea
+                  id="blockReason"
+                  className="form-control" 
+                  placeholder="Enter the reason for blocking..."
+                  value={blockReason}
+                  onChange={(e) => setBlockReason(e.target.value)}
+                />
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-light-secondary" data-bs-dismiss="modal">
+                  <i className="bx bx-x d-block d-sm-none" />
+                  <span className="d-none d-sm-block">Close</span>
+                </button>
+                <button type="button" className="btn btn-danger" data-bs-dismiss="modal" 
+                onClick={() => blockUser(user._id,user.email,'blocked',blockReason)}>
+                  <i className="bx bx-check d-block d-sm-none" />
+                  <span className="d-none d-sm-block">Block</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        
+      </>
+
       )}
     </td>
               </tr>
@@ -113,7 +162,15 @@ function AdminViewUsers() {
           activeClassName="active"
         />
       </div>
-    </div>
+
+
+
+      
+        
+        {/* Vertically Centered modal Modal */}
+        
+      </div>
+   
   );
 }
 

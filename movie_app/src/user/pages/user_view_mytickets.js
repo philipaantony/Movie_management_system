@@ -55,9 +55,9 @@ function UserViewMyTickets() {
                     <th>Show Details</th>
                     <th>Booking Details</th>
                     <th>Payment ID</th>
+                    <th>View My Ticket</th>
+                    <th>Seat No</th>
 
-                    <th>Seat Number</th>
-                    <th>View</th>
                   </tr>
                 </thead>
                 <tbody>

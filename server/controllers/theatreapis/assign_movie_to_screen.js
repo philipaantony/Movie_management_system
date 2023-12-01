@@ -49,6 +49,7 @@ router.post('/current', async (req, res) => {
                 _id: screening._id,
                 time_id: screening.time_id,
                 title: movie ? movie.title : 'Unknown Title', // Replace with a default value if movie not found
+                movie_id: movie._id
             };
         });
         console.log('------------------------------');

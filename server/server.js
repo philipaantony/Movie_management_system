@@ -55,6 +55,7 @@ const fetchmyprofile = require('./controllers/userapis/fetchuserdetails');
 const getmytickets = require('./controllers/userapis/getuserbookings');
 const payment = require('./controllers/userapis/payment');
 const updateuserprofile = require('./controllers/userapis/user_update_profile');
+const bookingstatictis = require('./controllers/theatreapis/getstatistics');
 
 
 app.use("/api/userprofile", updateuserprofile);
@@ -85,6 +86,8 @@ app.use('/api/fetchbookedseats', fetchbookedseats);
 app.use('/api/getfavmovies', favmovieslist);
 app.use('/api/getfavmovies', favmovieslist);
 app.use('/api/user', fetchmyprofile);
+
+app.use('/api/statistics', bookingstatictis);
 
 
 const storage = multer.diskStorage({

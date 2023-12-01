@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const sendBlockEmail = async (toEmail) => {
+const sendBlockEmail = async (toEmail, reason) => {
     const mailOptions = {
         from: emailUser,
         to: toEmail,
@@ -25,7 +25,7 @@ const sendBlockEmail = async (toEmail) => {
         We regret to inform you that your MovieVerse account has been blocked. If you believe this action is in error, have any questions, or need further assistance, please contact our administrator at admin@movieverse.com.
         
         Please provide your account details and any relevant information when reaching out to expedite the resolution process.
-        
+        Reason behind block is : ${reason}
         Thank you for your understanding and cooperation.
         Best regards,
         The MovieVerse Team`,
@@ -45,7 +45,7 @@ router.post('/:id', async (req, res) => {
     try {
 
         const id = req.params.id; // Get the _id from the route parameter
-        const { email, status } = req.body;
+        const { email, status, reason } = req.body;
         console.log(email);
         console.log(status);
         const user = await Login.findByIdAndUpdate(id, { status: status });
@@ -55,7 +55,7 @@ router.post('/:id', async (req, res) => {
         }
         else {
             if (status === 'blocked') {
-                const emailsend = await sendBlockEmail(email);
+                const emailsend = await sendBlockEmail(email, reason);
             }
             return res.status(200).json({ message: 'Status Updated' });
         }
