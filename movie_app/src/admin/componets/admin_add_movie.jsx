@@ -169,19 +169,27 @@ function AdminAddMovie() {
                               <label>Genre</label>
                             </div>
                             <div className="col-md-8 form-group">
-                              <select
-                                className="btn  dropdown-toggle dropdown-toggle-split"
-                                name="genre"
-                                defaultValue=""
-                                {...register("genre", validationRules.genre)}
-                              >
-                                <option value="">Select a genre</option>
-                                <option value="action">Action</option>
-                                <option value="comedy">Comedy</option>
-                                <option value="drama">Drama</option>
-                                <option value="horror">Horror</option>
-                                {/* Add more genre options here */}
-                              </select>
+                            <select
+  className="btn dropdown-toggle dropdown-toggle-split"
+  name="genre"
+  defaultValue=""
+  {...register("genre", validationRules.genre)}
+>
+  <option value="">Select a genre</option>
+  <option value="action">Action</option>
+  <option value="comedy">Comedy</option>
+  <option value="drama">Drama</option>
+  <option value="horror">Horror</option>
+  <option value="thriller">Thriller</option>
+  <option value="action/drama">Action/Drama</option>
+  <option value="comedy/drama">Comedy/Drama</option>
+  <option value="horror/thriller">Horror/Thriller</option>
+  <option value="sci-fi/fantasy">Science Fiction/Fantasy</option>
+  <option value="romance/drama">Romance/Drama</option>
+  <option value="mystery/thriller">Mystery/Thriller</option>
+  {/* Add more genre options here */}
+</select>
+
                               <p className="text-danger">
                                 {errors?.genre && errors.genre.message}
                               </p>
@@ -240,6 +248,10 @@ function AdminAddMovie() {
                                   validationRules.language
                                 )}
                               />
+                              <p className="text-danger">
+                                {errors?.language &&
+                                  errors.language.message}
+                              </p>
                             </div>
 
                             <div className="col-md-4">

@@ -93,7 +93,7 @@ function ViewScreenList() {
                             });
                           }}
                         >
-                          <i className="bi bi-clock-fill"></i> Assign Movie
+                          <i className=""></i>Manage Movies
                         </button>
                        
                       </div>
@@ -124,17 +124,7 @@ function ViewScreenList() {
                         orientationProp={screen.orientation}
                       />
                     )}
-                   <button 
-                    onClick={() => {
-                      navigate('/viewstatistics', {
-                        state: { 
-                          
-                          seatcount:seatcount,
-                          screenid: screen._id, trid: screen.trid
-                         },
-                      });
-                    }}
-                    className="btn btn-primary">view Statities</button>
+                  
                   </div>
                 </div>
               );

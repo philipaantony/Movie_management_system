@@ -30,8 +30,10 @@ function UserHomePage2() {
 
     // Filter movies based on the search term
     const filteredMovies = movies.filter((movie) =>
-      movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    movie.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    movie.language.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
     setFilteredMovies(filteredMovies);
   };
@@ -161,6 +163,7 @@ function UserHomePage2() {
                 <div className="col-md-8 mx-auto">
                   <div className="input-group">
                     <input
+                    id="serachmymovie"
                       type="text"
                       className="form-control"
                       placeholder="Search for movies..."

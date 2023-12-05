@@ -6,12 +6,13 @@ const Movies = require('../model/moviemodel'); // Import your User model
 
 router.get('', async (req, res) => {
     try {
-        const movies = await Movies.find();
+        const movies = await Movies.find().sort({ _id: -1 });
         res.json(movies);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching movies' });
     }
 });
+
 
 router.patch('/:id', async (req, res) => {
     try {

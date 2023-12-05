@@ -396,7 +396,7 @@ function UserSelectSeat() {
 
                  
               
-                <p>Buy React now!</p>
+                <p>Buy Now!</p>
                 <button className="btn btn-danger" onClick={() => displayRazorpay(totalPrice)}>
                     Pay ₹{totalPrice}
                 </button>

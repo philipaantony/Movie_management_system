@@ -120,7 +120,7 @@ function AdminHome() {
                                                     <h5 class="card-title">View Movies</h5>
                                                     <p class="card-text">View Posted Movies</p>
                                                     <Link to="/viewpostedmovies">
-                                                    <a  class="btn btn-primary">View Movie</a>
+                                                    <a id="viewmovies" class="btn btn-primary">View Movie</a>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -131,7 +131,7 @@ function AdminHome() {
                                                     <h5 class="card-title">View Users</h5>
                                                     <p class="card-text">Click to View System Users</p>
                                                     <Link to="/viewusers">
-                                                        <button class="btn btn-primary">View Users</button>
+                                                        <button id ="viewUsersButtonId" class="btn btn-primary">View Users</button>
                                                     </Link>
 
                                                 </div>

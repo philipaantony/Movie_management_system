@@ -127,7 +127,7 @@ function UserProfile() {
                     <i className="bi bi-heart-fill"></i> My Saved Collections
                   </Link>
                 </li>
-                <li className="list-group-item">
+                <li className="list-group-item" id="mybookings">
                   <Link to="/mybookings">
                     <i className="bi bi-bookmark-check-fill"></i> My Booking
                   </Link>

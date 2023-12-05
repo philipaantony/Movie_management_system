@@ -5,6 +5,7 @@ import { baseUrl } from "../../config/config";
 import TheaterSidebar from "../SideBar/theater_sidebar";
 import { Chart } from "react-google-charts";
 import { Link, useNavigate } from "react-router-dom";
+import GoBackButton from "../../public/gobackButton";
 
 function ViewStatisticsPage() {
   const location = useLocation();
@@ -50,7 +51,11 @@ function ViewStatisticsPage() {
   }, []);
 
   const renderPieChart = () => {
-    if (!chartData) return null;
+    if (!chartData || Object.keys(chartData).length === 0) {
+      return <p>No booking statistics available.<br></br>
+      No seats have been booked yet.
+      </p>;
+    }
 
     return Object.entries(chartData).map(([date, count]) => {
       const data = [["Task", "Count"]];
@@ -62,9 +67,17 @@ function ViewStatisticsPage() {
       return (
         <div key={date}>
           <div className="card-content">
+          
             <div className="card-body">
+            <h4>{new Date(date).toLocaleDateString()}</h4>
               <div style={{ display: "flex", flexDirection: "row" }}>
+
+
+
+             
                 {showtimes.map((showtime) => (
+
+                  
                   <button
                     key={showtime._id}
                     style={{
@@ -74,20 +87,21 @@ function ViewStatisticsPage() {
                       borderRadius: "10px",
                       color: "white",
                       backgroundColor: "#146C94",
-                      display: "flex", // Make the div a flex container
-                      alignItems: "center", // Center its contents vertically
-                      cursor: "pointer", // Add cursor pointer style
+                      display: "flex",
+                      alignItems: "center",
+                      cursor: "pointer",
                     }}
                     onClick={() => {
                       navigate("/viewstatisticsbooking", {
                         state: {
-                          date:date,
-                          screen_id:screenid,
-                          movie_id:movie_id,
+                          seatcount:seatcount,
+                          date: date,
+                          screen_id: screenid,
+                          movie_id: movie_id,
                           time_id: showtime._id,
                         },
                       });
-                    }} // Replace handleButtonClick with your click handler function
+                    }}
                   >
                     {showtime.time}
                   </button>
@@ -95,24 +109,9 @@ function ViewStatisticsPage() {
               </div>
             </div>
           </div>
-          <h4>{new Date(date).toLocaleDateString()}</h4>
-          <div>
-            <p>Total Seats: {seatcount}</p>
-            <p>Booked Seats: {count}</p>
-            <p>Remaining Seats: {seatcount - count}</p>
-          </div>
-          <Chart
-            chartType="PieChart"
-            data={data}
-            options={{
-              title: `Booking Distribution for ${new Date(
-                date
-              ).toLocaleDateString()}`,
-              is3D: true,
-            }}
-            width="100%"
-            height="300px"
-          />
+          
+          
+        
         </div>
       );
     });
@@ -123,6 +122,7 @@ function ViewStatisticsPage() {
       <TheaterSidebar />
       <div style={{ backgroundColor: "#f2f7ff" }}>
         <div id="main">
+          <GoBackButton/>
           <section className="bootstrap-select">
             <div className="row">
               <div className="col-12">

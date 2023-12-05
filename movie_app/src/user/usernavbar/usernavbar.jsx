@@ -66,6 +66,7 @@ function UserNavBar(props)
 
           <Link to="/userprofile">
             <li
+            id="viewpro"
               style={{ color: "white" }}
               className={`nav-item ${props.activep}`}
             >
@@ -124,10 +125,12 @@ function UserNavBar(props)
 
                   <Dropdown.Item style={{ color: "green" }}>
               
-                  <Link to="/mybookings">
+                  <div  id="mybooking"><Link to="/mybookings">
                     <MovieIcon /> View My Booking
                     </Link>
+                    </div>
                   </Dropdown.Item>
+                  
 
 
                   <Dropdown.Item style={{ color: "red" }}>

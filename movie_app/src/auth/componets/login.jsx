@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast, Toaster } from 'react-hot-toast';
 import { useDispatch } from "react-redux";
 import { login } from "../../Redux/user/userSlice";
 import { useForm } from "react-hook-form";
@@ -35,7 +36,8 @@ function Login() {
         localStorage.setItem("usertype", usertype);
 
         if (usertype === "admin") {
-          alert("Login Successfull as Admin");
+          toast.success("Login Successfull as Admin")
+          
           dispatch(login({userid:userId ,useremail: email }));
           navigate("/adminhome");
         } else if (usertype === "user") 
@@ -46,7 +48,8 @@ function Login() {
           }
           else
           {
-            alert("Login Successfull");
+            //alert("Login Successfull");
+            toast.success("Login Successfull")
             dispatch(login({userid:userId ,useremail: email }));
             navigate("/userhome");
           }
@@ -93,6 +96,7 @@ function Login() {
 
   return (
     <div>
+       <div><Toaster/></div>
       <br></br>
       <div className="container" style={{}}>
         <div className="row mt-lg-n10 mt-md-n11 mt-n10">
@@ -169,7 +173,9 @@ function Login() {
 
                   <div className="text-center">
                     <button
+                      id="testid"
                       type="submit"
+
                       className="attractive-button btn-block btn-lg shadow-lg mt-5"
                     >
                       Login

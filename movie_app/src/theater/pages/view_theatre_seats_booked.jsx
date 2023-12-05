@@ -1,33 +1,22 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../config/config";
-import { useSelector } from "react-redux";
-
+import { Chart } from "react-google-charts";
 import axios from "axios";
 import UserNavBar from "../SideBar/theater_sidebar";
 
 function TSBooked() {
-  
   const location = useLocation();
   const navigate = useNavigate();
 
-
-  const movie_id =location.state.movie_id;
-  console.log("<<<<<<",movie_id)
- 
+  const movie_id = location.state.movie_id;
   const date = location.state.date;
-  console.log("date:",date)
-  const trid =  localStorage.getItem("userId");
-  
-  console.log("thr id",trid);
+  const trid = localStorage.getItem("userId");
+  const screen_id = location.state.screen_id;
+  const time_id = location.state.time_id;
+  const seatcount = location.state.seatcount;
 
-  const screen_id =location.state.screen_id;
-  console.log("screen id :",screen_id);
-
-  const time_id =location.state.time_id;
-  console.log("time id",time_id);
- 
-
+  const [chartData, setChartData] = useState(null);
   const [theatre, settheatre] = useState([]);
   const [rows, setrows] = useState(6);
   const [columns, setcolumns] = useState(6);
@@ -43,7 +32,6 @@ function TSBooked() {
     axios
       .get(`${baseUrl}/api/getmytheatre-user/${time_id}`)
       .then((response) => {
-        console.log(response.data);
         setrows(response.data.rows);
         setcolumns(response.data.columns);
         setmyorientation(response.data.orientation);
@@ -60,32 +48,31 @@ function TSBooked() {
       screen_id: screen_id,
       show_time_id: time_id,
       date: date,
-      movie_id:movie_id
+      movie_id: movie_id,
     };
     axios
       .get(`${baseUrl}/api/fetchbookedseats`, {
         params: mydata,
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data) {
           setbookedseats(response.data.BookedSeats);
+          const bookedSeatsCount = response.data.BookedSeats.split(",").length;
+
+          // Chart data
+          const chartData = [
+            ["Task", "Count"],
+            ["UnBooked", Math.max(0, seatcount - bookedSeatsCount)],
+            ["Booked", Math.min(seatcount, bookedSeatsCount)],
+          ];
+
+          setChartData(chartData);
         }
       })
       .catch((error) => {
         console.error(error);
       });
   }, [selectedSeats]);
-
-
-
-
-
-
-  
-  
-
-
 
   const alphabet = Array.from({ length: 26 }, (_, i) =>
     String.fromCharCode(65 + i)
@@ -106,15 +93,33 @@ function TSBooked() {
     }
   };
 
+  const renderPieChart = () => {
+    return (
+      <Chart
+        chartType="PieChart"
+        data={chartData}
+        options={{
+          title: `Booking Distribution for ${new Date(
+            date
+          ).toLocaleDateString()}`,
+          is3D: true,
+        }}
+        width="100%"
+        height="300px"
+      />
+    );
+  };
+
   return (
     <div>
-      <UserNavBar/>
-        <br></br>
-      
-
+      <UserNavBar />
+      <br></br>
+      <div className="card-content" id="main">
+        <div className="card-body">{renderPieChart()}</div>
+      </div>
       {myorientation ? (
         <>
-          <div>
+          <div id="main">
             <center>
               <br></br>
               <h2>Select Your Seats</h2>
@@ -184,35 +189,11 @@ function TSBooked() {
               })()}
             </div>
           </div>
-          <div
-            class="card"
-            style={{ marginLeft: "200px", marginRight: "200px" }}
-          >
-            <div className="card-body">
-              <div className="card mb-3"></div>
-
-              <h5 className="card-title">Selected Seats:</h5>
-              <div className="billing-container">
-                <div className="selected-seats">
-                  {selectedSeats.map((seat, index) => (
-                    <span
-                      className="badge rounded-pill bg-success"
-                      style={{ marginLeft: "5px" }}
-                      key={index}
-                    >
-                      {seat}{" "}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+         
         </>
       ) : null}
     </div>
   );
 }
-
-
 
 export default TSBooked;

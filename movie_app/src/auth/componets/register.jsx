@@ -1,14 +1,16 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { baseUrl } from "../../config/config";
+import { toast, Toaster } from 'react-hot-toast';
 import GoogleauthLogin from '../googleauth/googleauth_userreg';
 import GoogleauthUserReg from '../googleauth/googleauth_userreg';
 
 function Register() {
 
 
+  const navigate = useNavigate();
     const {register,handleSubmit,formState:{ errors },} = useForm( {mode: "onChange"});
     const onSubmit = (data) =>
      {
@@ -18,7 +20,11 @@ function Register() {
        axios.post(`${baseUrl}/api/register`, data)
             .then((response) => {
                 console.log("Success:", response);
-                alert(response.data.message);
+                //alert(response.data.message);
+                toast.success(response.data.message)
+                toast.success("Please login using your email and password")
+                //dispatch(login({userid:userId ,useremail: email }));
+                navigate("/");
         })
         .catch((error) => {
            ;console.error(error.response.data);
@@ -105,6 +111,7 @@ function Register() {
    
     return (
         <div>
+          <div><Toaster/></div>
           <br></br>
           <div className="container" style={{}}>
        <div className="row mt-lg-n10 mt-md-n11 mt-n10" >
@@ -212,7 +219,9 @@ function Register() {
             </div> */}
 
             <div className="text-center">
-              <button type="submit" className="attractive-button btn-block btn-lg shadow-lg mt-5">Register</button>
+              <button type="submit" 
+              name="testname"
+              className="attractive-button btn-block btn-lg shadow-lg mt-5">Register</button>
             </div>
 
            

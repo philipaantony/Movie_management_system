@@ -118,120 +118,88 @@ const [selectedDate, setSelectedDate] = useState(next5Days[0]);
           </section>
         ) : (
           <div>
-            {Object.keys(showtimesByTheaterAndScreen).map((theaterName) => (
 
-              
-              <div key={theaterName}>
-          {
-                              showtimesByTheaterAndScreen[theaterName][
-                                Object.keys(
-                                  showtimesByTheaterAndScreen[theaterName]
-                                )[0]
-                              ][0].theater_id
-                              
-                            }
-                <section className="section">
-                  <div className="row" style={{ margin: "30px" }}>
-                    <div className="col-12">
-                      <div className="card">
-                        <div className="card-header">
-                          <h3>{theaterName}{}</h3>
-                          <h6 className="">
-                            Theater Location:{" "}
-                           
-                          </h6>
-                          <h5 className="card-title">
-                            {Object.keys(
-                              showtimesByTheaterAndScreen[theaterName]
-                            ).map((screen_name) => (
-                              <div key={screen_name}>
-                                <div className="container">
-                                  <div class="row">
-                                    <div class="col-auto">
-                                      <span
-                                        style={badgeStyles}
-                                        className="badge"
-                                      >
-                                        {" "}
-                                        Screen :{screen_name}
-                                      </span>
-                                    </div>
-                                    <div class="col-auto">
-                                      <span
-                                        style={badgeStyles}
-                                        className="badge"
-                                      >
-                                        {
-                                          showtimesByTheaterAndScreen[
-                                            theaterName
-                                          ][
-                                            Object.keys(
-                                              showtimesByTheaterAndScreen[
-                                                theaterName
-                                              ]
-                                            )[0]
-                                          ][0].theatertype
-                                        }
-                                      </span>
-                                    </div>
-                                    <div class="col-auto">
-                                      <span
-                                        style={badgeStyles}
-                                        className="badge"
-                                      >
-                                        {" "}
-                                        {
-                                          showtimesByTheaterAndScreen[
-                                            theaterName
-                                          ][screen_name][0].screentype
-                                        }
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div
-                                  style={{
-                                    margin: "10px",
-                                    marginLeft: "40px",
-                                    paddingLeft: "30px",
-                                  }}
-                                  
-                                  className="btn-group"
-                                  role="group"
-                                >
-                                  {showtimesByTheaterAndScreen[theaterName][
-                                    screen_name
-                                  ].map((showtime) => (
-                                    <button
-                                      key={showtime._id}
-                                      type="button"
-                                      className="btn btn-outline-dark m-1"
-                                      onClick={()=>{
-                                        navigate('/selectseat',{
-                                          state:{
-                                            screen_id:showtimesByTheaterAndScreen[theaterName][Object.keys(showtimesByTheaterAndScreen[theaterName])[0]][0].screen_id,
-                                            theater_id:showtimesByTheaterAndScreen[theaterName][Object.keys(showtimesByTheaterAndScreen[theaterName])[0]][0].theater_id,
-                                            movie_id:movie_id,
-                                            date:selectedDate,
-                                            time_id:showtime.time_id,
-                                            time:showtime.time}});
-                                      }}
-                                    >
-                                      {showtime.time}
-                                    </button>
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </h5>
+
+{Object.keys(showtimesByTheaterAndScreen).map((theaterName) => {
+  const screen_name = Object.keys(showtimesByTheaterAndScreen[theaterName])[0];
+  return (
+    <div key={theaterName}>
+      <section className="section">
+        <div className="row" style={{ margin: "30px" }}>
+          <div className="col-12">
+            <div className="card">
+              <div className="card-header">
+                <h3>{theaterName}</h3>
+                <h6 className="">
+                  Theater Location: {showtimesByTheaterAndScreen[theaterName][screen_name][0].theater_location}
+                </h6>
+                <h5 className="card-title">
+                  {Object.keys(showtimesByTheaterAndScreen[theaterName]).map((screenName) => (
+                    <div key={screenName}>
+                      <div className="container">
+                        <div className="row">
+                          <div className="col-auto">
+                            <span style={badgeStyles} className="badge">
+                              Screen: {screenName}
+                            </span>
+                          </div>
+                          <div className="col-auto">
+                            <span style={badgeStyles} className="badge">
+                              {showtimesByTheaterAndScreen[theaterName][screenName][0].theatertype}
+                            </span>
+                          </div>
+                          <div className="col-auto">
+                            <span style={badgeStyles} className="badge">
+                              {showtimesByTheaterAndScreen[theaterName][screenName][0].screentype}
+                            </span>
+                          </div>
                         </div>
-                        <div className="card-body"></div>
+                      </div>
+                      <div
+                        style={{
+                          margin: "10px",
+                          marginLeft: "40px",
+                          paddingLeft: "30px",
+                        }}
+                        className="btn-group"
+                        role="group"
+                      >
+                        {showtimesByTheaterAndScreen[theaterName][screenName].map((showtime) => (
+                          <button
+                            key={showtime._id}
+                            type="button"
+                            className="btn btn-outline-dark m-1"
+                            onClick={() => {
+                              navigate('/selectseat', {
+                                state: {
+                                  screen_id: showtimesByTheaterAndScreen[theaterName][screenName][0].screen_id,
+                                  theater_id: showtimesByTheaterAndScreen[theaterName][screenName][0].theater_id,
+                                  movie_id: movie_id,
+                                  date: selectedDate,
+                                  time_id: showtime.time_id,
+                                  time: showtime.time
+                                },
+                              });
+                            }}
+                          >
+                            {showtime.time}
+                          </button>
+                        ))}
                       </div>
                     </div>
-                  </div>
-                </section>
+                  ))}
+                </h5>
               </div>
-            ))}
+              <div className="card-body"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+})}
+
+
           </div>
         )}
       </div>
