@@ -128,7 +128,7 @@ function AdminViewPostedMovies() {
                           Update
                         </button>
 
-                        <button type="button"  onClick={() => {
+                        {/* <button type="button"  onClick={() => {
                            
                             deleteMovie(movie._id);
                           }}
@@ -136,7 +136,7 @@ function AdminViewPostedMovies() {
                         
                         className="btn btn-danger">
                           Delete
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>

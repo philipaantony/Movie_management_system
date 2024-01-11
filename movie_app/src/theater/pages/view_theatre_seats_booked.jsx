@@ -120,11 +120,7 @@ function TSBooked() {
       {myorientation ? (
         <>
           <div id="main">
-            <center>
-              <br></br>
-              <h2>Select Your Seats</h2>
-            </center>
-            <div class="seat-grid" style={{ margin: "30px", padding: "50px" }}>
+            <div class="seat-grid" style={{ margin: "10px", padding: "10px" }}>
               {(() => {
                 const seatRow = [];
                 for (let i = 0; i < rows; i++) {
@@ -138,8 +134,8 @@ function TSBooked() {
                     const backgroundColor = isSelected
                       ? "#25CA00" //green
                       : isBookedSeat
-                      ? "#e33545  "
-                      : "";
+                        ? "#e33545  "
+                        : "";
 
                     seatCols.push(
                       <div className="seat" key={seatNumber}>
@@ -189,7 +185,7 @@ function TSBooked() {
               })()}
             </div>
           </div>
-         
+
         </>
       ) : null}
     </div>
