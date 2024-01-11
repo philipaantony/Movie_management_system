@@ -71,62 +71,62 @@ The User module provides a user-friendly interface for movie enthusiasts. Key fe
 ### Admin Module
 
 - Admin Home Page
-  ![Admin Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/admin_home.png)
+  ![Admin Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/admin_home.png)
 
 - Admin Theatre List
-  ![Admin Theatre List](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/admin_theatre_list.png)
+  ![Admin Theatre List](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/admin_theatre_list.png)
 
 - Admin User List
-  ![Admin User List](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/admin_userlist.png)
+  ![Admin User List](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/admin_userlist.png)
 
 - Login Page
-  ![Login Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/login.png)
+  ![Login Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/login.png)
 
 ### Theatre Module
 
 - Theatre Home Page
-  ![Theatre Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_home.png)
+  ![Theatre Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/theatre_home.png)
 
 - Theatre Allocate Movie to Screen
-  ![Allocate Movie to Screen](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_allocate_movie_to_screen.png)
+  ![Allocate Movie to Screen](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/theatre_allocate_movie_to_screen.png)
 
 - Theatre Screen Creation 1
-  ![Screen Creation 1](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_screen_creation1.png)
+  ![Screen Creation 1](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/theatre_screen_creation1.png)
 
 - Theatre Screen Creation 2
-  ![Screen Creation 2](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_screen_creation2.png)
+  ![Screen Creation 2](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/theatre_screen_creation2.png)
 
 - Theatre View Booking
-  ![View Booking](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_view_booking.png)
+  ![View Booking](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/theatre_view_booking.png)
 
 - Theatre View Movies
-  ![View Movies](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_view_movies.png)
+  ![View Movies](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/theatre_view_movies.png)
 
 - Theatre View Screen
-  ![View Screen](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_view_screen.png)
+  ![View Screen](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/theatre_view_screen.png)
 
 ### User Module
 
 - User Home Page
-  ![User Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_home.png)
+  ![User Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/user_home.png)
 
 - User Payment Page
-  ![User Payment Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_payment.png)
+  ![User Payment Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/user_payment.png)
 
 - User Profile Page
-  ![User Profile Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_profile.png)
+  ![User Profile Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/user_profile.png)
 
 - User Registration Page
-  ![User Registration Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_registration.png)
+  ![User Registration Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/user_registration.png)
 
 - User Select Movies Page
-  ![Select Movies Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_select_movies.png)
+  ![Select Movies Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/user_select_movies.png)
 
 - User Ticket Page
-  ![User Ticket Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_ticket.png)
+  ![User Ticket Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/user_ticket.png)
 
 - User View Bookings Page
-  ![View Bookings Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_view_bookings.png)
+  ![View Bookings Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/user_view_bookings.png)
 
 
 
