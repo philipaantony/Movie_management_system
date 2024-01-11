@@ -12,10 +12,8 @@ This README file provides an overview of the project, its features, and instruct
    - [User](#user)
 3. [Additional Features](#additional-features)
 4. [Technologies Used](#technologies-used)
-5. [Installation](#installation)
-6. [Usage](#usage)
-7. [Contributing](#contributing)
-8. [License](#license)
+6. [User_Interface_Previews](#User-Interface-Previews)
+
 
 ## Introduction
 
@@ -68,11 +66,68 @@ The User module provides a user-friendly interface for movie enthusiasts. Key fe
 - Google Authentication
 - Nodemailer
 
-## User Interface Preview
+## User Interface Previews
 
-![Admin Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/admin_home.png)
+### Admin Module
 
-*Caption: This is an example screenshot of the Admin Home Page.*
+- Admin Home Page
+  ![Admin Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/admin_home.png)
+
+- Admin Theatre List
+  ![Admin Theatre List](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/admin_theatre_list.png)
+
+- Admin User List
+  ![Admin User List](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/admin_userlist.png)
+
+- Login Page
+  ![Login Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/login.png)
+
+### Theatre Module
+
+- Theatre Home Page
+  ![Theatre Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_home.png)
+
+- Theatre Allocate Movie to Screen
+  ![Allocate Movie to Screen](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_allocate_movie_to_screen.png)
+
+- Theatre Screen Creation 1
+  ![Screen Creation 1](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_screen_creation1.png)
+
+- Theatre Screen Creation 2
+  ![Screen Creation 2](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_screen_creation2.png)
+
+- Theatre View Booking
+  ![View Booking](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_view_booking.png)
+
+- Theatre View Movies
+  ![View Movies](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_view_movies.png)
+
+- Theatre View Screen
+  ![View Screen](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/theatre_view_screen.png)
+
+### User Module
+
+- User Home Page
+  ![User Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_home.png)
+
+- User Payment Page
+  ![User Payment Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_payment.png)
+
+- User Profile Page
+  ![User Profile Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_profile.png)
+
+- User Registration Page
+  ![User Registration Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_registration.png)
+
+- User Select Movies Page
+  ![Select Movies Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_select_movies.png)
+
+- User Ticket Page
+  ![User Ticket Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_ticket.png)
+
+- User View Bookings Page
+  ![View Bookings Page](https://github.com/philipaantony/Movie_management_system/blob/master/screenshots/user_view_bookings.png)
+
 
 
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md).
