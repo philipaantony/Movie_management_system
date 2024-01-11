@@ -68,21 +68,12 @@ The User module provides a user-friendly interface for movie enthusiasts. Key fe
 - Google Authentication
 - Nodemailer
 
-## Installation
+## User Interface Preview
 
-1. Clone the repository.
-2. Install dependencies using `npm install`.
-3. Set up MongoDB and update the configuration files accordingly.
-4. Configure Google and Razorpay authentication.
-5. Run the application using `npm start`.
+![Admin Home Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/admin_home.png)
 
-## Usage
+*Caption: This is an example screenshot of the Admin Home Page.*
 
-1. Access the application through the provided URL.
-2. Register or log in based on your role (Admin, Theater, User).
-3. Explore the features of the respective modules.
-
-## Contributing
 
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md).
 
