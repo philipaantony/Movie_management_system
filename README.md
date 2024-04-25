@@ -129,6 +129,9 @@ The User module provides a user-friendly interface for movie enthusiasts. Key fe
   ![View Bookings Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/user_view_bookings.png)
 
 ![View Bookings Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/1.png)
+![View Bookings Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/2.png)
+![View Bookings Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/3.png)
+![View Bookings Page](https://github.com/philipaantony/Movie_management_system/blob/master/ScreenShots/4.png)
 
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md).
 
